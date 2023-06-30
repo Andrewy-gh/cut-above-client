@@ -37,7 +37,6 @@ export default function Register() {
         const lowercaseEmail = trimmedEmail.toLowerCase();
         return lowercaseEmail;
       });
-      console.log('registering...');
       await registerAccount({
         email,
         password,
