@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import { useLoginMutation } from "../features/auth/authApiSlice";
-import { setCredentials } from "../features/auth/authSlice";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { useLoginMutation } from '../features/auth/authApiSlice';
+import { setCredentials } from '../features/auth/authSlice';
 
 export default function Login() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [login] = useLoginMutation();
 
@@ -20,11 +20,10 @@ export default function Login() {
         password,
       }).unwrap();
       if (loggedInUser.success) {
-        console.log(loggedInUser.message);
         dispatch(
           setCredentials({
             user: loggedInUser.user,
-            token: loggedInUser.accessToken,
+            token: loggedInUser.token,
           })
         );
       }
