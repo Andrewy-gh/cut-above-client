@@ -3,6 +3,7 @@ import {
   selectCurrentUser,
   selectCurrentToken,
 } from '../features/auth/authSlice';
+import LogoutButton from './LogoutButton';
 
 export default function Account() {
   const email = useSelector(selectCurrentUser);
@@ -16,6 +17,7 @@ export default function Account() {
     <div>
       <h3>{welcome} Account page</h3>
       <p>{info}</p>
+      {token && <LogoutButton />}
     </div>
   );
 }
