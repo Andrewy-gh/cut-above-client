@@ -7,12 +7,17 @@ const baseQuery = fetchBaseQuery({
       : 'https://cutaboveshop-api.fly.dev/',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
+    const token = getState().auth.token;
+    if (token) {
+      headers.set('authorization', `Bearer ${token}`);
+    }
+
     return headers;
   },
 });
 
 export const apiSlice = createApi({
   baseQuery,
-  tagTypes: ['User'],
+  tagTypes: ['Appointment', 'User'],
   endpoints: (builder) => ({}),
 });
