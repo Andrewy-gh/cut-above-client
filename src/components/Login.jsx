@@ -1,18 +1,25 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { useLoginMutation } from '../features/auth/authApiSlice';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const [login] = useLoginMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(email, password);
+      const loggedInUser = await login({
+        email: email.toLowerCase(),
+        password,
+      }).unwrap();
+      if (loggedInUser.success) console.log('User successfully logged in');
     } catch (error) {
       console.error(error);
+      setError(error);
     }
   };
   return (
