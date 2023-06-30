@@ -4,7 +4,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl:
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:8080'
-      : 'https://cutaboveshop-api.fly.dev/',
+      : 'http://cutaboveshop-api.fly.dev/',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     return headers;
