@@ -10,7 +10,7 @@ export default function Account() {
   const email = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
   const welcome = email ? `Welcome ${email} to the ` : 'Welcome to the ';
-  const tokenAbbr = token && `${token.slice(0, 9)}...`;
+  const tokenAbbr = token && `${token.slice(-9)}...`;
   const info = token
     ? `Logged in with token: ${tokenAbbr}`
     : 'No user logged in';
