@@ -18,6 +18,7 @@ export default function Account() {
     <div>
       <h3>{welcome} Account page</h3>
       <p>{info}</p>
+      {token && <Link to="/add">Add a new schedule</Link>}
       {token && <Link to="/appointments">View your appointments</Link>}
       {token && <LogoutButton />}
     </div>

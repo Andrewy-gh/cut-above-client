@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Account from './components/auth/Account';
+import AddSchedule from './components/schedule/AddSchedule';
 import Appointments from './components/auth/Appointments';
 import Footer from './components/Footer';
 import Home from './components/Home';
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/signup" element={<Register />} />
           <Route element={<RequireAuth />}>
             <Route path="/account" element={<Account />} />
+            <Route path="/add" element={<AddSchedule />} />
             <Route path="/appointments" element={<Appointments />} />
           </Route>
         </Routes>
