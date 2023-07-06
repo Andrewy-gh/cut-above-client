@@ -33,15 +33,11 @@ export default function AddSchedule() {
 
   const handleAddSchedule = async (dates) => {
     try {
-      console.log(dates);
-      //  const schedules = dateServices.generateDateRanges(dates, open, close);
-      const addedSchedules = await addSchedule({
+      await addSchedule({
         dates,
         open: dayjs(open).format('HH:mm'),
         close: dayjs(close).format('HH:mm'),
       }).unwrap();
-      console.log('addedSchedules', addedSchedules);
-      //  dispatch(setSuccess(addedSchedules.message));
     } catch (error) {
       console.error(`Error add schedule ${error}`, error);
       //  dispatch(setError(`Failed to save new schedule: ${error}`));
