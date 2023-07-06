@@ -8,6 +8,7 @@ import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Register from './components/Register';
 import RequireAuth from './components/auth/RequireAuth';
+import Schedule from './components/schedule/Schedule';
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/account" element={<Account />} />
             <Route path="/add" element={<AddSchedule />} />
             <Route path="/appointments" element={<Appointments />} />
+            <Route path="/schedule" element={<Schedule />} />
           </Route>
         </Routes>
         <Footer />

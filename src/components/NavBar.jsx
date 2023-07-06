@@ -8,7 +8,9 @@ export default function NavBar() {
       position="relative"
       sx={{ backgroundColor: 'grey' }}
     >
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
+      <Toolbar
+        sx={{ display: 'flex', justifyContent: 'space-around', gap: '2rem' }}
+      >
         <Link to="/">Home</Link>
         <Link to="/signup">Register</Link>
         <Link to="/login">Login</Link>
