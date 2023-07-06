@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import DateRangePicker from '../DateRangePicker';
 import dayjs from 'dayjs';
+import { useAddScheduleMutation } from '../../features/scheduleSlice';
 
 const containerStyle = {
   '@media (minWidth: 1200px)': {
@@ -25,6 +26,7 @@ export default function AddSchedule() {
     // .add(1, 'month')
   ]);
 
+  const [addSchedule] = useAddScheduleMutation();
   const handleDateChange = (newDates) => {
     setDates(newDates);
   };
@@ -33,7 +35,12 @@ export default function AddSchedule() {
     try {
       console.log(dates);
       //  const schedules = dateServices.generateDateRanges(dates, open, close);
-      //  const addedSchedules = await addSchedule(schedules).unwrap();
+      const addedSchedules = await addSchedule({
+        dates,
+        open: dayjs(open).format('HH:mm'),
+        close: dayjs(close).format('HH:mm'),
+      }).unwrap();
+      console.log('addedSchedules', addedSchedules);
       //  dispatch(setSuccess(addedSchedules.message));
     } catch (error) {
       console.error(`Error add schedule ${error}`, error);
