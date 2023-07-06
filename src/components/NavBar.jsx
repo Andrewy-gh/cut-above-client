@@ -12,6 +12,7 @@ export default function NavBar() {
         sx={{ display: 'flex', justifyContent: 'space-around', gap: '2rem' }}
       >
         <Link to="/">Home</Link>
+        <Link to="/bookings">Booking Page</Link>
         <Link to="/signup">Register</Link>
         <Link to="/login">Login</Link>
         <Link to="/account">Account</Link>
