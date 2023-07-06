@@ -3,7 +3,10 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useRegisterAccountMutation } from '../features/registerSlice';
 
+//
 export default function Register() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPwd, setConfirmPwd] = useState('');
@@ -38,6 +41,8 @@ export default function Register() {
         return lowercaseEmail;
       });
       await registerAccount({
+        firstName,
+        lastName,
         email,
         password,
       });
@@ -47,6 +52,29 @@ export default function Register() {
   };
   return (
     <form onSubmit={handleSubmit}>
+      <div
+        style={{
+          display: 'flex',
+          gap: '2rem',
+          justifyContent: 'space-between',
+          marginBottom: '1rem',
+        }}
+      >
+        <TextField
+          label="First name"
+          margin="normal"
+          fullWidth
+          value={firstName}
+          onChange={({ target }) => setFirstName(target.value)}
+        ></TextField>
+        <TextField
+          label="Last name"
+          margin="normal"
+          fullWidth
+          value={lastName}
+          onChange={({ target }) => setLastName(target.value)}
+        ></TextField>
+      </div>
       <TextField
         label="Email"
         required
