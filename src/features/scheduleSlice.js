@@ -46,22 +46,22 @@ export const { selectAll: selectAllSchedule, selectById: selectScheduleById } =
     (state) => selectScheduleData(state) ?? initialState
   );
 
-export const selectScheduleByFilter = createSelector(
-  selectScheduleByDate,
-  selectEmployeeIds,
-  selectService,
-  (schedule, employees, service) => {
-    if (!schedule) {
-      return [];
-    }
-    const availableTimeSlots = findAvailableTimeSlots(
-      schedule,
-      service.duration,
-      employees
-    );
-    return availableTimeSlots;
-  }
-);
+// export const selectScheduleByFilter = createSelector(
+//   selectScheduleByDate,
+//   selectEmployeeIds,
+//   selectService,
+//   (schedule, employees, service) => {
+//     if (!schedule) {
+//       return [];
+//     }
+//     const availableTimeSlots = findAvailableTimeSlots(
+//       schedule,
+//       service.duration,
+//       employees
+//     );
+//     return availableTimeSlots;
+//   }
+// );
 
 const findAvailableTimeSlots = (schedule, duration, employees) => {
   const { open, close, appointments } = schedule;
