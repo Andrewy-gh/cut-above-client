@@ -1,24 +1,28 @@
-import { useState } from 'react';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import { theme } from '../../styles/styles';
-import { services } from '../../data/data';
+import { useDispatch, useSelector } from "react-redux";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import { selectService, setService } from "../../features/filterSlice";
+import { theme } from "../../styles/styles";
+import { services } from "../../data/data";
 
 export default function ServiceSelect() {
-  const [service, setService] = useState('');
-  const handleServiceChange = (value) => {
-    // const serviceId = services.find((service) => service.id === id);
-    // setService(serviceId);
-    console.log(value);
+  const dispatch = useDispatch();
+  const service = useSelector(selectService);
+
+  const handleServiceChange = (serviceId) => {
+    const service = services.find((service) => service.id === serviceId);
+    const { name, duration } = service;
+    dispatch(setService({ id: serviceId, name, duration }));
   };
+
   return (
     <FormControl fullWidth>
       <InputLabel>Choose a service</InputLabel>
       <Select
-        label="Barber"
-        value={service}
+        label="Service"
+        value={service.id}
         fullWidth
         onChange={(e) => handleServiceChange(e.target.value)}
         sx={{ color: theme.palette.secondary.main }}

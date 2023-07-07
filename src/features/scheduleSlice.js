@@ -1,8 +1,10 @@
-import { createSelector, createEntityAdapter } from '@reduxjs/toolkit';
-import { apiSlice } from '../app/api/apiSlice';
+import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
+import { apiSlice } from "../app/api/apiSlice";
 
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { selectDate } from "./filterSlice";
+
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
 const scheduleAdapter = createEntityAdapter({});
@@ -12,21 +14,21 @@ const initialState = scheduleAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getSchedule: builder.query({
-      query: () => '/schedule',
+      query: () => "/schedule",
       transformResponse: (responseData) => {
         const loadedPosts = responseData;
         return scheduleAdapter.setAll(initialState, loadedPosts);
       },
       keepUnusedDataFor: 5,
-      providesTags: ['Schedule'],
+      providesTags: ["Schedule"],
     }),
     addSchedule: builder.mutation({
       query: (schedule) => ({
-        url: '/schedule',
-        method: 'POST',
+        url: "/schedule",
+        method: "POST",
         body: schedule,
       }),
-      invalidatesTags: ['Schedule'],
+      invalidatesTags: ["Schedule"],
     }),
   }),
 });
@@ -45,6 +47,14 @@ export const { selectAll: selectAllSchedule, selectById: selectScheduleById } =
   scheduleAdapter.getSelectors(
     (state) => selectScheduleData(state) ?? initialState
   );
+
+export const selectScheduleByDate = createSelector(
+  selectAllSchedule,
+  selectDate,
+  (schedule, date) => {
+    return schedule.find((s) => s.date === dayjs(date).format("YYYY-MM-DD"));
+  }
+);
 
 // export const selectScheduleByFilter = createSelector(
 //   selectScheduleByDate,
@@ -65,14 +75,14 @@ export const { selectAll: selectAllSchedule, selectById: selectScheduleById } =
 
 const findAvailableTimeSlots = (schedule, duration, employees) => {
   const { open, close, appointments } = schedule;
-  const timeFormat = 'HH:mm';
+  const timeFormat = "HH:mm";
   const searchIncrement = 15;
   const slots = [];
   let slotStart = dayjs(open);
   const slotEnd = dayjs(close);
 
   while (slotStart.isBefore(slotEnd)) {
-    const currentSlotEnd = slotStart.add(duration, 'minute');
+    const currentSlotEnd = slotStart.add(duration, "minute");
     const currentSlotStartString = slotStart.format(timeFormat);
     const currentSlotEndString = currentSlotEnd.format(timeFormat);
 
@@ -101,7 +111,7 @@ const findAvailableTimeSlots = (schedule, duration, employees) => {
       });
     }
 
-    slotStart = slotStart.add(searchIncrement, 'minute');
+    slotStart = slotStart.add(searchIncrement, "minute");
   }
 
   return slots;
