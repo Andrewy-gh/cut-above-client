@@ -3,10 +3,9 @@ import { setCredentials, logoutUser } from '../../features/auth/authSlice';
 
 const baseQuery = fetchBaseQuery({
   baseUrl:
-    // process.env.NODE_ENV === 'development'
-    //   ? 'http://localhost:8080'
-    //   :
-    'https://cutaboveshop-api.fly.dev/',
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:8080'
+      : 'https://cutaboveshop-api.fly.dev/',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;

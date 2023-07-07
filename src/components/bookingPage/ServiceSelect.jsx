@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import { selectService, setService } from "../../features/filterSlice";
-import { theme } from "../../styles/styles";
-import { services } from "../../data/data";
+import { useDispatch, useSelector } from 'react-redux';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import { selectService, setService } from '../../features/filterSlice';
+import { theme } from '../../styles/styles';
+import { services } from '../../data/data';
 
 export default function ServiceSelect() {
   const dispatch = useDispatch();

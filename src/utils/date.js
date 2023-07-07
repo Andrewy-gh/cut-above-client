@@ -1,17 +1,19 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 
-export const formatDate = (date) => dayjs(date).format("YYYY-MM-DD");
+export const formatDate = (date) => dayjs(date).format('YYYY-MM-DD');
 
 export const findAvailableTimeSlots = (schedule, duration, employees) => {
   const { open, close, appointments } = schedule;
-  const timeFormat = "HH:mm";
+  const timeFormat = 'HH:mm';
   const searchIncrement = 15;
   const slots = [];
   let slotStart = dayjs(open);
   const slotEnd = dayjs(close);
 
   while (slotStart.isBefore(slotEnd)) {
-    const currentSlotEnd = slotStart.add(duration, "minute");
+    const currentSlotEnd = slotStart.add(duration, 'minute');
     const currentSlotStartString = slotStart.format(timeFormat);
     const currentSlotEndString = currentSlotEnd.format(timeFormat);
 
@@ -40,7 +42,7 @@ export const findAvailableTimeSlots = (schedule, duration, employees) => {
       });
     }
 
-    slotStart = slotStart.add(searchIncrement, "minute");
+    slotStart = slotStart.add(searchIncrement, 'minute');
   }
 
   return slots;

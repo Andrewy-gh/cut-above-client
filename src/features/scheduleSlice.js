@@ -1,11 +1,12 @@
-import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
-import { apiSlice } from "../app/api/apiSlice";
+import { createSelector, createEntityAdapter } from '@reduxjs/toolkit';
+import { apiSlice } from '../app/api/apiSlice';
+import { selectEmployeeIds } from './employeeSlice';
+import { selectDate, selectService } from './filterSlice';
+import { findAvailableTimeSlots, formatDate } from '../utils/date';
 
-import { selectDate } from "./filterSlice";
-
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-dayjs.extend(customParseFormat);
+// import dayjs from 'dayjs';
+// import customParseFormat from 'dayjs/plugin/customParseFormat';
+// dayjs.extend(customParseFormat);
 
 const scheduleAdapter = createEntityAdapter({});
 
@@ -14,21 +15,21 @@ const initialState = scheduleAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getSchedule: builder.query({
-      query: () => "/schedule",
+      query: () => '/schedule',
       transformResponse: (responseData) => {
         const loadedPosts = responseData;
         return scheduleAdapter.setAll(initialState, loadedPosts);
       },
       keepUnusedDataFor: 5,
-      providesTags: ["Schedule"],
+      providesTags: ['Schedule'],
     }),
     addSchedule: builder.mutation({
       query: (schedule) => ({
-        url: "/schedule",
-        method: "POST",
+        url: '/schedule',
+        method: 'POST',
         body: schedule,
       }),
-      invalidatesTags: ["Schedule"],
+      invalidatesTags: ['Schedule'],
     }),
   }),
 });
@@ -51,68 +52,78 @@ export const { selectAll: selectAllSchedule, selectById: selectScheduleById } =
 export const selectScheduleByDate = createSelector(
   selectAllSchedule,
   selectDate,
+  // selectDateDisabled,
+  // add dateDisabled to below
   (schedule, date) => {
-    return schedule.find((s) => s.date === dayjs(date).format("YYYY-MM-DD"));
+    console.log('slice by date', schedule, date);
+    return schedule.find(
+      (s) =>
+        formatDate(s.date) ===
+        // dayjs(date).format('YYYY-MM-DD')
+        formatDate(date)
+    );
   }
 );
 
-// export const selectScheduleByFilter = createSelector(
-//   selectScheduleByDate,
-//   selectEmployeeIds,
-//   selectService,
-//   (schedule, employees, service) => {
-//     if (!schedule) {
-//       return [];
-//     }
-//     const availableTimeSlots = findAvailableTimeSlots(
-//       schedule,
-//       service.duration,
-//       employees
-//     );
-//     return availableTimeSlots;
-//   }
-// );
+export const selectScheduleByFilter = createSelector(
+  selectScheduleByDate,
+  selectService,
+  selectEmployeeIds,
+  (schedule, service, employees) => {
+    console.log('slice by filter:', schedule, service, employees);
 
-const findAvailableTimeSlots = (schedule, duration, employees) => {
-  const { open, close, appointments } = schedule;
-  const timeFormat = "HH:mm";
-  const searchIncrement = 15;
-  const slots = [];
-  let slotStart = dayjs(open);
-  const slotEnd = dayjs(close);
-
-  while (slotStart.isBefore(slotEnd)) {
-    const currentSlotEnd = slotStart.add(duration, "minute");
-    const currentSlotStartString = slotStart.format(timeFormat);
-    const currentSlotEndString = currentSlotEnd.format(timeFormat);
-
-    if (currentSlotEnd.isAfter(slotEnd)) {
-      break;
+    if (!schedule) {
+      return [];
     }
-
-    const availableEmployees = employees.filter((employeeId) => {
-      const employeeAppointments = appointments.filter(
-        (appointment) => appointment.employee === employeeId
-      );
-      const employeeBooked = employeeAppointments.some(
-        (appointment) =>
-          dayjs(appointment.start).isBefore(currentSlotEnd) &&
-          dayjs(appointment.end).isAfter(slotStart)
-      );
-      return !employeeBooked;
-    });
-
-    if (availableEmployees.length > 0) {
-      slots.push({
-        id: crypto.randomUUID(),
-        start: currentSlotStartString,
-        end: currentSlotEndString,
-        available: availableEmployees,
-      });
-    }
-
-    slotStart = slotStart.add(searchIncrement, "minute");
+    const availableTimeSlots = findAvailableTimeSlots(
+      schedule,
+      service.duration,
+      employees
+    );
+    return availableTimeSlots;
   }
+);
 
-  return slots;
-};
+// const findAvailableTimeSlots = (schedule, duration, employees) => {
+//   const { open, close, appointments } = schedule;
+//   const timeFormat = 'HH:mm';
+//   const searchIncrement = 15;
+//   const slots = [];
+//   let slotStart = dayjs(open);
+//   const slotEnd = dayjs(close);
+
+//   while (slotStart.isBefore(slotEnd)) {
+//     const currentSlotEnd = slotStart.add(duration, 'minute');
+//     const currentSlotStartString = slotStart.format(timeFormat);
+//     const currentSlotEndString = currentSlotEnd.format(timeFormat);
+
+//     if (currentSlotEnd.isAfter(slotEnd)) {
+//       break;
+//     }
+
+//     const availableEmployees = employees.filter((employeeId) => {
+//       const employeeAppointments = appointments.filter(
+//         (appointment) => appointment.employee === employeeId
+//       );
+//       const employeeBooked = employeeAppointments.some(
+//         (appointment) =>
+//           dayjs(appointment.start).isBefore(currentSlotEnd) &&
+//           dayjs(appointment.end).isAfter(slotStart)
+//       );
+//       return !employeeBooked;
+//     });
+
+//     if (availableEmployees.length > 0) {
+//       slots.push({
+//         id: crypto.randomUUID(),
+//         start: currentSlotStartString,
+//         end: currentSlotEndString,
+//         available: availableEmployees,
+//       });
+//     }
+
+//     slotStart = slotStart.add(searchIncrement, 'minute');
+//   }
+
+//   return slots;
+// };
