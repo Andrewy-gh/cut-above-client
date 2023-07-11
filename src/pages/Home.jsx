@@ -1,4 +1,8 @@
 import Box from "@mui/material/Box";
+import ContactUs from "../components/home/ContactUs";
+import Services from "../components/home/Services";
+import TeamMembers from "../components/home/TeamMembers";
+import { theme } from "../styles/styles";
 
 const people = [
   { id: 1, name: "Matthew" },
@@ -21,6 +25,30 @@ const people = [
   { id: 18, name: "Matthew" },
   { id: 19, name: "Matthew" },
   { id: 20, name: "Olivia" },
+];
+
+const employees = [
+  {
+    id: 1,
+    firstName: "Andre",
+    image: "https://placehold.co/900x1600",
+    profile:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis vulputate enim nulla aliquet porttitor lacus. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin.",
+  },
+  {
+    id: 2,
+    firstName: "Salah",
+    image: "https://placehold.co/900x1600",
+    profile:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis vulputate enim nulla aliquet porttitor lacus. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin.",
+  },
+  {
+    id: 3,
+    firstName: "Obi",
+    image: "https://placehold.co/900x1600",
+    profile:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis vulputate enim nulla aliquet porttitor lacus. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin.",
+  },
 ];
 
 export default function Home() {
@@ -123,6 +151,9 @@ export default function Home() {
         varius. Nulla facilisi cras fermentum odio eu. Vel facilisis volutpat
         est velit egestas dui id ornare. Non quam lacus suspendisse faucibus.
       </div>
+      <Services />
+      <TeamMembers employees={employees} />
+      <ContactUs />
     </>
   );
 }
