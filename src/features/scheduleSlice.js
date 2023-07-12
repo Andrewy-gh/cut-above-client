@@ -20,7 +20,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         const loadedPosts = responseData;
         return scheduleAdapter.setAll(initialState, loadedPosts);
       },
-      keepUnusedDataFor: 5,
+      // keepUnusedDataFor: 5,
       providesTags: ['Schedule'],
     }),
     addSchedule: builder.mutation({
@@ -55,7 +55,7 @@ export const selectScheduleByDate = createSelector(
   // selectDateDisabled,
   // add dateDisabled to below
   (schedule, date) => {
-    console.log('slice by date', schedule, date);
+    // console.log('slice by date', schedule, date);
     return schedule.find(
       (s) =>
         formatDate(s.date) ===
@@ -70,7 +70,7 @@ export const selectScheduleByFilter = createSelector(
   selectService,
   selectEmployeeIds,
   (schedule, service, employees) => {
-    console.log('slice by filter:', schedule, service, employees);
+    // console.log('slice by filter:', schedule, service, employees);
 
     if (!schedule) {
       return [];

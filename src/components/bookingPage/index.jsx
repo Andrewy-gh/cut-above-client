@@ -12,32 +12,23 @@ import {
 } from '../../features/scheduleSlice';
 import { findAvailableTimeSlots, formatDate } from '../../utils/date';
 import { useGetEmployeesQuery } from '../../features/employeeSlice';
+import { selectEmployee } from '../../features/filterSlice';
+import BookingDialog from './BookingDialog';
+import Employee from '../employee';
 
-// const employees = [
-//   { id: 1, firstName: 'Andre' },
-//   { id: 2, firstName: 'Obi' },
-//   { id: 3, firstName: 'Salah' },
-// ];
-
-// const scheduleObj = [
-//   {
-//     date: '2023-07-06T04:00:00Z',
-//     open: '2023-07-06T14:00:00Z',
-//     close: '2023-07-06T23:00:00Z',
-//     appointments: [],
-//   },
-//   {
-//     date: '2023-07-07T04:00:00Z',
-//     open: '2023-07-07T14:00:00Z',
-//     close: '2023-07-07T15:00:00Z',
-//     appointments: [],
-//   },
-// ];
+// TODO: debugging:
+import { selectService } from '../../features/filterSlice';
 
 export default function BookPage() {
   const dispatch = useDispatch();
   const { data: employees } = useGetEmployeesQuery();
   const { data: schedule } = useGetScheduleQuery();
+  const employee = useSelector(selectEmployee);
+
+  // TODO: debugging values:
+  const date = useSelector(selectDate);
+  const service = useSelector(selectService);
+
   // const scheduleByDate = useSelector(selectScheduleByDate);
   // const selectedDate = useSelector(selectDate);
   const handleDateChange = (newDate) => {
@@ -63,12 +54,22 @@ export default function BookPage() {
   // ​​start: "10:00"
   // console.log('availableTimeSlots', availableTimeSlots);
 
-  const handleBooking = () => {
+  const handleBooking = (data) => {
     console.log('handling this booking');
+    // TODO: new appointment
+    // POST: date, start, end, service, client, employee
+    console.log('selected date:', date);
+    console.log('data from time slot:');
+    console.table(data);
+    console.log('selected service: ', service);
+    console.log('selected employee to book: ', employee);
+    // TODO: add to schedule
+    // PUT: new appointment
   };
 
   return (
     <div>
+      <div>DEBUG service: {JSON.stringify(service)}</div>
       <ServiceSelect />
       <DatePicker handleDateChange={handleDateChange} />
       <TimeSlots timeSlots={timeSlots} handleAgree={handleBooking} />

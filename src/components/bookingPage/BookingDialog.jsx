@@ -4,13 +4,18 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Employee from '../employee';
 
-export default function BookingDialog({ handleAgree, handleClose }) {
+import { useSelector } from 'react-redux';
+import { selectEmployee } from '../../features/filterSlice';
+
+export default function BookingDialog({ children, handleAgree, handleClose }) {
+  const employee = useSelector(selectEmployee);
   return (
     <>
       <DialogContentText>
         Pick an employee and confirm appointment.
+        <div>DEBUG employee: {employee}</div>
       </DialogContentText>
-      <Employee />
+      {children}
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
         <Button onClick={handleAgree} autoFocus>

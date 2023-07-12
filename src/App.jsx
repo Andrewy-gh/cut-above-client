@@ -7,7 +7,7 @@ import BookingPage from './components/bookingPage';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import NavBar from './components/NavBar';
+import NavBar from './components/navbar/index';
 import Register from './pages/Register';
 import RequireAuth from './components/auth/RequireAuth';
 import Schedule from './components/schedule/Schedule';

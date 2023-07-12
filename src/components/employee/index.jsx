@@ -6,27 +6,22 @@ import {
 import { selectEmployee, setEmployee } from '../../features/filterSlice';
 import EmployeeSelect from './EmployeeSelect';
 
-export default function Employee() {
-  const dispatch = useDispatch();
-  const { isLoading, isSuccess, isError, error } = useGetEmployeesQuery();
-  const employees = useSelector(selectAllEmployees);
-  const employee = useSelector(selectEmployee);
-  const handleEmployeeChange = (employeeId) =>
-    dispatch(setEmployee(employeeId));
-
-  let content;
-  if (isLoading) {
-    return <p>Loading...</p>;
-  } else if (isSuccess) {
-    content = (
-      <EmployeeSelect
-        employee={employee}
-        employees={employees}
-        handleEmployeeChange={handleEmployeeChange}
-      />
-    );
-  } else if (isError) {
-    content = <p>{error}</p>;
-  }
-  return <>{content}</>;
+export default function Employee({ employees }) {
+  // TODO: Add Avatar
+  return <EmployeeSelect employees={employees} />;
+  // let content;
+  // if (isLoading) {
+  //   return <p>Loading...</p>;
+  // } else if (isSuccess) {
+  //   content = (
+  //     <EmployeeSelect
+  //       employee={employee}
+  //       employees={employees}
+  //       handleEmployeeChange={handleEmployeeChange}
+  //     />
+  //   );
+  // } else if (isError) {
+  //   content = <p>{error}</p>;
+  // }
+  // return <>{content}</>;
 }
