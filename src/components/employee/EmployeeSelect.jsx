@@ -5,46 +5,38 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { theme } from '../../styles/styles';
 import { selectEmployee, setEmployee } from '../../features/filterSlice';
-import { selectEmployeeById } from '../../features/employeeSlice';
+import { selectAllEmployees } from '../../features/employeeSlice';
 
-const EmployeeOption = ({ employeeId }) => {
-  const employee = useSelector((state) =>
-    selectEmployeeById(state, employeeId)
-  );
-  return (
-    <option value={employee.id} key={employee.id}>
-      {employee.firstName}
-    </option>
-  );
-};
-
-export default function EmployeeSelect({
-  // employee,
-  employees,
-}) {
+export default function EmployeeSelect() {
   const dispatch = useDispatch();
   const employee = useSelector(selectEmployee);
-  console.log(employee);
-  console.log('id: ', employee.id);
-  console.log('firsName: ', employee.firstName);
+  const employees = useSelector(selectAllEmployees);
   const handleEmployeeChange = (id) => {
     dispatch(setEmployee(id));
   };
   return (
-    // <FormControl fullWidth>
-    //   <InputLabel>Choose a barber</InputLabel>
-    <select
-      label="Barber"
-      value={employee}
-      // fullWidth
-      onChange={(e) => handleEmployeeChange(e.target.value)}
-      // sx={{ color: theme.palette.secondary.main }}
+    <FormControl
+      sx={{
+        width: '100%',
+      }}
     >
-      <option value="any">No preference</option>
-      {employees.map((employeeId) => (
-        <EmployeeOption key={employeeId} employeeId={employeeId} />
-      ))}
-    </select>
-    // </FormControl>
+      <InputLabel>Choose a barber</InputLabel>
+      <Select
+        label="Barber"
+        value={employee}
+        fullWidth
+        onChange={(e) => handleEmployeeChange(e.target.value)}
+        sx={{ color: theme.palette.secondary.main }}
+      >
+        <MenuItem value="any">No preference</MenuItem>
+        {employees.map((employee) => {
+          return (
+            <MenuItem value={employee.id} key={employee.id}>
+              {employee.firstName}
+            </MenuItem>
+          );
+        })}
+      </Select>
+    </FormControl>
   );
 }

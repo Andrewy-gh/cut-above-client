@@ -28,7 +28,7 @@ export default function ButtonDialog({
         aria-labelledby="responsive-dialog-title"
         maxWidth="lg"
       >
-        <DialogContent>{children}</DialogContent>
+        {children}
       </Dialog>
     </>
   );

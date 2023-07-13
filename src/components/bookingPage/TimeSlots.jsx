@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import ButtonDialog from '../ButtonDialog';
 import BookingDialog from './BookingDialog';
-import Employee from '../employee';
+import EmployeeAccordion from '../employee/EmployeeAccordion';
+import EmployeeRadio from '../employee/EmployeeRadio';
+import { useDispatch, useSelector } from 'react-redux';
+import { chooseEmployeePref, selectEmployee } from '../../features/filterSlice';
 
+// Enabled horizontal scrolling on small screens
 const containerStyle = {
   display: 'flex',
   alignItems: 'center',
@@ -18,9 +21,15 @@ const containerStyle = {
 };
 
 const TimeSlot = ({ slot, handleAgree }) => {
+  const dispatch = useDispatch();
+  const employeePref = useSelector(selectEmployee);
+  console.log(employeePref);
   const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    if (employeePref === 'any') dispatch(chooseEmployeePref(slot.available));
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
-  const handleOpen = () => setOpen(true);
   const handleBooking = () => {
     const { start, end } = slot;
     handleAgree({ start, end });
@@ -34,8 +43,11 @@ const TimeSlot = ({ slot, handleAgree }) => {
         handleOpen={handleOpen}
       >
         <BookingDialog handleAgree={handleBooking} handleClose={handleClose}>
-          {/* Employee Selection before booking */}
-          <Employee employees={slot.available} />
+          {employeePref === 'any' && (
+            <EmployeeAccordion>
+              <EmployeeRadio employees={slot.available} />
+            </EmployeeAccordion>
+          )}
         </BookingDialog>
       </ButtonDialog>
     </Box>

@@ -19,10 +19,19 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: ['Appointment'],
     }),
+    addAppointment: builder.mutation({
+      query: (appointment) => ({
+        url: '/appointment',
+        method: 'POST',
+        body: appointment,
+      }),
+      invalidatesTags: ['Appointment'],
+    }),
   }),
 });
 
-export const { useGetAppointmentQuery } = extendedApiSlice;
+export const { useGetAppointmentQuery, useAddAppointmentMutation } =
+  extendedApiSlice;
 
 export const selectAppointmentResult =
   extendedApiSlice.endpoints.getAppointment.select();

@@ -2,6 +2,10 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 
+export const currentDate = dayjs();
+
+export const oneMonthFromCurrent = dayjs().add(1, 'month');
+
 export const formatDate = (date) => dayjs(date).format('YYYY-MM-DD');
 
 export const findAvailableTimeSlots = (schedule, duration, employees) => {

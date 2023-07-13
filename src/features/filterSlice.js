@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getRandomEmployee } from '../utils/employee';
 
 const currentDate = new Date().toISOString();
 
@@ -28,6 +29,14 @@ const filterSlice = createSlice({
     setEmployee: (state, action) => {
       state.employee = action.payload;
     },
+    chooseEmployeePref: (state, action) => {
+      const availableEmployees = action.payload;
+      if (state.employee === 'any') {
+        state.employee = getRandomEmployee(availableEmployees);
+      } else {
+        return state;
+      }
+    },
     setSavedSelections: (state, action) => {
       const { slot, employee } = action.payload;
       state.holdStatus = true;
@@ -52,6 +61,7 @@ export const selectSavedSelections = (state) => state.filter.savedSelections;
 export const {
   setDate,
   setEmployee,
+  chooseEmployeePref,
   setDateDisabled,
   setService,
   setSavedSelections,
