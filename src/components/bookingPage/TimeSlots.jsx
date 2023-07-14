@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ButtonDialog from '../ButtonDialog';
 import BookingDialog from './BookingDialog';
@@ -20,41 +21,28 @@ const containerStyle = {
   justifyContent: { md: 'center' },
 };
 
-const TimeSlot = ({ slot, handleAgree }) => {
-  const dispatch = useDispatch();
-  const employeePref = useSelector(selectEmployee);
-  console.log(employeePref);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    if (employeePref === 'any') dispatch(chooseEmployeePref(slot.available));
-    setOpen(true);
-  };
-  const handleClose = () => setOpen(false);
-  const handleBooking = () => {
-    const { start, end } = slot;
-    handleAgree({ start, end });
-  };
+const TimeSlot = ({ children, handleOpen }) => {
+  // const dispatch = useDispatch();
+  // const employeePref = useSelector(selectEmployee);
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => {
+  //   if (employeePref === 'any') dispatch(chooseEmployeePref(slot.available));
+  //   setOpen(true);
+  // };
+  // const handleClose = () => setOpen(false);
+  // const handleBooking = () => {
+  //   const { start, end } = slot;
+  //   handleAgree({ start, end });
+  // };
   return (
-    <Box>
-      <ButtonDialog
-        buttonText={`${slot.start} ${slot.available.length} left`}
-        open={open}
-        handleClose={handleClose}
-        handleOpen={handleOpen}
-      >
-        <BookingDialog handleAgree={handleBooking} handleClose={handleClose}>
-          {employeePref === 'any' && (
-            <EmployeeAccordion>
-              <EmployeeRadio employees={slot.available} />
-            </EmployeeAccordion>
-          )}
-        </BookingDialog>
-      </ButtonDialog>
-    </Box>
+    <Button variant="contained" onClick={handleOpen}>
+      {children}
+    </Button>
   );
 };
 
-export default function TimeSlots({ timeSlots, handleAgree }) {
+export default function TimeSlots({ timeSlots, openDialog }) {
+  const handleOpen = (data) => openDialog(data);
   return (
     <>
       {timeSlots.length > 0 ? (
@@ -64,7 +52,11 @@ export default function TimeSlots({ timeSlots, handleAgree }) {
           </Typography>
           <Box sx={containerStyle}>
             {timeSlots.map((slot) => (
-              <TimeSlot slot={slot} key={slot.id} handleAgree={handleAgree} />
+              <TimeSlot
+                key={slot.id}
+                handleOpen={() => handleOpen(slot)}
+              >{`${slot.start} ${slot.available.length} left`}</TimeSlot>
+              // <TimeSlot slot={slot} key={slot.id} handleAgree={handleAgree} />
             ))}
           </Box>
         </div>
@@ -76,3 +68,37 @@ export default function TimeSlots({ timeSlots, handleAgree }) {
     </>
   );
 }
+
+// const TimeSlot = ({ slot, handleAgree }) => {
+//   const dispatch = useDispatch();
+//   const employeePref = useSelector(selectEmployee);
+//   console.log(employeePref);
+//   const [open, setOpen] = useState(false);
+//   const handleOpen = () => {
+//     if (employeePref === 'any') dispatch(chooseEmployeePref(slot.available));
+//     setOpen(true);
+//   };
+//   const handleClose = () => setOpen(false);
+//   const handleBooking = () => {
+//     const { start, end } = slot;
+//     handleAgree({ start, end });
+//   };
+//   return (
+//     <Box>
+//       <ButtonDialog
+//         buttonText={`${slot.start} ${slot.available.length} left`}
+//         open={open}
+//         handleClose={handleClose}
+//         handleOpen={handleOpen}
+//       >
+//         <BookingDialog handleAgree={handleBooking} handleClose={handleClose}>
+//           {employeePref === 'any' && (
+//             <EmployeeAccordion>
+//               <EmployeeRadio employees={slot.available} />
+//             </EmployeeAccordion>
+//           )}
+//         </BookingDialog>
+//       </ButtonDialog>
+//     </Box>
+//   );
+// };

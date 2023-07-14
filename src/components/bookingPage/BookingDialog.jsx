@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -9,6 +10,8 @@ import Employee from '../employee';
 
 import { useSelector } from 'react-redux';
 import { selectEmployee } from '../../features/filterSlice';
+
+import CustomDialog from '../CustomDialog';
 
 const BookingDialogTitle = ({ children, onClose }) => {
   return (
@@ -31,17 +34,24 @@ const BookingDialogTitle = ({ children, onClose }) => {
   );
 };
 
-export default function BookingDialog({ children, handleAgree, handleClose }) {
-  const employee = useSelector(selectEmployee);
+export default function BookingDialog({
+  children,
+  handleBooking,
+  handleClose,
+  selection,
+}) {
+  const handleAgree = (data) => {
+    handleBooking(data);
+  };
   return (
     <>
       <BookingDialogTitle onClose={handleClose}>
         Complete your Booking
       </BookingDialogTitle>
       <DialogContent dividers>
-        Service
-        {/* divider */}
-        Time
+        <div>{selection.start}</div>
+        <div>{selection.end}</div>
+        <div>{JSON.stringify(selection.available)}</div>
       </DialogContent>
       {children}
       <DialogActions>

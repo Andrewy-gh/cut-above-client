@@ -3,7 +3,7 @@ import { CssBaseline, ThemeProvider, responsiveFontSizes } from '@mui/material';
 import Account from './components/auth/Account';
 import AddSchedule from './components/schedule/AddSchedule';
 import Appointments from './components/auth/Appointments';
-import BookingPage from './components/bookingPage';
+import BookingPage from './pages/BookingPage';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
