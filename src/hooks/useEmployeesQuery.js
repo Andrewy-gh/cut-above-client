@@ -1,9 +1,19 @@
-import { useGetEmployeesQuery } from '../features/employeeSlice';
+import { useSelector } from 'react-redux';
+import {
+  selectAllEmployees,
+  selectEmployeeById,
+  useGetEmployeesQuery,
+} from '../features/employeeSlice';
 
-export function useEmployeesQuery() {
-  const { data: employees } = useGetEmployeesQuery();
+export function useEmployeesQuery(employeeId) {
+  const { data } = useGetEmployeesQuery();
+  const employees = useSelector(selectAllEmployees);
+  const employee = useSelector((state) =>
+    selectEmployeeById(state, employeeId)
+  );
 
   return {
     employees,
+    employee,
   };
 }
