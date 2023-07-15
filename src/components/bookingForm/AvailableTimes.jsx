@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 // Enabled horizontal scrolling on small screens
 const containerStyle = {
   display: 'flex',
+  gap: '.5rem',
   alignItems: 'center',
   margin: '2rem 0',
   padding: { sm: '0 1rem', md: '0' },
@@ -14,7 +15,7 @@ const containerStyle = {
   justifyContent: { md: 'center' },
   // hides horizontal scrollbar on browsers
   scrollbarWidth: 'none', // for Firefox
-  '-ms-overflow-style': 'none', // for Internet Explorer, Edge
+  msOverflowStyle: 'none', // for Internet Explorer, Edge
   '&::-webkit-scrollbar': {
     display: 'none', // for Chrome, Safari, and Opera
   },
