@@ -53,7 +53,7 @@ export default function Login() {
       ></TextField>
 
       <Button type="submit" variant="contained" fullWidth sx={{ mt: 2, mb: 3 }}>
-        Register
+        Login
       </Button>
     </form>
   );

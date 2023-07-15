@@ -1,5 +1,12 @@
 import { createSelector, createEntityAdapter } from '@reduxjs/toolkit';
 import { apiSlice } from '../app/api/apiSlice';
+import { selectEmployeeIds } from './employeeSlice';
+import { selectDate, selectService } from './filterSlice';
+import { findAvailableTimeSlots, formatDate } from '../utils/date';
+
+// import dayjs from 'dayjs';
+// import customParseFormat from 'dayjs/plugin/customParseFormat';
+// dayjs.extend(customParseFormat);
 
 const scheduleAdapter = createEntityAdapter({});
 
@@ -13,7 +20,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         const loadedPosts = responseData;
         return scheduleAdapter.setAll(initialState, loadedPosts);
       },
-      keepUnusedDataFor: 5,
+      // keepUnusedDataFor: 5,
       providesTags: ['Schedule'],
     }),
     addSchedule: builder.mutation({
@@ -24,10 +31,22 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Schedule'],
     }),
+    updateSchedule: builder.mutation({
+      query: (schedule) => ({
+        url: `/schedule/${schedule.id}`,
+        method: 'PUT',
+        body: schedule,
+      }),
+      invalidatesTags: ['Schedule'],
+    }),
   }),
 });
 
-export const { useGetScheduleQuery, useAddScheduleMutation } = extendedApiSlice;
+export const {
+  useGetScheduleQuery,
+  useAddScheduleMutation,
+  useUpdateScheduleMutation,
+} = extendedApiSlice;
 
 export const selectScheduleResult =
   extendedApiSlice.endpoints.getSchedule.select();
@@ -41,3 +60,81 @@ export const { selectAll: selectAllSchedule, selectById: selectScheduleById } =
   scheduleAdapter.getSelectors(
     (state) => selectScheduleData(state) ?? initialState
   );
+
+export const selectScheduleByDate = createSelector(
+  selectAllSchedule,
+  selectDate,
+  // selectDateDisabled,
+  // add dateDisabled to below
+  (schedule, date) => {
+    // console.log('slice by date', schedule, date);
+    return schedule.find(
+      (s) =>
+        formatDate(s.date) ===
+        // dayjs(date).format('YYYY-MM-DD')
+        formatDate(date)
+    );
+  }
+);
+
+export const selectScheduleByFilter = createSelector(
+  selectScheduleByDate,
+  selectService,
+  selectEmployeeIds,
+  (schedule, service, employees) => {
+    // console.log('slice by filter:', schedule, service, employees);
+    if (!schedule) {
+      return [];
+    }
+    const availableTimeSlots = findAvailableTimeSlots(
+      schedule,
+      service.duration,
+      employees
+    );
+    return availableTimeSlots;
+  }
+);
+
+// const findAvailableTimeSlots = (schedule, duration, employees) => {
+//   const { open, close, appointments } = schedule;
+//   const timeFormat = 'HH:mm';
+//   const searchIncrement = 15;
+//   const slots = [];
+//   let slotStart = dayjs(open);
+//   const slotEnd = dayjs(close);
+
+//   while (slotStart.isBefore(slotEnd)) {
+//     const currentSlotEnd = slotStart.add(duration, 'minute');
+//     const currentSlotStartString = slotStart.format(timeFormat);
+//     const currentSlotEndString = currentSlotEnd.format(timeFormat);
+
+//     if (currentSlotEnd.isAfter(slotEnd)) {
+//       break;
+//     }
+
+//     const availableEmployees = employees.filter((employeeId) => {
+//       const employeeAppointments = appointments.filter(
+//         (appointment) => appointment.employee === employeeId
+//       );
+//       const employeeBooked = employeeAppointments.some(
+//         (appointment) =>
+//           dayjs(appointment.start).isBefore(currentSlotEnd) &&
+//           dayjs(appointment.end).isAfter(slotStart)
+//       );
+//       return !employeeBooked;
+//     });
+
+//     if (availableEmployees.length > 0) {
+//       slots.push({
+//         id: crypto.randomUUID(),
+//         start: currentSlotStartString,
+//         end: currentSlotEndString,
+//         available: availableEmployees,
+//       });
+//     }
+
+//     slotStart = slotStart.add(searchIncrement, 'minute');
+//   }
+
+//   return slots;
+// };

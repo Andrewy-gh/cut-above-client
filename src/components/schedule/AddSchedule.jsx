@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import DateRangePicker from '../DateRangePicker';
+import DateRangePicker from '../datePickers/DateRangePicker';
 import dayjs from 'dayjs';
 import { useAddScheduleMutation } from '../../features/scheduleSlice';
 
