@@ -8,6 +8,10 @@ export const oneMonthFromCurrent = dayjs().add(1, 'month');
 
 export const formatDate = (date) => dayjs(date).format('YYYY-MM-DD');
 
+export const formatDateSlash = (date) => dayjs(date).format('MM/DD/YYYY');
+
+export const formatTime = (date) => dayjs(date).format('h:mma');
+
 export const findAvailableTimeSlots = (schedule, duration, employees) => {
   const { open, close, appointments } = schedule;
   const timeFormat = 'HH:mm';

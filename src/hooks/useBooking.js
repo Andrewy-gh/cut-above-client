@@ -19,7 +19,6 @@ export function useBooking() {
       service,
       employee,
     }).unwrap();
-
     const updatedSchedule = await updateSchedule({
       id: scheduleByDate.id,
       appointment: newAppt.data.id,

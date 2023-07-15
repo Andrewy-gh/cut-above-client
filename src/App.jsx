@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CssBaseline, ThemeProvider, responsiveFontSizes } from '@mui/material';
 import Account from './components/auth/Account';
 import AddSchedule from './components/schedule/AddSchedule';
-import Appointments from './components/auth/Appointments';
+import Appointments from './components/appointments/index';
 import BookingPage from './pages/BookingPage';
 import Footer from './components/Footer';
 import Home from './pages/Home';
