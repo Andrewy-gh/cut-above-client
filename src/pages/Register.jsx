@@ -104,7 +104,7 @@ export default function Register() {
         onChange={handleConfirmPwdChange}
       ></TextField>
       <Button type="submit" variant="contained" fullWidth sx={{ mt: 2, mb: 3 }}>
-        Register
+        Signup
       </Button>
     </form>
   );

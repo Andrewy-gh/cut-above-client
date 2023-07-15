@@ -12,6 +12,12 @@ const containerStyle = {
   overflow: { md: 'visible' },
   flexWrap: { md: 'wrap' },
   justifyContent: { md: 'center' },
+  // hides horizontal scrollbar on browsers
+  scrollbarWidth: 'none', // for Firefox
+  '-ms-overflow-style': 'none', // for Internet Explorer, Edge
+  '&::-webkit-scrollbar': {
+    display: 'none', // for Chrome, Safari, and Opera
+  },
 };
 
 const AvailableTime = ({ children, handleOpen }) => {
