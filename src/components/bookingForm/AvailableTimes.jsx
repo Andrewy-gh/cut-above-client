@@ -32,9 +32,30 @@ const AvailableTime = ({ children, handleOpen }) => {
 export default function AvailableTimes({ timeSlots, openDialog }) {
   const handleOpen = (data) => openDialog(data);
 
+  let availableTimes;
+  if (timeSlots.length > 0) {
+    availableTimes = (
+      <Box sx={containerStyle}>
+        {timeSlots.map((slot) => (
+          <AvailableTime
+            key={slot.id}
+            handleOpen={() => handleOpen(slot)}
+          >{`${slot.start} ${slot.available.length} left`}</AvailableTime>
+        ))}
+      </Box>
+    );
+  } else {
+    availableTimes = (
+      <Typography variant="h6" align="center">
+        No Times Available
+      </Typography>
+    );
+  }
+
   return (
     <>
-      {timeSlots.length > 0 ? (
+      {availableTimes}
+      {/* {timeSlots.length > 0 ? (
         <div style={{ marginBlock: '2rem' }}>
           <Typography variant="h6" align="center">
             Times Available
@@ -52,7 +73,7 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
         <Typography variant="h6" align="center">
           No Times Available
         </Typography>
-      )}
+      )} */}
     </>
   );
 }

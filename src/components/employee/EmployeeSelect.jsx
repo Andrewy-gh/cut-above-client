@@ -15,11 +15,7 @@ export default function EmployeeSelect() {
     dispatch(setEmployee(id));
   };
   return (
-    <FormControl
-      sx={{
-        width: '100%',
-      }}
-    >
+    <FormControl>
       <InputLabel>Choose a barber</InputLabel>
       <Select
         label="Barber"

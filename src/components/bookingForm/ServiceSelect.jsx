@@ -8,7 +8,7 @@ import { theme } from '../../styles/styles';
 export default function ServiceSelect() {
   const { services, service, handleServiceChange } = useServiceSelection();
   return (
-    <FormControl fullWidth>
+    <FormControl>
       <InputLabel>Choose a service</InputLabel>
       <Select
         label="Service"
