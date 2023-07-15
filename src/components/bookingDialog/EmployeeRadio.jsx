@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { selectEmployeeById } from '../../features/employeeSlice';
-import { selectEmployee, setEmployee } from '../../features/filterSlice';
+import { useEmployeeSelection } from '../../hooks/useEmployeeSelection';
 
 const EmployeeRadioOption = ({ employeeId }) => {
   const employee = useSelector((state) =>
@@ -21,18 +21,14 @@ const EmployeeRadioOption = ({ employeeId }) => {
 };
 
 export default function EmployeeRadio({ employees }) {
-  const dispatch = useDispatch();
-  const employee = useSelector(selectEmployee);
-  const handleChange = (id) => {
-    dispatch(setEmployee(id));
-  };
+  const { employee, handleEmployeeChange } = useEmployeeSelection();
 
   return (
     <FormControl>
       <FormLabel>Available Barbers:</FormLabel>
       <RadioGroup
         value={employee}
-        onChange={(e) => handleChange(e.target.value)}
+        onChange={(e) => handleEmployeeChange(e.target.value)}
       >
         {employees.map((employeeId) => (
           <EmployeeRadioOption key={employeeId} employeeId={employeeId} />

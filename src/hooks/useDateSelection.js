@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { currentDate } from '../utils/date';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDate, setDate } from '../features/filterSlice';
 
 // TODO: remove date from filter slice
 export function useDateSelection() {
-  const [date, setDate] = useState(currentDate);
+  const dispatch = useDispatch();
+  const date = useSelector(selectDate);
 
   const handleDateChange = (newDate) => {
-    setDate(newDate);
+    dispatch(setDate(newDate.toISOString()));
   };
 
   return {

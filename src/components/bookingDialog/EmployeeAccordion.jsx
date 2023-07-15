@@ -8,14 +8,14 @@ import { selectEmployee } from '../../features/filterSlice';
 import { selectEmployeeById } from '../../features/employeeSlice';
 
 export default function EmployeeAccordion({ children }) {
-  const employeeId = useSelector(selectEmployee);
-  const employee = useSelector((state) =>
-    selectEmployeeById(state, employeeId)
-  );
+  // const employeeId = useSelector(selectEmployee);
+  // const employee = useSelector((state) =>
+  //   selectEmployeeById(state, employeeId)
+  // );
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography>{employee.firstName} </Typography>
+        <Typography>Choose an employee: </Typography>
       </AccordionSummary>
       <AccordionDetails>{children}</AccordionDetails>
     </Accordion>

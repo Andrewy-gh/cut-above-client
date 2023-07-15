@@ -83,7 +83,6 @@ export const selectScheduleByFilter = createSelector(
   selectEmployeeIds,
   (schedule, service, employees) => {
     // console.log('slice by filter:', schedule, service, employees);
-
     if (!schedule) {
       return [];
     }
