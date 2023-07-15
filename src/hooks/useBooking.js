@@ -14,8 +14,8 @@ export function useBooking() {
   const handleBooking = async ({ date, start, end, service, employee }) => {
     const newAppt = await addAppointment({
       date,
-      start: `${formatDate(date)} ${start}`,
-      end: `${formatDate(date)} ${end}`,
+      start,
+      end,
       service,
       employee,
     }).unwrap();
@@ -23,7 +23,6 @@ export function useBooking() {
       id: scheduleByDate.id,
       appointment: newAppt.data.id,
     }).unwrap();
-
     console.log(updatedSchedule);
   };
 
