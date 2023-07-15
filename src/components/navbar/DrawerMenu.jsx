@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { theme } from '../../styles/styles';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -40,13 +41,17 @@ export default function DrawerMenu() {
       >
         <CloseIcon sx={{ color: theme.palette.secondary.main }} />
       </IconButton>
-      <ul>
+      <div>
         {navigation.map((link) => (
-          <li key={link.id} style={{ fontFamily: 'Corben', fontWeight: 700 }}>
-            {link.name}
-          </li>
+          <Link
+            to={link.path}
+            key={link.id}
+            style={{ fontFamily: 'Corben', fontWeight: 700 }}
+          >
+            <div>{link.name}</div>
+          </Link>
         ))}
-      </ul>
+      </div>
       <div
         style={{
           display: 'flex',
