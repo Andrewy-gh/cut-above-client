@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import CancelAppointment from './CancelAppointment';
+import ModifyAppointment from './ModifyAppointment';
 import { useAppointment } from '../../hooks/useAppointment';
 import { useEmployeesQuery } from '../../hooks/useEmployeesQuery';
 
@@ -38,6 +39,7 @@ export default function Appointments() {
           <Typography variant="body1">{appt.start}</Typography>
           <Typography variant="body1">{appt.service}</Typography>
           <Employee employeeId={appt.employee} />
+          <ModifyAppointment appt={appt} />
           <CancelAppointment appt={appt} />
         </div>
       </div>

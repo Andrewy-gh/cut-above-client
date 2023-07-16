@@ -5,11 +5,14 @@ import {
   useUpdateScheduleMutation,
 } from '../features/scheduleSlice';
 import { formatDate } from '../utils/date';
+import { useAppointment } from './useAppointment';
 
 export function useBooking() {
   const [addAppointment] = useAddAppointmentMutation();
   const [updateSchedule] = useUpdateScheduleMutation();
   const scheduleByDate = useSelector(selectScheduleByDate);
+  const { rescheduling, cancelId, handleCancel, handleRescheduling } =
+    useAppointment();
 
   const handleBooking = async ({ date, start, end, service, employee }) => {
     const newAppt = await addAppointment({
@@ -24,6 +27,10 @@ export function useBooking() {
       appointment: newAppt.data.id,
     }).unwrap();
     console.log(updatedSchedule);
+    if (rescheduling && cancelId) {
+      handleCancel(cancelId);
+      handleRescheduling();
+    }
   };
 
   return {
