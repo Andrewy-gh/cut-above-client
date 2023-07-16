@@ -13,6 +13,7 @@ import RequireAuth from './components/auth/RequireAuth';
 import Schedule from './components/schedule/Schedule';
 import { theme } from './styles/styles';
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+import ApptStatusBoard from './components/admin/ApptStatusBoard';
 
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
@@ -40,6 +41,7 @@ export default function App() {
               <Route path="/add" element={<AddSchedule />} />
               <Route path="/appointments" element={<Appointments />} />
               <Route path="/schedule" element={<Schedule />} />
+              <Route path="/dashboard/:id" element={<ApptStatusBoard />} />
             </Route>
           </Routes>
           <Footer />

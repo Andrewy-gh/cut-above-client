@@ -1,6 +1,10 @@
 import { createSelector, createEntityAdapter } from '@reduxjs/toolkit';
 import { apiSlice } from '../../app/api/apiSlice';
-import { formatDateSlash, formatTime } from '../../utils/date';
+import {
+  formatDateSlash,
+  formatDateToTime,
+  formatTime,
+} from '../../utils/date';
 
 const appointmentAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.date.localeCompare(b.date),
@@ -30,6 +34,14 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Appointment', 'Schedule'],
     }),
+    updateAppointment: builder.mutation({
+      query: (appointment) => ({
+        url: `/appointment/${appointment.id}`,
+        method: 'PUT',
+        body: appointment,
+      }),
+      invalidatesTags: ['Appointment', 'Schedule'],
+    }),
     cancelAppointment: builder.mutation({
       query: (appointment) => ({
         url: `/appointment/${appointment.id}`,
@@ -43,6 +55,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetAppointmentQuery,
   useAddAppointmentMutation,
+  useUpdateAppointmentMutation,
   useCancelAppointmentMutation,
 } = extendedApiSlice;
 

@@ -11,11 +11,7 @@ export default function EmployeeSelect() {
   const employees = useSelector(selectAllEmployees);
   const { employee, handleEmployeeChange } = useEmployeeSelection();
   return (
-    <FormControl
-      sx={{
-        width: '100%',
-      }}
-    >
+    <FormControl fullWidth>
       <InputLabel>Choose a barber</InputLabel>
       <Select
         label="Barber"

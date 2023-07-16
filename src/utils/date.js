@@ -6,11 +6,20 @@ export const currentDate = dayjs();
 
 export const oneMonthFromCurrent = dayjs().add(1, 'month');
 
+// server format
 export const formatDate = (date) => dayjs(date).format('YYYY-MM-DD');
 
+// client side format
 export const formatDateSlash = (date) => dayjs(date).format('MM/DD/YYYY');
 
-export const formatTime = (date) => dayjs(date).format('h:mma');
+// client side format
+export const formatDateFull = (date) => dayjs(date).format('dddd LL');
+
+//  possibly delete
+export const formatDateToTime = (date) => dayjs(date).format('h:mma');
+
+// adds AM and PM to date
+export const formatTime = (time) => dayjs(time, 'HH:mm').format('h:mma');
 
 export const findAvailableTimeSlots = (schedule, duration, employees) => {
   const { open, close, appointments } = schedule;
