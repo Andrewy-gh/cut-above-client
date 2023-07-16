@@ -11,7 +11,7 @@ import { useEmployeeSelection } from '../hooks/useEmployeeSelection';
 
 export default function BookingPage() {
   const { employees } = useEmployeesQuery();
-  const { schedule } = useScheduleQuery();
+  const { schedules } = useScheduleQuery();
   const { date } = useDateSelection();
   const { service } = useServiceSelection();
   const { employee } = useEmployeeSelection();
@@ -22,7 +22,7 @@ export default function BookingPage() {
   if (rescheduling) message = <div>Please book your new appointment</div>;
 
   return (
-    <>
+    <div>
       {message}
       <BookingForm handleOpen={handleSelectAndOpen} />
       <BookingDialog
@@ -39,6 +39,6 @@ export default function BookingPage() {
           })
         }
       />
-    </>
+    </div>
   );
 }

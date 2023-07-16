@@ -13,8 +13,8 @@ export default function BookingForm({ handleOpen }) {
   const timeSlots = useSelector(selectScheduleByFilter);
   return (
     <>
-      <ServiceSelect />
       <EmployeeSelect />
+      <ServiceSelect />
       <DatePicker
         date={dayjs(date)}
         handleDateChange={handleDateChange}

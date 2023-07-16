@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { formatTime } from '../../utils/date';
 
 // Enabled horizontal scrolling on small screens
 const containerStyle = {
@@ -42,12 +43,15 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
     );
     availableTimes = (
       <Box sx={containerStyle}>
-        {timeSlots.map((slot) => (
-          <AvailableTime
-            key={slot.id}
-            handleOpen={() => handleOpen(slot)}
-          >{`${slot.start} ${slot.available.length} left`}</AvailableTime>
-        ))}
+        {timeSlots.map((slot) => {
+          const startTime = formatTime(slot.start);
+          return (
+            <AvailableTime
+              key={slot.id}
+              handleOpen={() => handleOpen(slot)}
+            >{`${startTime} ${slot.available.length} left`}</AvailableTime>
+          );
+        })}
       </Box>
     );
   } else {

@@ -1,3 +1,4 @@
+import DialogContent from '@mui/material/DialogContent';
 import CustomDialog from '../CustomDialog';
 import BookingDialogContent from './BookingDialogContent';
 import { useEmployeeSelection } from '../../hooks/useEmployeeSelection';
@@ -34,7 +35,7 @@ export default function BookingDialog({
         handleAgree={handleAgree}
         handleClose={handleClose}
       >
-        {employeeOptions}
+        <DialogContent>{employeeOptions}</DialogContent>
       </BookingDialogContent>
     </CustomDialog>
   );

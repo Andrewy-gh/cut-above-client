@@ -4,22 +4,22 @@ import { useAppointment } from '../../hooks/useAppointment';
 import { useDialog } from '../../hooks/useDialog';
 import { useEmployeesQuery } from '../../hooks/useEmployeesQuery';
 
-const dialog = (appt, employee) => {
+const dialog = (appointment, employee) => {
   return {
     button: 'Cancel',
-    title: `Are you sure you want to cancel your ${appt.service}?`,
-    content: `With ${employee.firstName} on ${appt.date} at ${appt.start}?`,
+    title: `Are you sure you want to cancel your ${appointment.service}?`,
+    content: `With ${employee.firstName} on ${appointment.date} at ${appointment.start}?`,
   };
 };
 
-export default function CancelAppointment({ appt }) {
+export default function CancelAppointment({ appointment }) {
   const { open, handleOpen, handleClose } = useDialog();
-  const { employee } = useEmployeesQuery(appt.employee);
+  const { employee } = useEmployeesQuery(appointment.employee);
   const { handleCancel } = useAppointment();
 
   if (!employee) return <div>Loading...</div>;
 
-  const dialogProps = dialog(appt, employee);
+  const dialogProps = dialog(appointment, employee);
 
   return (
     <ButtonDialog
@@ -30,7 +30,7 @@ export default function CancelAppointment({ appt }) {
     >
       <CustomDialogContent
         dialog={dialogProps}
-        handleAgree={() => handleCancel(appt.id)}
+        handleAgree={() => handleCancel(appointment.id)}
         handleClose={handleClose}
       />
     </ButtonDialog>

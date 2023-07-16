@@ -39,8 +39,8 @@ export default function Appointments() {
           <Typography variant="body1">{appt.start}</Typography>
           <Typography variant="body1">{appt.service}</Typography>
           <Employee employeeId={appt.employee} />
-          <ModifyAppointment appt={appt} />
-          <CancelAppointment appt={appt} />
+          <ModifyAppointment appointment={appt} />
+          <CancelAppointment appointment={appt} />
         </div>
       </div>
     ));

@@ -4,6 +4,7 @@ import {
   selectAllAppointment,
   useGetAppointmentQuery,
   useCancelAppointmentMutation,
+  useUpdateAppointmentMutation,
 } from '../features/appointments/apptApiSlice';
 import {
   beginRescheduling,
@@ -17,9 +18,10 @@ export function useAppointment() {
   const navigate = useNavigate();
   const { data } = useGetAppointmentQuery();
   const appointments = useSelector(selectAllAppointment);
-  const [cancelAppointment] = useCancelAppointmentMutation();
   const rescheduling = useSelector(selectRescheduling);
   const cancelId = useSelector(selectCancelId);
+  const [cancelAppointment] = useCancelAppointmentMutation();
+  const [updateAppointment] = useUpdateAppointmentMutation();
 
   const handleCancel = async (id) => {
     try {
@@ -37,6 +39,14 @@ export function useAppointment() {
 
   const handleRescheduling = () => dispatch(endRescheduling());
 
+  const handleStatusUpdate = async (appointment, newStatus) => {
+    const checkedInAppt = await updateAppointment({
+      ...appointment,
+      status: newStatus,
+    });
+    console.log('check status update: ', checkedInAppt);
+  };
+
   return {
     appointments,
     rescheduling,
@@ -44,5 +54,6 @@ export function useAppointment() {
     handleCancel,
     handleModify,
     handleRescheduling,
+    handleStatusUpdate,
   };
 }
