@@ -2,8 +2,13 @@ import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import CancelAppointment from './CancelAppointment';
 import ModifyAppointment from './ModifyAppointment';
-import { useAppointment } from '../../hooks/useAppointment';
+// import { useAppointment } from '../../hooks/useAppointment';
 import { useEmployeesQuery } from '../../hooks/useEmployeesQuery';
+import {
+  selectAllAppointment,
+  useGetAppointmentQuery,
+} from '../../features/appointments/apptApiSlice';
+import { useSelector } from 'react-redux';
 
 const Employee = ({ employeeId }) => {
   const { employee } = useEmployeesQuery(employeeId);
@@ -12,7 +17,9 @@ const Employee = ({ employeeId }) => {
 };
 
 export default function Appointments() {
-  const { appointments } = useAppointment();
+  // const { appointments } = useAppointment();
+  const { data } = useGetAppointmentQuery();
+  const appointments = useSelector(selectAllAppointment);
 
   let content;
   if (appointments.length > 0) {

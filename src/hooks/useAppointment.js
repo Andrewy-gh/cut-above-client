@@ -16,8 +16,8 @@ import {
 export function useAppointment() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data } = useGetAppointmentQuery();
-  const appointments = useSelector(selectAllAppointment);
+  // const { data } = useGetAppointmentQuery();
+  // const appointments = useSelector(selectAllAppointment);
   const rescheduling = useSelector(selectRescheduling);
   const cancelId = useSelector(selectCancelId);
   const [cancelAppointment] = useCancelAppointmentMutation();
@@ -48,7 +48,7 @@ export function useAppointment() {
   };
 
   return {
-    appointments,
+    // appointments,
     rescheduling,
     cancelId,
     handleCancel,

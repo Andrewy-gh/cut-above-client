@@ -1,10 +1,6 @@
 import { createSelector, createEntityAdapter } from '@reduxjs/toolkit';
 import { apiSlice } from '../../app/api/apiSlice';
-import {
-  formatDateSlash,
-  formatDateToTime,
-  formatTime,
-} from '../../utils/date';
+import { formatDateSlash, formatTime } from '../../utils/date';
 
 const appointmentAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.date.localeCompare(b.date),
