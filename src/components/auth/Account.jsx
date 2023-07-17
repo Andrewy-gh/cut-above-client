@@ -5,6 +5,7 @@ import DeleteAccount from './DeleteAccount';
 import LogoutButton from '../LogoutButton';
 import {
   selectCurrentUser,
+  selectCurrentUserRole,
   selectCurrentToken,
 } from '../../features/auth/authSlice';
 import { useUsersQuery } from '../../hooks/useUsersQuery';
@@ -12,6 +13,7 @@ import { useUsersQuery } from '../../hooks/useUsersQuery';
 export default function Account() {
   const navigate = useNavigate();
   const email = useSelector(selectCurrentUser);
+  const role = useSelector(selectCurrentUserRole);
   const token = useSelector(selectCurrentToken);
   const { handleUserDelete } = useUsersQuery();
   const welcome = email ? `Welcome ${email} to the ` : 'Welcome to the ';
@@ -27,6 +29,7 @@ export default function Account() {
   return (
     <div>
       <h3>{welcome} Account page</h3>
+      <p>Current user privileges: {role}</p>
       <p>{info}</p>
       <div>
         <Link to="/schedule">View schedule</Link>

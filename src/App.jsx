@@ -11,6 +11,7 @@ import NavBar from './components/navbar/index';
 import Register from './pages/Register';
 import RequireAuth from './components/auth/RequireAuth';
 import Schedule from './components/schedule/Schedule';
+import Unauthorized from './components/auth/Unauthorized';
 import { theme } from './styles/styles';
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 import ApptStatusBoard from './components/admin/ApptStatusBoard';
@@ -38,11 +39,14 @@ export default function App() {
             <Route path="/signup" element={<Register />} />
             <Route element={<RequireAuth />}>
               <Route path="/account" element={<Account />} />
-              <Route path="/add" element={<AddSchedule />} />
               <Route path="/appointments" element={<Appointments />} />
-              <Route path="/schedule" element={<Schedule />} />
-              <Route path="/dashboard/:id" element={<ApptStatusBoard />} />
+              <Route element={<RequireAuth requiredRole="admin" />}>
+                <Route path="/add" element={<AddSchedule />} />
+                <Route path="/schedule" element={<Schedule />} />
+                <Route path="/dashboard/:id" element={<ApptStatusBoard />} />
+              </Route>
             </Route>
+            <Route path="/unauthorized" element={<Unauthorized />} />
           </Routes>
           <Footer />
         </div>
