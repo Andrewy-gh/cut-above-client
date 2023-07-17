@@ -1,12 +1,10 @@
 export const navigation = [
   { id: 1, name: "Home", path: "/" },
   { id: 2, name: "Booking", path: "/bookings" },
-  { id: 3, name: "Add Schedule", path: "/add" },
-  { id: 4, name: "Sign Up", path: "/signup" },
-  { id: 5, name: "Login", path: "/login" },
-  { id: 6, name: "Account", path: "/account" },
-  { id: 7, name: "Schedule", path: "/schedule" },
-  // { id: 8, name: 'Appointments', path: '/appointments' },
+  { id: 3, name: "Sign Up", path: "/signup" },
+  { id: 4, name: "Login", path: "/login" },
+  { id: 5, name: "Account", path: "/account" },
+  { id: 6, name: "Schedule", path: "/schedule" },
 ];
 
 export const services = [
