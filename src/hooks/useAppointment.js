@@ -43,7 +43,7 @@ export function useAppointment() {
     const checkedInAppt = await updateAppointment({
       ...appointment,
       status: newStatus,
-    });
+    }).unwrap();
     console.log('check status update: ', checkedInAppt);
   };
 

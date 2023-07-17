@@ -46,7 +46,6 @@ function BookingDialogContent({
 }) {
   const { date } = useDateSelection();
   const { service } = useServiceSelection();
-  console.log('selection', selection);
   return (
     <>
       <BookingDialogTitle onClose={handleClose}>
