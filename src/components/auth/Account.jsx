@@ -1,21 +1,11 @@
-import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
 import DeleteAccount from './DeleteAccount';
 import LogoutButton from '../LogoutButton';
-import {
-  selectCurrentUser,
-  selectCurrentUserRole,
-  selectCurrentToken,
-} from '../../features/auth/authSlice';
-import { useUsersQuery } from '../../hooks/useUsersQuery';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function Account() {
   const navigate = useNavigate();
-  const email = useSelector(selectCurrentUser);
-  const role = useSelector(selectCurrentUserRole);
-  const token = useSelector(selectCurrentToken);
-  const { handleUserDelete } = useUsersQuery();
+  const { email, role, token } = useAuth();
   const welcome = email ? `Welcome ${email} to the ` : 'Welcome to the ';
   const tokenAbbr = token && `${token.slice(-9)}...`;
   const info = token
