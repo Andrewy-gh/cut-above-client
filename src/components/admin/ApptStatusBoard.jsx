@@ -77,14 +77,23 @@ const StatusColumns = ({ appointments }) => {
 export default function ApptStatusBoard() {
   const { id } = useParams();
   const { appointments } = useScheduleQuery(id);
-  if (appointments.length < 1) return <div>No Appointments made</div>;
+  let content;
+  if (appointments.length < 1) {
+    content = <div>No Appointments made</div>;
+  } else {
+    content = (
+      <>
+        <Typography variant="h5" component="div" style={{ padding: '1rem' }}>
+          {formatDateFull(appointments[0].date)}
+        </Typography>
+        <StatusColumns appointments={appointments} />
+      </>
+    );
+  }
   return (
     <div>
       <Link to="/schedule">Go Back to Schedule </Link>
-      <Typography variant="h5" component="div" style={{ padding: '1rem' }}>
-        {formatDateFull(appointments[0].date)}
-      </Typography>
-      <StatusColumns appointments={appointments} />
+      {content}
     </div>
   );
 }

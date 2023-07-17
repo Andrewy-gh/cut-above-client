@@ -4,7 +4,6 @@ import {
   selectScheduleByDate,
   useUpdateScheduleMutation,
 } from '../features/scheduleSlice';
-import { formatDate } from '../utils/date';
 import { useAppointment } from './useAppointment';
 
 export function useBooking() {
