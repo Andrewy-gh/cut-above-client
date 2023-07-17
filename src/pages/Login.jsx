@@ -21,10 +21,12 @@ export default function Login() {
         email: email.toLowerCase(),
         password,
       }).unwrap();
+      console.log('login result: ', loggedInUser);
       if (loggedInUser.success) {
         dispatch(
           setCredentials({
             user: loggedInUser.user,
+            role: loggedInUser.role,
             token: loggedInUser.token,
           })
         );
