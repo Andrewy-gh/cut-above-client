@@ -1,32 +1,40 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
-  selectAllAppointment,
-  useGetAppointmentQuery,
   useCancelAppointmentMutation,
   useUpdateAppointmentMutation,
 } from '../features/appointments/apptApiSlice';
+import { useSendCancellationMutation } from '../features/emailSlice';
 import {
   beginRescheduling,
   endRescheduling,
   selectCancelId,
   selectRescheduling,
 } from '../features/appointments/appointmentSlice';
+import { formatDateSlash, formatTime } from '../utils/date';
 
 export function useAppointment() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { data } = useGetAppointmentQuery();
-  // const appointments = useSelector(selectAllAppointment);
   const rescheduling = useSelector(selectRescheduling);
   const cancelId = useSelector(selectCancelId);
   const [cancelAppointment] = useCancelAppointmentMutation();
   const [updateAppointment] = useUpdateAppointmentMutation();
+  const [sendCancellation] = useSendCancellationMutation();
 
   const handleCancel = async (id) => {
     try {
       const cancelledAppt = await cancelAppointment({ id }).unwrap();
-      console.log('cancelled appointment: ', cancelledAppt);
+      const formattedDate = formatDateSlash(cancelledAppt.data.date);
+      const formattedTime = formatTime(cancelledAppt.data.time);
+      if (!rescheduling) {
+        const sentCancellation = await sendCancellation({
+          employee: cancelledAppt.data.employee,
+          date: formattedDate,
+          time: formattedTime,
+        });
+        console.log('cancellation email response: ', sentCancellation);
+      }
     } catch (error) {
       console.error(error);
     }
