@@ -33,7 +33,7 @@ export default function App() {
         >
           <NavBar />
           <Routes>
-            <Route index element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/bookings" element={<BookingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Register />} />
