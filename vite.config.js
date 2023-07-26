@@ -11,4 +11,14 @@ export default defineConfig({
     host: 'localhost',
     port: '3000',
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'mui-x-date-pickers': ['@mui/x-date-pickers'],
+          'mui-x-date-pickers-pro': ['@mui/x-date-pickers-pro'],
+        },
+      },
+    },
+  },
 });
