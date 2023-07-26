@@ -1,38 +1,38 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CssBaseline, ThemeProvider, responsiveFontSizes } from '@mui/material';
-import Account from './components/auth/Account';
-import AddSchedule from './components/schedule/AddSchedule';
-import Appointments from './components/appointments/index';
-import BookingPage from './pages/BookingPage';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import NavBar from './components/navbar/index';
-import Register from './pages/Register';
-import RequireAuth from './components/auth/RequireAuth';
-import Schedule from './components/schedule/Schedule';
-import Unauthorized from './components/auth/Unauthorized';
 import { theme } from './styles/styles';
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
-import ApptStatusBoard from './components/admin/ApptStatusBoard';
 
+import Layout from './components/Layout';
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
+
+// Lazy-loaded components
+const Account = React.lazy(() => import('./components/auth/Account'));
+const AddSchedule = React.lazy(() =>
+  import('./components/schedule/AddSchedule')
+);
+const Appointments = React.lazy(() =>
+  import('./components/appointments/index')
+);
+const BookingPage = React.lazy(() => import('./pages/BookingPage'));
+const Home = React.lazy(() => import('./pages/Home'));
+const Login = React.lazy(() => import('./pages/Login'));
+const Register = React.lazy(() => import('./pages/Register'));
+const RequireAuth = React.lazy(() => import('./components/auth/RequireAuth'));
+const Schedule = React.lazy(() => import('./components/schedule/Schedule'));
+const Unauthorized = React.lazy(() => import('./components/auth/Unauthorized'));
+const ApptStatusBoard = React.lazy(() =>
+  import('./components/admin/ApptStatusBoard')
+);
 
 export default function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={responsiveFontSizes(theme)}>
         <CssBaseline />
-        <div
-          style={{
-            minHeight: '100vh',
-            minHeight: '100dvh',
-            display: 'grid',
-            gridTemplateRows: 'auto 1fr auto',
-          }}
-        >
-          <NavBar />
-          <Routes>
+        <Routes>
+          <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/bookings" element={<BookingPage />} />
             <Route path="/login" element={<Login />} />
@@ -47,9 +47,8 @@ export default function App() {
               </Route>
             </Route>
             <Route path="/unauthorized" element={<Unauthorized />} />
-          </Routes>
-          <Footer />
-        </div>
+          </Route>
+        </Routes>
       </ThemeProvider>
     </BrowserRouter>
   );
