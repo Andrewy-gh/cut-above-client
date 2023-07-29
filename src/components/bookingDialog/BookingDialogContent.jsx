@@ -7,8 +7,9 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDateSelection } from '../../hooks/useDateSelection';
-import { formatDateFull, formatTime } from '../../utils/date';
+import { formatDateFull, formatTimeAlt } from '../../utils/date';
 import { useServiceSelection } from '../../hooks/useServiceSelection';
+import { theme } from '../../styles/styles';
 
 const flex = {
   display: 'flex',
@@ -19,22 +20,26 @@ const flex = {
 
 const BookingDialogTitle = ({ children, onClose }) => {
   return (
-    <DialogTitle>
-      {children}
-      {onClose ? (
-        <IconButton
-          onClick={onClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            // color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </DialogTitle>
+    <div
+      style={{
+        display: 'flex',
+        gap: '1rem',
+      }}
+    >
+      <DialogTitle>{children}</DialogTitle>
+      <div style={{ padding: '.25rem' }}>
+        {onClose ? (
+          <IconButton
+            onClick={onClose}
+            sx={{
+              color: theme.palette.secondary.light,
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+      </div>
+    </div>
   );
 };
 
@@ -60,9 +65,8 @@ function BookingDialogContent({
         <div style={flex}>
           <CalendarMonthIcon />
           <div>{formatDateFull(date)}</div>
-          <div>{formatTime(selection.start)}</div>
+          <div>{formatTimeAlt(selection.start)}</div>
         </div>
-        <div>{JSON.stringify(selection.available)}</div>
       </DialogContent>
       {children}
       <DialogActions>

@@ -22,6 +22,18 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: ['Appointment'],
     }),
+    getSingleAppointment: builder.query({
+      query: (id) => `/appointment/${id}`,
+      transformResponse: (responseData) => {
+        console.log('responseData', responseData);
+        return {
+          ...responseData,
+          date: formatDateSlash(responseData.date),
+          start: formatDateToTime(responseData.start),
+        };
+      },
+      providesTags: ['Appointment'],
+    }),
     addAppointment: builder.mutation({
       query: (appointment) => ({
         url: '/appointment',
@@ -50,6 +62,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetAppointmentQuery,
+  useGetSingleAppointmentQuery,
   useAddAppointmentMutation,
   useUpdateAppointmentMutation,
   useCancelAppointmentMutation,

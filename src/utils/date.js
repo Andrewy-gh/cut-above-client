@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
+dayjs.locale('en');
 
 export const currentDate = dayjs();
 
@@ -21,6 +22,8 @@ export const formatDateToTime = (date) => dayjs(date).format('h:mma');
 // adds AM and PM to date
 export const formatTime = (time) =>
   dayjs(time, 'YYYY-MM-DDTHH:mm:ss.SSSZ').format('h:mma');
+
+export const formatTimeAlt = (time) => dayjs(time, 'HH:mm').format('h:mma');
 
 export const findAvailableTimeSlots = (schedule, duration, employees) => {
   const { open, close, appointments } = schedule;
