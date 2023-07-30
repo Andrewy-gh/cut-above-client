@@ -11,7 +11,7 @@ const initialState = appointmentAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAppointment: builder.query({
-      query: () => '/appointment',
+      query: () => '/api/appointment',
       transformResponse: (responseData) => {
         const loadedPosts = responseData.map((appt) => ({
           ...appt,
@@ -23,7 +23,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       providesTags: ['Appointment'],
     }),
     getSingleAppointment: builder.query({
-      query: (id) => `/appointment/${id}`,
+      query: (id) => `/api/appointment/${id}`,
       transformResponse: (responseData) => {
         console.log('responseData', responseData);
         return {
@@ -36,7 +36,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     addAppointment: builder.mutation({
       query: (appointment) => ({
-        url: '/appointment',
+        url: '/api/appointment',
         method: 'POST',
         body: appointment,
       }),
@@ -44,7 +44,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     updateAppointment: builder.mutation({
       query: (appointment) => ({
-        url: `/appointment/${appointment.id}`,
+        url: `/api/appointment/${appointment.id}`,
         method: 'PUT',
         body: appointment,
       }),
@@ -52,7 +52,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     cancelAppointment: builder.mutation({
       query: (appointment) => ({
-        url: `/appointment/${appointment.id}`,
+        url: `/api/appointment/${appointment.id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Appointment'],
