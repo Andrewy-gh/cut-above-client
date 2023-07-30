@@ -47,6 +47,7 @@ export function useBooking() {
         employee,
         date: formatDateSlash(date),
         time: formatTimeAlt(start),
+        emailId: newAppt.data.emailId,
       });
       console.log('confirmation response: ', sentConfirmation);
     }
