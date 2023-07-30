@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
 import CancelAppointment from './CancelAppointment';
 import ModifyAppointment from './ModifyAppointment';
 // import { useAppointment } from '../../hooks/useAppointment';
@@ -14,6 +13,10 @@ const Employee = ({ employeeId }) => {
   const { employee } = useEmployeesQuery(employeeId);
   if (!employee) return <div>Loading...</div>;
   return <div>{employee.firstName}</div>;
+};
+
+const fontSize = {
+  fontSize: '1rem',
 };
 
 export default function Appointments() {
@@ -42,9 +45,9 @@ export default function Appointments() {
             gap: '1rem',
           }}
         >
-          <Typography variant="body1">{appt.date}</Typography>
-          <Typography variant="body1">{appt.start}</Typography>
-          <Typography variant="body1">{appt.service}</Typography>
+          <div style={fontSize}>{appt.date}</div>
+          <div style={fontSize}>{appt.start}</div>
+          <div style={fontSize}>{appt.service}</div>
           <Employee employeeId={appt.employee} />
           <ModifyAppointment appointment={appt} />
           <CancelAppointment appointment={appt} />
@@ -52,11 +55,7 @@ export default function Appointments() {
       </div>
     ));
   } else {
-    content = (
-      <Typography component="h4" variant="h5" align="center">
-        No appointments made
-      </Typography>
-    );
+    content = <h4 style={{ textAlign: 'center' }}>No appointments made</h4>;
   }
 
   return (

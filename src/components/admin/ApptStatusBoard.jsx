@@ -1,5 +1,4 @@
 import { Link, useParams } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
 import { useScheduleQuery } from '../../hooks/useScheduleQuery';
 import UpdateApptStatus from './UpdateApptStatus';
 import { formatDateFull } from '../../utils/date';
@@ -28,9 +27,7 @@ const StatusColumns = ({ appointments }) => {
         }}
       >
         <div style={column}>
-          <Typography variant="h6" component="div">
-            Scheduled
-          </Typography>
+          <h2>Scheduled</h2>
           {scheduled.map((e) => (
             <div key={e.id}>
               <div>Client: {e.client}</div>
@@ -42,9 +39,7 @@ const StatusColumns = ({ appointments }) => {
           ))}
         </div>
         <div style={column}>
-          <Typography variant="h6" component="div">
-            Checked In
-          </Typography>
+          <h2>Checked In</h2>
           {checkedIn.map((e) => (
             <div key={e.id}>
               <div>Client: {e.client}</div>
@@ -56,9 +51,7 @@ const StatusColumns = ({ appointments }) => {
           ))}
         </div>
         <div style={column}>
-          <Typography variant="h6" component="div">
-            Completed
-          </Typography>
+          <h2>Completed</h2>
           {completed.map((e) => (
             <div key={e.id}>
               <div>Client: {e.client}</div>
@@ -83,9 +76,9 @@ export default function ApptStatusBoard() {
   } else {
     content = (
       <>
-        <Typography variant="h5" component="div" style={{ padding: '1rem' }}>
+        <h2 style={{ padding: '1rem' }}>
           {formatDateFull(appointments[0].date)}
-        </Typography>
+        </h2>
         <StatusColumns appointments={appointments} />
       </>
     );

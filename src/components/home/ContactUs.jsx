@@ -1,13 +1,13 @@
-import { useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 export default function ContactUs() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(firstName, lastName, email, message);
@@ -15,24 +15,22 @@ export default function ContactUs() {
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        gap: "10px",
-        margintTop: "8px",
-        padding: "1rem",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        gap: '10px',
+        margintTop: '8px',
+        padding: '1rem',
       }}
     >
-      <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
-        Contact us
-      </Typography>
+      <h3 style={{ mb: 2 }}>Contact us</h3>
       <form onSubmit={handleSubmit}>
         <div
           style={{
-            display: "flex",
-            gap: "1rem",
-            justifyContent: "space-between",
+            display: 'flex',
+            gap: '1rem',
+            justifyContent: 'space-between',
           }}
         >
           <TextField

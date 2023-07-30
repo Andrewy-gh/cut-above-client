@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { theme } from '../../styles/styles';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -8,19 +7,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useAuth } from '../../hooks/useAuth';
 import { navigation } from '../../data/data';
 import { renderLink } from '../../utils/navigation';
+import { theme } from '../../styles/styles';
 
 export default function DrawerMenu() {
   const { role, token, handleLogout } = useAuth();
   const [open, setOpen] = useState(false);
-  // const handleLogout = async () => {
-  //   try {
-  //     // await logout();
-  //     // dispatch(logoutUser());
-  //     console.log('logging out...');
-  //   } catch (error) {
-  //     console.error('Error logging out: ', error);
-  //   }
-  // };
 
   const getList = () => (
     <div
@@ -53,6 +44,7 @@ export default function DrawerMenu() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          gap: '.75rem',
         }}
       >
         {navigation.map((link) =>
