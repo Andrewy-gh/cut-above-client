@@ -30,8 +30,8 @@ export default function ChangeEmail() {
         setHelperText('Emails do not match');
         return;
       }
-      setNewEmail((email) => {
-        const trimmedEmail = email.trim();
+      setNewEmail((newEmail) => {
+        const trimmedEmail = newEmail.trim();
         const lowercaseEmail = trimmedEmail.toLowerCase();
         return lowercaseEmail;
       });

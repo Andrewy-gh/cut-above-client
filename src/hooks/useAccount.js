@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser, updateUserDetails } from '../features/auth/authSlice';
 import {
   useChangeUserEmailMutation,
@@ -8,6 +8,7 @@ import {
 
 export function useAccount() {
   const dispatch = useDispatch();
+  const auth = useSelector(({ auth }) => auth);
   const [changeUserEmail] = useChangeUserEmailMutation();
   const [changeUserPassword] = useChangeUserPasswordMutation();
   const [deleteUser] = useDeleteUserMutation();
@@ -15,7 +16,9 @@ export function useAccount() {
   const handleUserEmailChange = async (newEmailObj) => {
     try {
       const updatedUser = await changeUserEmail(newEmailObj).unwrap();
-      if (updatedUser.success) dispatch(updateUserDetails(updatedUser.user));
+      if (updatedUser.success) {
+        dispatch(updateUserDetails(updatedUser.user));
+      }
     } catch (error) {
       console.error(`Error changing email: ${error}`);
     }
