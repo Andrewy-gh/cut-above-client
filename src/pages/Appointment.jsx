@@ -20,13 +20,10 @@ export default function Appointment() {
     isError,
     error,
   } = useGetSingleAppointmentQuery(id);
-  console.log('appointment', appointment);
   let content;
   if (isLoading) {
-    console.log('loading');
     return <p>Loading...</p>;
   } else if (isSuccess) {
-    console.log('success');
     content = (
       <div
         style={{
@@ -58,7 +55,6 @@ export default function Appointment() {
       </div>
     );
   } else if (isError) {
-    console.log('error');
     content = <p>{error}</p>;
   }
   return <>{content}</>;

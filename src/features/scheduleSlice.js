@@ -17,7 +17,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getSchedule: builder.query({
       query: () => '/api/schedule',
       transformResponse: (responseData) => {
-        console.log('responseData', responseData);
         const loadedPosts = responseData;
         return scheduleAdapter.setAll(initialState, loadedPosts);
       },

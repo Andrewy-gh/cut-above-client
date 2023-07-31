@@ -16,7 +16,6 @@ export function useAuth() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const email = useSelector(selectCurrentUser);
-  console.log('email in custom hook:', email);
   const role = useSelector(selectCurrentUserRole);
   const token = useSelector(selectCurrentToken);
   const [login] = useLoginMutation();

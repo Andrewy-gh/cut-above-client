@@ -7,7 +7,6 @@ export function useDateSelection() {
   const date = useSelector(selectDate);
 
   const handleDateChange = (newDate) => {
-    console.log(newDate.toISOString());
     dispatch(setDate(newDate.toISOString()));
   };
 

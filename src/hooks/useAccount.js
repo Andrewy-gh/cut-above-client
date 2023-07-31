@@ -15,7 +15,6 @@ export function useAccount() {
   const handleUserEmailChange = async (newEmailObj) => {
     try {
       const updatedUser = await changeUserEmail(newEmailObj).unwrap();
-      console.log('changed email: ', updatedUser);
       if (updatedUser.success) dispatch(updateUserDetails(updatedUser.user));
     } catch (error) {
       console.error(`Error changing email: ${error}`);
@@ -34,7 +33,6 @@ export function useAccount() {
   const handleUserDelete = async () => {
     try {
       const deletedUser = await deleteUser().unwrap();
-      console.log(deletedUser);
       if (deletedUser.success) {
         dispatch(logoutUser());
       }

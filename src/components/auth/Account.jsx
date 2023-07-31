@@ -14,7 +14,6 @@ export default function Account() {
   if (!token) {
     navigate('/login');
   }
-  console.log('email: ', email);
 
   return (
     <div>

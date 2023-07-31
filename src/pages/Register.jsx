@@ -46,7 +46,6 @@ export default function Register() {
         email,
         password,
       });
-      console.log('new user: ', newUser);
     } catch (error) {
       console.error(error);
     }
