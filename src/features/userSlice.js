@@ -8,15 +8,31 @@ const initialState = userAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: () => '/user',
+      query: () => '/api/user',
       transformResponse: (responseData) => {
         return userAdapter.setAll(initialState, responseData);
       },
       providesTags: ['User'],
     }),
+    changeUserEmail: builder.mutation({
+      query: (email) => ({
+        url: '/api/user/email',
+        method: 'PUT',
+        body: email,
+      }),
+      invalidatesTags: ['User'],
+    }),
+    changeUserPassword: builder.mutation({
+      query: (password) => ({
+        url: '/api/user/password',
+        method: 'PUT',
+        body: password,
+      }),
+      invalidatesTags: ['User'],
+    }),
     deleteUser: builder.mutation({
       query: () => ({
-        url: '/user',
+        url: '/api/user',
         method: 'DELETE',
       }),
       invalidatesTags: ['User'],
@@ -24,7 +40,12 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetUsersQuery, useDeleteUserMutation } = extendedApiSlice;
+export const {
+  useGetUsersQuery,
+  useChangeUserEmailMutation,
+  useChangeUserPasswordMutation,
+  useDeleteUserMutation,
+} = extendedApiSlice;
 
 export const selectUsersResult = extendedApiSlice.endpoints.getUsers.select();
 

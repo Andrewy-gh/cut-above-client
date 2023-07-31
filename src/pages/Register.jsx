@@ -40,12 +40,13 @@ export default function Register() {
         const lowercaseEmail = trimmedEmail.toLowerCase();
         return lowercaseEmail;
       });
-      await registerAccount({
+      const newUser = await registerAccount({
         firstName,
         lastName,
         email,
         password,
       });
+      console.log('new user: ', newUser);
     } catch (error) {
       console.error(error);
     }

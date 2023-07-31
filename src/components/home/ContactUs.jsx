@@ -19,8 +19,8 @@ export default function ContactUs() {
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
-        gap: '10px',
-        margintTop: '8px',
+        gap: '.625rem',
+        marginTop: '.5rem',
         padding: '1rem',
       }}
     >

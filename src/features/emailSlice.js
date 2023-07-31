@@ -4,21 +4,21 @@ export const emailSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     sendConfirmation: builder.mutation({
       query: (email) => ({
-        url: '/email/confirmation',
+        url: '/api/email/confirmation',
         method: 'POST',
         body: email,
       }),
     }),
     sendModification: builder.mutation({
       query: (email) => ({
-        url: '/email/modification',
+        url: '/api/email/modification',
         method: 'POST',
         body: email,
       }),
     }),
     sendCancellation: builder.mutation({
       query: (email) => ({
-        url: '/email/cancellation',
+        url: '/api/email/cancellation',
         method: 'POST',
         body: email,
       }),

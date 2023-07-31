@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import DeleteAccount from './DeleteAccount';
 import LogoutButton from '../LogoutButton';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -15,12 +14,16 @@ export default function Account() {
   if (!token) {
     navigate('/login');
   }
+  console.log('email: ', email);
 
   return (
     <div>
       <h3>{welcome} Account page</h3>
       <p>Current user privileges: {role}</p>
       <p>{info}</p>
+      <div>
+        <Link to="/account/settings">Account settings</Link>
+      </div>
       <div>
         <Link to="/schedule">View schedule</Link>
       </div>
@@ -32,9 +35,6 @@ export default function Account() {
       </div>
       <div>
         <LogoutButton />
-      </div>
-      <div>
-        <DeleteAccount />
       </div>
     </div>
   );

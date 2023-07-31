@@ -25,7 +25,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getSingleAppointment: builder.query({
       query: (id) => `/api/appointment/${id}`,
       transformResponse: (responseData) => {
-        console.log('responseData', responseData);
         return {
           ...responseData,
           date: formatDateSlash(responseData.date),

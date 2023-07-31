@@ -15,8 +15,9 @@ const initialState = scheduleAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getSchedule: builder.query({
-      query: () => '/schedule',
+      query: () => '/api/schedule',
       transformResponse: (responseData) => {
+        console.log('responseData', responseData);
         const loadedPosts = responseData;
         return scheduleAdapter.setAll(initialState, loadedPosts);
       },
@@ -25,7 +26,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     addSchedule: builder.mutation({
       query: (schedule) => ({
-        url: '/schedule',
+        url: '/api/schedule',
         method: 'POST',
         body: schedule,
       }),
@@ -33,7 +34,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     updateSchedule: builder.mutation({
       query: (schedule) => ({
-        url: `/schedule/${schedule.id}`,
+        url: `/api/schedule/${schedule.id}`,
         method: 'PUT',
         body: schedule,
       }),

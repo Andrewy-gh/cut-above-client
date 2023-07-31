@@ -17,6 +17,7 @@ const Appointment = lazy(() => import('./pages/Appointment'));
 const Appointments = lazy(() => import('./components/appointments/index'));
 const RequireAuth = lazy(() => import('./components/auth/RequireAuth'));
 const Schedule = lazy(() => import('./components/schedule/Schedule'));
+const Settings = lazy(() => import('./components/account/Settings'));
 const Unauthorized = lazy(() => import('./components/auth/Unauthorized'));
 const ApptStatusBoard = lazy(() =>
   import('./components/admin/ApptStatusBoard')
@@ -36,6 +37,7 @@ export default function App() {
             <Route path="/signup" element={<Register />} />
             <Route element={<RequireAuth />}>
               <Route path="/account" element={<Account />} />
+              <Route path="/account/settings" element={<Settings />} />
               <Route path="/appointments" element={<Appointments />} />
               <Route element={<RequireAuth requiredRole="admin" />}>
                 <Route path="/add" element={<AddSchedule />} />
