@@ -1,9 +1,31 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { formatTimeAlt } from '../../utils/date';
+import { useMediaQuery } from "@mui/material/";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { formatTimeAlt } from "../../utils/date";
+import { theme } from "../../styles/styles";
 
-const containerStyle = {};
+const containerMobile = {
+  width: "100%",
+  height: "100%",
+  overflowX: "scroll",
+  scrollBehavior: "smooth",
+  whiteSpace: "nowrap",
+  scrollbarWidth: "none",
+  msOverflowStyle: "none",
+};
+
+const containerDesktop = {
+  display: "flex",
+  gap: ".5rem",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  alignItems: "center",
+  // margin: "2rem 0",
+  // padding: { sm: "0 1rem", md: "0" },
+  // flexWrap: { md: "wrap" },
+  // justifyContent: { md: "center" },
+};
 
 const AvailableTime = ({ children, handleOpen }) => {
   return (
@@ -15,21 +37,18 @@ const AvailableTime = ({ children, handleOpen }) => {
 
 export default function AvailableTimes({ timeSlots, openDialog }) {
   const handleOpen = (data) => openDialog(data);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  let content;
+  let title;
+  let availableTimes;
   if (timeSlots.length > 0) {
-    content = (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          overflowX: 'scroll',
-          scrollBehavior: 'smooth',
-          whiteSpace: 'nowrap',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-        }}
-      >
+    title = (
+      <Typography variant="h6" align="center" sx={{ mb: 4 }}>
+        Times Available
+      </Typography>
+    );
+    availableTimes = (
+      <div style={isMobile ? containerMobile : containerDesktop}>
         {timeSlots.map((slot) => {
           const startTime = formatTimeAlt(slot.start);
           return (
@@ -42,7 +61,7 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
       </div>
     );
   } else {
-    content = (
+    title = (
       <Typography variant="h6" align="center">
         No Times Available
       </Typography>
@@ -50,10 +69,13 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
   }
 
   return (
-    <div
-      style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
-    >
-      {content}
-    </div>
+    <>
+      {title}
+      {/* <div
+      style={{ position: "relative", display: "flex", alignItems: "center" }}
+      > */}
+      {availableTimes}
+      {/* </div> */}
+    </>
   );
 }
