@@ -9,14 +9,18 @@ export default function Layout() {
       style={{
         minHeight: '100vh',
         minHeight: '100dvh',
-        display: 'grid',
-        gridTemplateRows: 'auto 1fr auto',
+        // display: 'grid',
+        // gridTemplateRows: 'auto 1fr auto',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <NavBar />
-      <Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-      </Suspense>
+      <div style={{ flexGrow: '1' }}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </div>
       <Footer />
     </div>
   );

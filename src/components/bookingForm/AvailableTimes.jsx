@@ -3,24 +3,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { formatTimeAlt } from '../../utils/date';
 
-// Enabled horizontal scrolling on small screens
-const containerStyle = {
-  display: 'flex',
-  gap: '.5rem',
-  alignItems: 'center',
-  margin: '2rem 0',
-  padding: { sm: '0 1rem', md: '0' },
-  overflowX: 'scroll',
-  overflow: { md: 'visible' },
-  flexWrap: { md: 'wrap' },
-  justifyContent: { md: 'center' },
-  // hides horizontal scrollbar on browsers
-  scrollbarWidth: 'none', // for Firefox
-  msOverflowStyle: 'none', // for Internet Explorer, Edge
-  '&::-webkit-scrollbar': {
-    display: 'none', // for Chrome, Safari, and Opera
-  },
-};
+const containerStyle = {};
 
 const AvailableTime = ({ children, handleOpen }) => {
   return (
@@ -33,16 +16,20 @@ const AvailableTime = ({ children, handleOpen }) => {
 export default function AvailableTimes({ timeSlots, openDialog }) {
   const handleOpen = (data) => openDialog(data);
 
-  let title;
-  let availableTimes;
+  let content;
   if (timeSlots.length > 0) {
-    title = (
-      <Typography variant="h6" align="center">
-        Times Available
-      </Typography>
-    );
-    availableTimes = (
-      <Box sx={containerStyle}>
+    content = (
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          overflowX: 'scroll',
+          scrollBehavior: 'smooth',
+          whiteSpace: 'nowrap',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        }}
+      >
         {timeSlots.map((slot) => {
           const startTime = formatTimeAlt(slot.start);
           return (
@@ -52,10 +39,10 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
             >{`${startTime} ${slot.available.length} left`}</AvailableTime>
           );
         })}
-      </Box>
+      </div>
     );
   } else {
-    title = (
+    content = (
       <Typography variant="h6" align="center">
         No Times Available
       </Typography>
@@ -63,9 +50,10 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
   }
 
   return (
-    <>
-      {title}
-      {availableTimes}
-    </>
+    <div
+      style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
+    >
+      {content}
+    </div>
   );
 }

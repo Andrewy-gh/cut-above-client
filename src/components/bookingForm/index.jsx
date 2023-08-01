@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 export default function BookingForm({ handleOpen }) {
   const { date, handleDateChange } = useDateSelection();
   const timeSlots = useSelector(selectScheduleByFilter);
+
   return (
     <>
       <EmployeeSelect />

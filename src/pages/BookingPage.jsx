@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useEmployeesQuery } from '../hooks/useEmployeesQuery';
 import { useScheduleQuery } from '../hooks/useScheduleQuery';
@@ -9,6 +11,9 @@ import { useDateSelection } from '../hooks/useDateSelection';
 import { useDialog } from '../hooks/useDialog';
 import { useServiceSelection } from '../hooks/useServiceSelection';
 import { useEmployeeSelection } from '../hooks/useEmployeeSelection';
+
+import { selectScheduleByFilter } from '../features/scheduleSlice';
+import AvailableTimes from '../components/bookingForm/AvailableTimes';
 
 const url =
   'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80';
@@ -51,6 +56,14 @@ export default function BookingPage() {
   const { open, selection, handleSelectAndOpen, handleClose } = useDialog();
   const { handleBooking } = useBooking();
   const { rescheduling } = useAppointment();
+  const timeSlots = useSelector(selectScheduleByFilter);
+  // examle timeSlots
+  // console.log(timeSlots);
+  // available: Array [ "64a60e878bdf8a4ac0f98209", "64a60f1a8bdf8a4ac0f98210" ]
+  // ​​end: "10:30"
+  // ​​id: "1cc97c1d-8be3-4f3a-8d11-492f042f4ac7"
+  // ​​start: "10:00"
+
   let message;
   if (rescheduling) message = <div>Please book your new appointment</div>;
 
@@ -66,9 +79,13 @@ export default function BookingPage() {
           align="center"
           sx={{ mb: 5 }}
         >
-          Schedule your appointment
+          Schedule your appointment **DEV**
         </Typography>
         <BookingForm handleOpen={handleSelectAndOpen} />
+        {/* <AvailableTimes
+          timeSlots={timeSlots}
+          openDialog={handleSelectAndOpen}
+        /> */}
         <BookingDialog
           open={open}
           handleClose={handleClose}
