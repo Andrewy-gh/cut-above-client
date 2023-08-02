@@ -1,25 +1,30 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { formatTimeAlt } from '../../utils/date';
+import { useMediaQuery } from "@mui/material/";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { formatTimeAlt } from "../../utils/date";
+import { theme } from "../../styles/styles";
 
-// Enabled horizontal scrolling on small screens
-const containerStyle = {
-  display: 'flex',
-  gap: '.5rem',
-  alignItems: 'center',
-  margin: '2rem 0',
-  padding: { sm: '0 1rem', md: '0' },
-  overflowX: 'scroll',
-  overflow: { md: 'visible' },
-  flexWrap: { md: 'wrap' },
-  justifyContent: { md: 'center' },
-  // hides horizontal scrollbar on browsers
-  scrollbarWidth: 'none', // for Firefox
-  msOverflowStyle: 'none', // for Internet Explorer, Edge
-  '&::-webkit-scrollbar': {
-    display: 'none', // for Chrome, Safari, and Opera
-  },
+const containerMobile = {
+  width: "100%",
+  height: "100%",
+  overflowX: "scroll",
+  scrollBehavior: "smooth",
+  whiteSpace: "nowrap",
+  scrollbarWidth: "none",
+  msOverflowStyle: "none",
+};
+
+const containerDesktop = {
+  display: "flex",
+  gap: ".5rem",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  alignItems: "center",
+  // margin: "2rem 0",
+  // padding: { sm: "0 1rem", md: "0" },
+  // flexWrap: { md: "wrap" },
+  // justifyContent: { md: "center" },
 };
 
 const AvailableTime = ({ children, handleOpen }) => {
@@ -32,17 +37,18 @@ const AvailableTime = ({ children, handleOpen }) => {
 
 export default function AvailableTimes({ timeSlots, openDialog }) {
   const handleOpen = (data) => openDialog(data);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   let title;
   let availableTimes;
   if (timeSlots.length > 0) {
     title = (
-      <Typography variant="h6" align="center">
+      <Typography variant="h6" align="center" sx={{ mb: 4 }}>
         Times Available
       </Typography>
     );
     availableTimes = (
-      <Box sx={containerStyle}>
+      <div style={isMobile ? containerMobile : containerDesktop}>
         {timeSlots.map((slot) => {
           const startTime = formatTimeAlt(slot.start);
           return (
@@ -52,7 +58,7 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
             >{`${startTime} ${slot.available.length} left`}</AvailableTime>
           );
         })}
-      </Box>
+      </div>
     );
   } else {
     title = (
@@ -65,7 +71,11 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
   return (
     <>
       {title}
+      {/* <div
+      style={{ position: "relative", display: "flex", alignItems: "center" }}
+      > */}
       {availableTimes}
+      {/* </div> */}
     </>
   );
 }
