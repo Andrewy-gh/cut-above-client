@@ -13,6 +13,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return employeeAdapter.setAll(initialState, responseData);
       },
       keepUnusedDataFor: 5,
+      providesTags: ['Employee'],
     }),
   }),
 });

@@ -25,16 +25,10 @@ export default function BookingPage() {
 
   return (
     <div>
+      <h3 style={{ textAlign: 'center', marginBottom: '3rem' }}>
+        Schedule your appointment
+      </h3>
       {message}
-      <Typography
-        component="h3"
-        variant="h4"
-        gutterBottom
-        align="center"
-        sx={{ mb: 5 }}
-      >
-        Messages
-      </Typography>
       <BookingForm handleOpen={handleSelectAndOpen} />
       <BookingDialog
         open={open}
