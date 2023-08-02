@@ -15,7 +15,7 @@ const flex = {
   display: 'flex',
   alignItems: 'center',
   gap: '.5rem',
-  marginBottom: '3rem',
+  marginBottom: '1rem',
 };
 
 const BookingDialogTitle = ({ children, onClose }) => {
@@ -23,6 +23,7 @@ const BookingDialogTitle = ({ children, onClose }) => {
     <div
       style={{
         display: 'flex',
+        justifyContent: 'space-between',
         gap: '1rem',
       }}
     >
