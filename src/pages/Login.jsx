@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import { useAuth } from '../hooks/useAuth';
-import Overlay from '../components/Overlay';
+import { useState } from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import { useAuth } from "../hooks/useAuth";
+import Overlay from "../components/Overlay";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const { handleLogin } = useAuth();
 
@@ -22,8 +22,8 @@ export default function Login() {
 
   return (
     <Overlay>
-      <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
-        <h3 style={{ textAlign: 'center' }}>Log in</h3>
+      <div style={{ width: "min(40ch, 100% - 2rem)", marginInline: "auto" }}>
+        <h3 style={{ textAlign: "center" }}>Log in</h3>
         <form onSubmit={handleSubmit}>
           <TextField
             label="Email"
