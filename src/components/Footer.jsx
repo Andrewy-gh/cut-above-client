@@ -1,15 +1,15 @@
-import Box from "@mui/material/Box";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { theme } from "../styles/styles";
+import Box from '@mui/material/Box';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { theme } from '../styles/styles';
 // import logoSide from '../assets/cover-logo-side.png';
 
 const Copyright = () => {
   return (
-    <p style={{ fontSize: "14px", fontWeight: "500" }}>
-      {"Copyright © "}
+    <p style={{ fontSize: '14px', fontWeight: '500' }}>
+      {'Copyright © '}
       {new Date().getFullYear()}
-      {"."}
+      {'.'}
     </p>
     // <Typography variant="body2" color="text.secondary">
     //   {'Copyright © '}
@@ -23,16 +23,16 @@ export default function Footer() {
   return (
     <footer
       style={{
-        padding: "1rem 1rem",
-        margintTop: "2rem",
+        padding: '.75rem .75rem',
+        margintTop: '2rem',
         backgroundColor: theme.palette.primary.main,
       }}
     >
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
         <Copyright />
