@@ -4,7 +4,7 @@ import DrawerMenu from './DrawerMenu';
 
 export default function NavMobile() {
   return (
-    <nav
+    <div
       style={{
         width: '100%',
         display: 'flex',
@@ -18,6 +18,6 @@ export default function NavMobile() {
           Cut Above
         </Typography>
       </Link>
-    </nav>
+    </div>
   );
 }

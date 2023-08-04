@@ -1,8 +1,5 @@
-import Box from '@mui/material/Box';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import { theme } from '../styles/styles';
-// import logoSide from '../assets/cover-logo-side.png';
+import logoSide from '../assets/cover-logo-side-small.avif';
 
 const Copyright = () => {
   return (
@@ -11,11 +8,6 @@ const Copyright = () => {
       {new Date().getFullYear()}
       {'.'}
     </p>
-    // <Typography variant="body2" color="text.secondary">
-    //   {'Copyright © '}
-    //   {new Date().getFullYear()}
-    //   {'.'}
-    // </Typography>
   );
 };
 
@@ -36,15 +28,12 @@ export default function Footer() {
         }}
       >
         <Copyright />
-        <div>Image placeholder</div>
-        {/* <CardMedia
-          component="img"
-          sx={{
-            width: 'clamp(100px, 40%, 200px)',
-          }}
-          image={logoSide}
-          alt="logo"
-        /> */}
+        <div style={{ width: 'clamp(150px, 40%, 250px)' }}>
+          <img
+            src={logoSide}
+            alt="Cut Above Barbershop logo image side variation"
+          />
+        </div>
       </div>
     </footer>
   );

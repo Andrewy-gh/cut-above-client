@@ -3,7 +3,7 @@ import { apiSlice } from '../../app/api/apiSlice';
 import { formatDateSlash, formatDateToTime } from '../../utils/date';
 
 const appointmentAdapter = createEntityAdapter({
-  sortComparer: (a, b) => a.date.localeCompare(b.date),
+  sortComparer: (a, b) => a.start.localeCompare(b.start),
 });
 
 const initialState = appointmentAdapter.getInitialState();
@@ -13,6 +13,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getAppointment: builder.query({
       query: () => '/api/appointment',
       transformResponse: (responseData) => {
+        console.log('reponseData: ', responseData);
         const loadedPosts = responseData.map((appt) => ({
           ...appt,
           date: formatDateSlash(appt.date),
