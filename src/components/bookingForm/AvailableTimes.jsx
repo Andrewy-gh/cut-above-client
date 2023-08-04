@@ -1,26 +1,27 @@
-import { useMediaQuery } from "@mui/material/";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { formatTimeAlt } from "../../utils/date";
-import { theme } from "../../styles/styles";
+import { useMediaQuery } from '@mui/material/';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { formatTimeAlt } from '../../utils/date';
+import { theme } from '../../styles/styles';
 
 const containerMobile = {
-  width: "100%",
-  height: "100%",
-  overflowX: "scroll",
-  scrollBehavior: "smooth",
-  whiteSpace: "nowrap",
-  scrollbarWidth: "none",
-  msOverflowStyle: "none",
+  width: '100%',
+  height: '100%',
+  overflowX: 'scroll',
+  scrollBehavior: 'smooth',
+  whiteSpace: 'nowrap',
+  scrollbarWidth: 'none',
+  msOverflowStyle: 'none',
 };
 
 const containerDesktop = {
-  display: "flex",
-  gap: ".5rem",
-  flexWrap: "wrap",
-  justifyContent: "center",
-  alignItems: "center",
+  display: 'flex',
+  gap: '.5rem',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 'min(100ch, 100% - 3rem)',
+  marginInline: 'auto',
   // margin: "2rem 0",
   // padding: { sm: "0 1rem", md: "0" },
   // flexWrap: { md: "wrap" },
@@ -37,7 +38,7 @@ const AvailableTime = ({ children, handleOpen }) => {
 
 export default function AvailableTimes({ timeSlots, openDialog }) {
   const handleOpen = (data) => openDialog(data);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   let title;
   let availableTimes;
@@ -71,11 +72,7 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
   return (
     <>
       {title}
-      {/* <div
-      style={{ position: "relative", display: "flex", alignItems: "center" }}
-      > */}
       {availableTimes}
-      {/* </div> */}
     </>
   );
 }

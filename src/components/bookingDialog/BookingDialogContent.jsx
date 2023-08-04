@@ -6,9 +6,8 @@ import IconButton from '@mui/material/IconButton';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import CloseIcon from '@mui/icons-material/Close';
-import { useDateSelection } from '../../hooks/useDateSelection';
 import { formatDateFull, formatTimeAlt } from '../../utils/date';
-import { useServiceSelection } from '../../hooks/useServiceSelection';
+import { useFilter } from '../../hooks/useFilter';
 import { theme } from '../../styles/styles';
 
 const flex = {
@@ -50,8 +49,7 @@ function BookingDialogContent({
   handleClose,
   selection,
 }) {
-  const { date } = useDateSelection();
-  const { service } = useServiceSelection();
+  const { date, service } = useFilter();
   return (
     <>
       <BookingDialogTitle onClose={handleClose}>

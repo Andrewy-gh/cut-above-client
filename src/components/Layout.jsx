@@ -15,13 +15,17 @@ export default function Layout() {
         flexDirection: 'column',
       }}
     >
-      <NavBar />
+      <div style={{ flexGrow: '0' }}>
+        <NavBar />
+      </div>
       <div style={{ flexGrow: '1' }}>
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </Suspense>
       </div>
-      <Footer />
+      <div style={{ flexGrow: '0' }}>
+        <Footer />
+      </div>
     </div>
   );
 }

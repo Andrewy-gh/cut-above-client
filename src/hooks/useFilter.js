@@ -1,4 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectDate,
   selectEmployee,
@@ -6,11 +7,12 @@ import {
   setDate,
   setEmployee,
   setService,
-} from "../features/filterSlice";
-import { services } from "../data/data";
+} from '../features/filterSlice';
+import { services } from '../data/data';
 
 export function useFilter() {
   const dispatch = useDispatch();
+  const [selection, setSelection] = useState({});
   const date = useSelector(selectDate);
   const employee = useSelector(selectEmployee);
   const service = useSelector(selectService);
@@ -20,6 +22,9 @@ export function useFilter() {
   };
   const handleEmployeeChange = (id) => {
     dispatch(setEmployee(id));
+  };
+  const handleSelectionChange = (data) => {
+    setSelection(data);
   };
   const handleServiceChange = (serviceId) => {
     const service = services.find((service) => service.id === serviceId);
@@ -31,7 +36,9 @@ export function useFilter() {
     employee,
     handleDateChange,
     handleEmployeeChange,
+    handleSelectionChange,
     handleServiceChange,
+    selection,
     service,
     services,
   };

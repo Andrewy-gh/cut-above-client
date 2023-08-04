@@ -52,7 +52,6 @@ export function useAppointment() {
       ...appointment,
       status: newStatus,
     }).unwrap();
-    console.log('check status update: ', checkedInAppt);
   };
 
   return {

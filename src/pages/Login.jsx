@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useAuth } from '../hooks/useAuth';
+import Overlay from '../components/Overlay';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -20,36 +21,38 @@ export default function Login() {
   };
 
   return (
-    <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
-      <h3 style={{ textAlign: 'center' }}>Log in</h3>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label="Email"
-          required
-          fullWidth
-          value={email}
-          onChange={({ target }) => setEmail(target.value)}
-        ></TextField>
-        <TextField
-          error={error}
-          label="Password"
-          type="password"
-          required
-          fullWidth
-          margin="normal"
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
-        ></TextField>
+    <Overlay>
+      <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
+        <h3 style={{ textAlign: 'center' }}>Log in</h3>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="Email"
+            required
+            fullWidth
+            value={email}
+            onChange={({ target }) => setEmail(target.value)}
+          ></TextField>
+          <TextField
+            error={error}
+            label="Password"
+            type="password"
+            required
+            fullWidth
+            margin="normal"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+          ></TextField>
 
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth
-          sx={{ mt: 2, mb: 3 }}
-        >
-          Login
-        </Button>
-      </form>
-    </div>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{ mt: 2, mb: 3 }}
+          >
+            Login
+          </Button>
+        </form>
+      </div>
+    </Overlay>
   );
 }
