@@ -4,15 +4,21 @@ import CustomDialog from './CustomDialog';
 export default function ButtonDialog({
   children,
   buttonStyle,
-  variant = 'contained',
   buttonText,
+  fullWidth,
+  open,
   handleOpen,
   handleClose,
-  open,
+  variant = 'contained',
 }) {
   return (
     <>
-      <Button variant={variant} onClick={handleOpen} sx={buttonStyle}>
+      <Button
+        variant={variant}
+        onClick={handleOpen}
+        fullWidth={fullWidth}
+        sx={buttonStyle}
+      >
         {buttonText}
       </Button>
       <CustomDialog open={open} handleClose={handleClose}>

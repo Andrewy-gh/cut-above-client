@@ -49,6 +49,7 @@ export default function ChangeEmail() {
         fullWidth
         value={newEmail}
         onChange={handleNewEmailChange}
+        sx={{ marginBlock: '.5rem' }}
       ></TextField>
       <TextField
         label="Confirm new email"
@@ -58,6 +59,7 @@ export default function ChangeEmail() {
         fullWidth
         value={confirmNewEmail}
         onChange={handleConfirmNewEmailChange}
+        sx={{ marginBlock: '.5rem' }}
       ></TextField>
       <Button type="submit" variant="contained" fullWidth sx={{ mt: 2, mb: 3 }}>
         Change email

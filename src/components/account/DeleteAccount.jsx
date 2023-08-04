@@ -6,7 +6,7 @@ import { useAccount } from '../../hooks/useAccount';
 const dialog = {
   button: 'Delete Account',
   title: 'Are you sure you want to delete your accout?',
-  content: 'Once you agree this action cannot be reversed.',
+  content: 'Once you agree, this action cannot be reversed.',
 };
 
 export default function DeleteAccount() {
@@ -16,6 +16,7 @@ export default function DeleteAccount() {
   return (
     <ButtonDialog
       buttonText={dialog.button}
+      fullWidth={true}
       open={open}
       handleOpen={handleOpen}
       handleClose={handleClose}
