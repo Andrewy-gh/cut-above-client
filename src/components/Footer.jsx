@@ -1,5 +1,5 @@
 import { theme } from '../styles/styles';
-import logoSide from '../assets/cover-logo-side-small.avif';
+import logoSide from '../assets/cover-logo-side-small.png';
 
 const Copyright = () => {
   return (
@@ -15,8 +15,8 @@ export default function Footer() {
   return (
     <footer
       style={{
+        width: '100%',
         padding: '.75rem .75rem',
-        margintTop: '2rem',
         backgroundColor: theme.palette.primary.main,
       }}
     >

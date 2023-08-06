@@ -13,7 +13,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getAppointment: builder.query({
       query: () => '/api/appointment',
       transformResponse: (responseData) => {
-        console.log('reponseData: ', responseData);
         const loadedPosts = responseData.map((appt) => ({
           ...appt,
           date: formatDateSlash(appt.date),

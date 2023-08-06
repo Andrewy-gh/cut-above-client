@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectOpen,
   selectMessage,
@@ -6,7 +6,7 @@ import {
   setSuccess,
   setError,
   clearMessage,
-} from "../features/notificationSlice";
+} from '../features/notificationSlice';
 
 export function useNotification() {
   const dispatch = useDispatch();
@@ -15,7 +15,9 @@ export function useNotification() {
   const severity = useSelector(selectSeverity);
   const handleSuccess = (message) => dispatch(setSuccess(message));
   const handleError = (err) => {
-    const errorMessage = err?.response?.data?.error || err;
+    // redux returns data
+    console.log('err notification: ', err);
+    const errorMessage = err?.data?.error || JSON.stringify(err);
     dispatch(setError(`Error: ${errorMessage}`));
   };
   const handleClearMessage = () => dispatch(clearMessage());

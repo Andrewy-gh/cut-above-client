@@ -12,6 +12,7 @@ const containerMobile = {
   whiteSpace: 'nowrap',
   scrollbarWidth: 'none',
   msOverflowStyle: 'none',
+  paddingInline: '1rem',
 };
 
 const containerDesktop = {
@@ -26,6 +27,11 @@ const containerDesktop = {
   // padding: { sm: "0 1rem", md: "0" },
   // flexWrap: { md: "wrap" },
   // justifyContent: { md: "center" },
+};
+
+const itemMobile = {
+  display: 'inline',
+  marginRight: '.5rem',
 };
 
 const AvailableTime = ({ children, handleOpen }) => {
@@ -53,10 +59,11 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
         {timeSlots.map((slot) => {
           const startTime = formatTimeAlt(slot.start);
           return (
-            <AvailableTime
-              key={slot.id}
-              handleOpen={() => handleOpen(slot)}
-            >{`${startTime} ${slot.available.length} left`}</AvailableTime>
+            <div key={slot.id} style={isMobile ? itemMobile : null}>
+              <AvailableTime
+                handleOpen={() => handleOpen(slot)}
+              >{`${startTime} ${slot.available.length} left`}</AvailableTime>
+            </div>
           );
         })}
       </div>
@@ -70,9 +77,9 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
   }
 
   return (
-    <>
+    <div style={{ marginTop: '2.5rem' }}>
       {title}
       {availableTimes}
-    </>
+    </div>
   );
 }

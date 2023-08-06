@@ -1,9 +1,9 @@
-import hero from '../assets/images/hero.avif';
+import hero from '../assets/images/hero.jpg';
 
 const containerStyle = {
   position: 'relative',
   width: '100%',
-  height: '90vh',
+  height: '100vh',
   background: `url(${hero}) center/cover no-repeat`,
 };
 

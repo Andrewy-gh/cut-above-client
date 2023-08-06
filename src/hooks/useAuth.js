@@ -1,17 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   useLoginMutation,
   useLogoutMutation,
-} from "../features/auth/authApiSlice";
+} from '../features/auth/authApiSlice';
 import {
   logoutUser,
   selectCurrentToken,
   selectCurrentUser,
   selectCurrentUserRole,
   setCredentials,
-} from "../features/auth/authSlice";
-import { useNotification } from "./useNotification";
+} from '../features/auth/authSlice';
+import { useNotification } from './useNotification';
 
 export function useAuth() {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ export function useAuth() {
           })
         );
         handleSuccess(loggedInUser.message);
-        navigate("/account");
+        navigate('/account');
       }
     } catch (err) {
       handleError(err);
@@ -48,10 +48,10 @@ export function useAuth() {
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout().unwrap();
       dispatch(logoutUser());
     } catch (error) {
-      console.error("Error logging out: ", error);
+      console.error('Error logging out: ', error);
     }
   };
 

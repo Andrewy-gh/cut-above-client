@@ -1,63 +1,63 @@
-import Box from "@mui/material/Box";
-import ContactUs from "../components/home/ContactUs";
-import Services from "../components/home/Services";
-import TeamMembers from "../components/home/TeamMembers";
-import Hero from "../components/home/Hero";
-import andre from "../assets/images/andre.jpg";
-import obi from "../assets/images/obi.jpg";
-import salah from "../assets/images/salah.jpg";
+import Box from '@mui/material/Box';
+import ContactUs from '../components/home/ContactUs';
+import Services from '../components/home/Services';
+import TeamMembers from '../components/home/TeamMembers';
+import Hero from '../components/home/Hero';
+import andre from '../assets/images/andre.jpg';
+import obi from '../assets/images/obi.jpg';
+import salah from '../assets/images/salah.jpg';
 
 const people = [
-  { id: 1, name: "Matthew" },
-  { id: 2, name: "Michael" },
-  { id: 3, name: "John" },
-  { id: 4, name: "David" },
-  { id: 5, name: "Michael" },
-  { id: 6, name: "Sophia" },
-  { id: 7, name: "Emma" },
-  { id: 8, name: "David" },
-  { id: 9, name: "Emma" },
-  { id: 10, name: "Sophia" },
-  { id: 11, name: "Daniel" },
-  { id: 12, name: "David" },
-  { id: 13, name: "Olivia" },
-  { id: 14, name: "John" },
-  { id: 15, name: "Jane" },
-  { id: 16, name: "Jane" },
-  { id: 17, name: "Jane" },
-  { id: 18, name: "Matthew" },
-  { id: 19, name: "Matthew" },
-  { id: 20, name: "Olivia" },
+  { id: 1, name: 'Matthew' },
+  { id: 2, name: 'Michael' },
+  { id: 3, name: 'John' },
+  { id: 4, name: 'David' },
+  { id: 5, name: 'Michael' },
+  { id: 6, name: 'Sophia' },
+  { id: 7, name: 'Emma' },
+  { id: 8, name: 'David' },
+  { id: 9, name: 'Emma' },
+  { id: 10, name: 'Sophia' },
+  { id: 11, name: 'Daniel' },
+  { id: 12, name: 'David' },
+  { id: 13, name: 'Olivia' },
+  { id: 14, name: 'John' },
+  { id: 15, name: 'Jane' },
+  { id: 16, name: 'Jane' },
+  { id: 17, name: 'Jane' },
+  { id: 18, name: 'Matthew' },
+  { id: 19, name: 'Matthew' },
+  { id: 20, name: 'Olivia' },
 ];
 
 const employees = [
   {
     id: 1,
-    firstName: "Andre",
+    firstName: 'Andre',
     image: andre,
     profile:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis vulputate enim nulla aliquet porttitor lacus. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin.",
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis vulputate enim nulla aliquet porttitor lacus. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin.',
   },
   {
     id: 2,
-    firstName: "Obi",
+    firstName: 'Obi',
     image: obi,
     profile:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis vulputate enim nulla aliquet porttitor lacus. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin.",
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis vulputate enim nulla aliquet porttitor lacus. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin.',
   },
   {
     id: 3,
-    firstName: "Salah",
+    firstName: 'Salah',
     image: salah,
     profile:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis vulputate enim nulla aliquet porttitor lacus. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin.",
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis vulputate enim nulla aliquet porttitor lacus. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin.',
   },
 ];
 
 export default function Home() {
   return (
-    <div style={{ marginBottom: "4rem" }}>
-      <Box
+    <div style={{ marginBottom: '4rem' }}>
+      {/* <Box
         sx={{
           display: "flex",
           alignItems: "center",
@@ -88,7 +88,7 @@ export default function Home() {
             {name}
           </Box>
         ))}
-      </Box>
+      </Box> */}
       <Hero />
       <Services />
       <TeamMembers employees={employees} />

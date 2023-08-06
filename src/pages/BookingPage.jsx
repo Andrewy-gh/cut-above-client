@@ -25,7 +25,7 @@ export default function BookingPage() {
   if (rescheduling) message = <div>Please book your new appointment</div>;
 
   return (
-    <div style={{ marginBottom: '3rem' }}>
+    <div style={{ marginBottom: '4rem' }}>
       <h3 style={{ textAlign: 'center', marginBottom: '3rem' }}>
         Schedule your appointment
       </h3>
