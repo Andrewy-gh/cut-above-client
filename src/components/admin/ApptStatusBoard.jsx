@@ -84,7 +84,7 @@ export default function ApptStatusBoard() {
     );
   }
   return (
-    <div>
+    <div style={{ marginBottom: '4rem' }}>
       <Link to="/schedule">Go Back to Schedule </Link>
       {content}
     </div>
