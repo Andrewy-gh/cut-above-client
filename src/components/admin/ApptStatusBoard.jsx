@@ -1,98 +1,52 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useScheduleQuery } from '../../hooks/useScheduleQuery';
-import UpdateApptStatus from './UpdateApptStatus';
+import StatusColumn from './StatusColumn';
+import StatusTab from './StatusTab';
 import { formatDateFull } from '../../utils/date';
-
-const column = {
-  margin: '.5rem',
-  border: '1px solid white',
-  borderRadius: '.125rem',
-  // width: '220px',
-  padding: '1rem',
-  display: 'flex',
-  flexDirection: 'column',
-};
-
-const StatusColumns = ({ appointments, status }) => {
-  const nextStatus = {
-    scheduled: 'checked-in',
-    'checked-in': 'completed',
-    completed: 'scheduled',
-  };
-  const newStatus = nextStatus[status];
-  if (appointments.length < 1) {
-    return <div>No {status} appointments</div>;
-  }
-  return (
-    <div style={{ marginInline: 'auto' }}>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-        }}
-      >
-        <div style={column}>
-          {appointments.map((appt) => (
-            <div key={appt.id}>
-              <div>Client: {appt.client}</div>
-              <div>Employee: {appt.employee}</div>
-              <div>Start: {appt.start}</div>
-              <div>Service: {appt.service}</div>
-              <UpdateApptStatus appointment={appt} newStatus={newStatus} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export default function ApptStatusBoard() {
   const { id } = useParams();
   const { appointments } = useScheduleQuery(id);
   const [status, setStatus] = useState('scheduled');
-  let content;
-  const filteredAppointments = status
-    ? appointments.filter((appt) => appt.status === status)
-    : appointments;
   const scheduled = appointments.filter((appt) => appt.status === 'scheduled');
   const checkedIn = appointments.filter((appt) => appt.status === 'checked-in');
   const completed = appointments.filter((appt) => appt.status === 'completed');
+  const statuses = [
+    { id: 1, name: 'scheduled', data: scheduled },
+    { id: 2, name: 'checked-in', data: checkedIn },
+    { id: 3, name: 'completed', data: completed },
+  ];
+  const filteredAppointments = statuses.find((st) => st.name === status).data;
+  let content;
   if (appointments.length < 1) {
-    content = <div>No Appointments made</div>;
+    content = <h5>No Appointments made</h5>;
   } else {
     content = (
       <>
-        <h5 style={{ padding: '1rem' }}>
-          {formatDateFull(appointments[0].start)}
-        </h5>
-        <div style={{ display: 'flex', gap: '1rem', outline: 'solid white' }}>
-          <div
-            style={{ cursor: 'pointer' }}
-            onClick={() => setStatus('scheduled')}
-          >
-            Scheduled {scheduled.length}
-          </div>
-          <div
-            style={{ cursor: 'pointer' }}
-            onClick={() => setStatus('checked-in')}
-          >
-            Checked In {checkedIn.length}
-          </div>
-          <div
-            style={{ cursor: 'pointer' }}
-            onClick={() => setStatus('completed')}
-          >
-            Completed {completed.length}
-          </div>
+        <h5>{formatDateFull(appointments[0].start)}</h5>
+        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+          {statuses.map((status) => (
+            <StatusTab
+              key={statuses.id}
+              handleClick={() => setStatus(status.name)}
+              name={status.name}
+              data={status.data}
+            />
+          ))}
         </div>
-        <StatusColumns appointments={filteredAppointments} status={status} />
+        <StatusColumn appointments={filteredAppointments} status={status} />
       </>
     );
   }
   return (
-    <div style={{ marginBottom: '4rem' }}>
+    <div
+      style={{
+        width: 'min(80ch, 100% - 2rem)',
+        marginInline: 'auto',
+        marginBottom: '4rem',
+      }}
+    >
       <Link to="/schedule">Go Back to Schedule </Link>
       {content}
     </div>

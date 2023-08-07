@@ -27,6 +27,7 @@ export function useAppointment() {
   const handleCancel = async (id) => {
     try {
       const cancelledAppt = await cancelAppointment({ id }).unwrap();
+      if (cancelledAppt.success) handleSuccess(cancelledAppt.message);
       const formattedDate = formatDateSlash(cancelledAppt.data.date);
       const formattedTime = formatTime(cancelledAppt.data.time);
       if (!rescheduling) {
@@ -37,8 +38,8 @@ export function useAppointment() {
         });
         console.log('cancellation email response: ', sentCancellation);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      handleError(err);
     }
   };
 
