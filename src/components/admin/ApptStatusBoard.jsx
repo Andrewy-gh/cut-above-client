@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useScheduleQuery } from '../../hooks/useScheduleQuery';
 import UpdateApptStatus from './UpdateApptStatus';
@@ -13,11 +14,16 @@ const column = {
   flexDirection: 'column',
 };
 
-const StatusColumns = ({ appointments }) => {
-  const scheduled = appointments.filter((appt) => appt.status === 'scheduled');
-  const checkedIn = appointments.filter((appt) => appt.status === 'checked-in');
-  const completed = appointments.filter((appt) => appt.status === 'completed');
-
+const StatusColumns = ({ appointments, status }) => {
+  const nextStatus = {
+    scheduled: 'checked-in',
+    'checked-in': 'completed',
+    completed: 'scheduled',
+  };
+  const newStatus = nextStatus[status];
+  if (appointments.length < 1) {
+    return <div>No {status} appointments</div>;
+  }
   return (
     <div style={{ marginInline: 'auto' }}>
       <div
@@ -27,38 +33,13 @@ const StatusColumns = ({ appointments }) => {
         }}
       >
         <div style={column}>
-          <h2>Scheduled</h2>
-          {scheduled.map((e) => (
-            <div key={e.id}>
-              <div>Client: {e.client}</div>
-              <div>Employee: {e.employee}</div>
-              <div>Start: {e.start}</div>
-              <div>Service: {e.service}</div>
-              <UpdateApptStatus appointment={e} newStatus={'checked-in'} />
-            </div>
-          ))}
-        </div>
-        <div style={column}>
-          <h2>Checked In</h2>
-          {checkedIn.map((e) => (
-            <div key={e.id}>
-              <div>Client: {e.client}</div>
-              <div>Employee: {e.employee}</div>
-              <div>Start: {e.start}</div>
-              <div>Service: {e.service}</div>
-              <UpdateApptStatus appointment={e} newStatus={'completed'} />
-            </div>
-          ))}
-        </div>
-        <div style={column}>
-          <h2>Completed</h2>
-          {completed.map((e) => (
-            <div key={e.id}>
-              <div>Client: {e.client}</div>
-              <div>Employee: {e.employee}</div>
-              <div>Start: {e.start}</div>
-              <div>Service: {e.service}</div>
-              <UpdateApptStatus appointment={e} newStatus={'scheduled'} />
+          {appointments.map((appt) => (
+            <div key={appt.id}>
+              <div>Client: {appt.client}</div>
+              <div>Employee: {appt.employee}</div>
+              <div>Start: {appt.start}</div>
+              <div>Service: {appt.service}</div>
+              <UpdateApptStatus appointment={appt} newStatus={newStatus} />
             </div>
           ))}
         </div>
@@ -70,16 +51,43 @@ const StatusColumns = ({ appointments }) => {
 export default function ApptStatusBoard() {
   const { id } = useParams();
   const { appointments } = useScheduleQuery(id);
+  const [status, setStatus] = useState('scheduled');
   let content;
+  const filteredAppointments = status
+    ? appointments.filter((appt) => appt.status === status)
+    : appointments;
+  const scheduled = appointments.filter((appt) => appt.status === 'scheduled');
+  const checkedIn = appointments.filter((appt) => appt.status === 'checked-in');
+  const completed = appointments.filter((appt) => appt.status === 'completed');
   if (appointments.length < 1) {
     content = <div>No Appointments made</div>;
   } else {
     content = (
       <>
-        <h2 style={{ padding: '1rem' }}>
-          {formatDateFull(appointments[0].date)}
-        </h2>
-        <StatusColumns appointments={appointments} />
+        <h5 style={{ padding: '1rem' }}>
+          {formatDateFull(appointments[0].start)}
+        </h5>
+        <div style={{ display: 'flex', gap: '1rem', outline: 'solid white' }}>
+          <div
+            style={{ cursor: 'pointer' }}
+            onClick={() => setStatus('scheduled')}
+          >
+            Scheduled {scheduled.length}
+          </div>
+          <div
+            style={{ cursor: 'pointer' }}
+            onClick={() => setStatus('checked-in')}
+          >
+            Checked In {checkedIn.length}
+          </div>
+          <div
+            style={{ cursor: 'pointer' }}
+            onClick={() => setStatus('completed')}
+          >
+            Completed {completed.length}
+          </div>
+        </div>
+        <StatusColumns appointments={filteredAppointments} status={status} />
       </>
     );
   }

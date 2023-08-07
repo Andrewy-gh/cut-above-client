@@ -11,6 +11,7 @@ import {
   selectCancelId,
   selectRescheduling,
 } from '../features/appointments/appointmentSlice';
+import { useNotification } from '../hooks/useNotification';
 import { formatDateSlash, formatTime } from '../utils/date';
 
 export function useAppointment() {
@@ -21,6 +22,7 @@ export function useAppointment() {
   const [cancelAppointment] = useCancelAppointmentMutation();
   const [updateAppointment] = useUpdateAppointmentMutation();
   const [sendCancellation] = useSendCancellationMutation();
+  const { handleSuccess, handleError } = useNotification();
 
   const handleCancel = async (id) => {
     try {
@@ -48,10 +50,15 @@ export function useAppointment() {
   const handleRescheduling = () => dispatch(endRescheduling());
 
   const handleStatusUpdate = async (appointment, newStatus) => {
-    const checkedInAppt = await updateAppointment({
-      ...appointment,
-      status: newStatus,
-    }).unwrap();
+    try {
+      const statusUpdate = await updateAppointment({
+        ...appointment,
+        status: newStatus,
+      }).unwrap();
+      if (statusUpdate.success) handleSuccess(statusUpdate.message);
+    } catch (err) {
+      handleError(err);
+    }
   };
 
   return {

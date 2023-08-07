@@ -2,9 +2,7 @@ import { createSelector, createEntityAdapter } from '@reduxjs/toolkit';
 import { apiSlice } from '../../app/api/apiSlice';
 import { formatDateSlash, formatDateToTime } from '../../utils/date';
 
-const appointmentAdapter = createEntityAdapter({
-  sortComparer: (a, b) => a.start.localeCompare(b.start),
-});
+const appointmentAdapter = createEntityAdapter({});
 
 const initialState = appointmentAdapter.getInitialState();
 
@@ -13,11 +11,13 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getAppointment: builder.query({
       query: () => '/api/appointment',
       transformResponse: (responseData) => {
-        const loadedPosts = responseData.map((appt) => ({
-          ...appt,
-          date: formatDateSlash(appt.date),
-          start: formatDateToTime(appt.start),
-        }));
+        const loadedPosts = responseData
+          .sort((a, b) => a.start.localeCompare(b.start))
+          .map((appt) => ({
+            ...appt,
+            date: formatDateSlash(appt.date),
+            start: formatDateToTime(appt.start),
+          }));
         return appointmentAdapter.setAll(initialState, loadedPosts);
       },
       providesTags: ['Appointment'],

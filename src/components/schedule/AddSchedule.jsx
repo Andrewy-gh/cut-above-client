@@ -59,25 +59,19 @@ export default function AddSchedule() {
           maxDate={dayjs().add(1, 'month')}
         />
         <h5>Choose your times:</h5>
-        <div>
-          <TimePicker
-            label="open"
-            value={open}
-            onChange={(newOpen) => setOpen(newOpen)}
-          />
-        </div>
-        <div>
-          <TimePicker
-            label="close"
-            value={close}
-            onChange={(newClose) => setClose(newClose)}
-          />
-        </div>
-        <div>
-          <Button variant="contained" onClick={() => handleAddSchedule(dates)}>
-            Add Schedule
-          </Button>
-        </div>
+        <TimePicker
+          label="open"
+          value={open}
+          onChange={(newOpen) => setOpen(newOpen)}
+        />
+        <TimePicker
+          label="close"
+          value={close}
+          onChange={(newClose) => setClose(newClose)}
+        />
+        <Button variant="contained" onClick={() => handleAddSchedule(dates)}>
+          Add Schedule
+        </Button>
       </div>
     </div>
   );

@@ -22,7 +22,9 @@ const fontSize = {
 export default function Appointments() {
   // const { appointments } = useAppointment();
   const { data } = useGetAppointmentQuery();
+  // console.log('appoinement data: ', appointments);
   const appointments = useSelector(selectAllAppointment);
+  console.log('appointments', appointments);
 
   let content;
   if (appointments.length > 0) {
