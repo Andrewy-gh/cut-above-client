@@ -13,17 +13,13 @@ export const formatDate = (date) => dayjs(date).format('YYYY-MM-DD');
 // client side format
 export const formatDateSlash = (date) => dayjs(date).format('MM/DD/YYYY');
 
-// client side format
+// client side format ex: Monday August 21, 2023
 export const formatDateFull = (date) => dayjs(date).format('dddd LL');
 
-//  possibly delete
+// ex: 10:00am 6:00pm
 export const formatDateToTime = (date) => dayjs(date).format('h:mma');
 
-// adds AM and PM to date
-export const formatTime = (time) =>
-  dayjs(time, 'YYYY-MM-DDTHH:mm:ss.SSSZ').format('h:mma');
-
-export const formatTimeAlt = (time) => dayjs(time, 'HH:mm').format('h:mma');
+export const formatTime = (time) => dayjs(time, 'HH:mm').format('h:mma');
 
 export const findAvailableTimeSlots = (schedule, duration, employees) => {
   const { open, close, appointments } = schedule;

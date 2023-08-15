@@ -9,7 +9,7 @@ import {
   useUpdateScheduleMutation,
 } from '../features/scheduleSlice';
 import { useAppointment } from './useAppointment';
-import { formatDateSlash, formatTimeAlt } from '../utils/date';
+import { formatDateSlash, formatTime } from '../utils/date';
 
 export function useBooking() {
   const [addAppointment] = useAddAppointmentMutation();
@@ -39,14 +39,14 @@ export function useBooking() {
       const sentModification = await sendModification({
         employee,
         date: formatDateSlash(date),
-        time: formatTimeAlt(start),
+        time: formatTime(start),
       });
       console.log('modification response: ', sentModification);
     } else {
       const sentConfirmation = await sendConfirmation({
         employee,
         date: formatDateSlash(date),
-        time: formatTimeAlt(start),
+        time: formatTime(start),
         emailId: newAppt.data.emailId,
       });
       console.log('confirmation response: ', sentConfirmation);

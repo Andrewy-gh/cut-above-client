@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import CloseIcon from '@mui/icons-material/Close';
-import { formatDateFull, formatTimeAlt } from '../../utils/date';
+import { formatDateFull, formatTime } from '../../utils/date';
 import { useFilter } from '../../hooks/useFilter';
 import { theme } from '../../styles/styles';
 
@@ -64,7 +64,7 @@ function BookingDialogContent({
         <div style={flex}>
           <CalendarMonthIcon />
           <div>{formatDateFull(date)}</div>
-          <div>{formatTimeAlt(selection.start)}</div>
+          <div>{formatTime(selection.start)}</div>
         </div>
       </DialogContent>
       {children}

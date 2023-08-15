@@ -1,7 +1,7 @@
 import { useMediaQuery } from '@mui/material/';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { formatTimeAlt } from '../../utils/date';
+import { formatTime } from '../../utils/date';
 import { theme } from '../../styles/styles';
 
 const containerMobile = {
@@ -57,7 +57,7 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
     availableTimes = (
       <div style={isMobile ? containerMobile : containerDesktop}>
         {timeSlots.map((slot) => {
-          const startTime = formatTimeAlt(slot.start);
+          const startTime = formatTime(slot.start);
           return (
             <div key={slot.id} style={isMobile ? itemMobile : null}>
               <AvailableTime
