@@ -5,7 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { selectEmployeeById } from '../../features/employeeSlice';
-import { useEmployeeSelection } from '../../hooks/useEmployeeSelection';
+import { useFilter } from '../../hooks/useFilter';
 
 const EmployeeRadioOption = ({ employeeId }) => {
   const employee = useSelector((state) =>
@@ -21,7 +21,7 @@ const EmployeeRadioOption = ({ employeeId }) => {
 };
 
 export default function EmployeeRadio({ employees }) {
-  const { employee, handleEmployeeChange } = useEmployeeSelection();
+  const { employee, handleEmployeeChange } = useFilter();
 
   return (
     <FormControl>

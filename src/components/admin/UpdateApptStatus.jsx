@@ -33,6 +33,10 @@ export default function UpdateApptStatus({ appointment, newStatus }) {
   const { handleStatusUpdate } = useAppointment();
 
   const dialogProps = dialog(newStatus);
+  const handleAgree = (appointment, newStatus) => {
+    handleStatusUpdate(appointment, newStatus);
+    handleClose();
+  };
 
   return (
     <ButtonDialog
@@ -43,7 +47,7 @@ export default function UpdateApptStatus({ appointment, newStatus }) {
     >
       <CustomDialogContent
         dialog={dialogProps}
-        handleAgree={() => handleStatusUpdate(appointment, newStatus)}
+        handleAgree={() => handleAgree(appointment, newStatus)}
         handleClose={handleClose}
       />
     </ButtonDialog>

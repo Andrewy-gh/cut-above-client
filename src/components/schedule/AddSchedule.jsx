@@ -1,16 +1,10 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import DateRangePicker from '../datePickers/DateRangePicker';
 import dayjs from 'dayjs';
 import { useAddScheduleMutation } from '../../features/scheduleSlice';
-
-const containerStyle = {
-  '@media (minWidth: 1200px)': {
-    maxWidth: '600px', //'1140px'
-  },
-};
+import { useNotification } from '../../hooks/useNotification';
 
 export default function AddSchedule() {
   const openTime = '10:00';
@@ -25,7 +19,7 @@ export default function AddSchedule() {
     dayjs().add(2, 'week'),
     // .add(1, 'month')
   ]);
-
+  const { handleSuccess, handleError } = useNotification();
   const [addSchedule] = useAddScheduleMutation();
   const handleDateChange = (newDates) => {
     setDates(newDates);
@@ -33,41 +27,38 @@ export default function AddSchedule() {
 
   const handleAddSchedule = async (dates) => {
     try {
-      await addSchedule({
+      const newSchedule = await addSchedule({
         dates,
         open: dayjs(open).format('HH:mm'),
         close: dayjs(close).format('HH:mm'),
       }).unwrap();
-    } catch (error) {
-      console.error(`Error add schedule ${error}`, error);
-      //  dispatch(setError(`Failed to save new schedule: ${error}`));
+      if (newSchedule.success) {
+        handleSuccess(newSchedule.message);
+      }
+    } catch (err) {
+      handleError(err);
     }
   };
   return (
-    <div style={containerStyle}>
+    <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
-          gap: 2,
-          mt: '8px',
-          padding: 2,
+          gap: '1rem',
+          marginTop: '.5rem',
         }}
       >
-        <Typography variant="h5" sx={{ mb: 2 }}>
-          Choose your dates:
-        </Typography>
+        <h5>Choose your dates:</h5>
         <DateRangePicker
           dates={dates}
           handleDateChange={handleDateChange}
           minDate={dayjs()}
           maxDate={dayjs().add(1, 'month')}
         />
-        <Typography variant="h5" sx={{ mb: 2 }}>
-          Choose your times:
-        </Typography>
+        <h5>Choose your times:</h5>
         <TimePicker
           label="open"
           value={open}

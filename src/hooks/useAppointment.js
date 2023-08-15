@@ -11,6 +11,7 @@ import {
   selectCancelId,
   selectRescheduling,
 } from '../features/appointments/appointmentSlice';
+import { useNotification } from '../hooks/useNotification';
 import { formatDateSlash, formatTime } from '../utils/date';
 
 export function useAppointment() {
@@ -21,10 +22,12 @@ export function useAppointment() {
   const [cancelAppointment] = useCancelAppointmentMutation();
   const [updateAppointment] = useUpdateAppointmentMutation();
   const [sendCancellation] = useSendCancellationMutation();
+  const { handleSuccess, handleError } = useNotification();
 
   const handleCancel = async (id) => {
     try {
       const cancelledAppt = await cancelAppointment({ id }).unwrap();
+      if (cancelledAppt.success) handleSuccess(cancelledAppt.message);
       const formattedDate = formatDateSlash(cancelledAppt.data.date);
       const formattedTime = formatTime(cancelledAppt.data.time);
       if (!rescheduling) {
@@ -35,8 +38,8 @@ export function useAppointment() {
         });
         console.log('cancellation email response: ', sentCancellation);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      handleError(err);
     }
   };
 
@@ -48,11 +51,15 @@ export function useAppointment() {
   const handleRescheduling = () => dispatch(endRescheduling());
 
   const handleStatusUpdate = async (appointment, newStatus) => {
-    const checkedInAppt = await updateAppointment({
-      ...appointment,
-      status: newStatus,
-    }).unwrap();
-    console.log('check status update: ', checkedInAppt);
+    try {
+      const statusUpdate = await updateAppointment({
+        ...appointment,
+        status: newStatus,
+      }).unwrap();
+      if (statusUpdate.success) handleSuccess(statusUpdate.message);
+    } catch (err) {
+      handleError(err);
+    }
   };
 
   return {

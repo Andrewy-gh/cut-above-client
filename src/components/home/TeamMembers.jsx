@@ -6,8 +6,9 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import { useFilter } from '../../hooks/useFilter';
 
-const MemberCard = ({ employee }) => {
+const MemberCard = ({ employee, handleClick }) => {
   return (
     <Grid item xs={12} sm={6} md={4} sx={{ marginInline: 'auto' }}>
       <Card
@@ -29,15 +30,21 @@ const MemberCard = ({ employee }) => {
           <h4 style={{ textAlign: 'center', marginTop: '0' }}>
             {employee.firstName}
           </h4>
-          <Typography variant="body2" align="center">
+          <p
+            className="body2"
+            style={{ textAlign: 'center', marginInline: 'auto' }}
+          >
             {employee.profile}
-          </Typography>
+          </p>
+          {/* <Typography variant="body2" align="center">
+            {employee.profile}
+          </Typography> */}
         </CardContent>
         <CardActions sx={{ marginInline: 'auto', mb: 2 }}>
           <Link
             to="/bookings"
             // state={{ employee: employee.id }}
-            //   onClick={() => dispatch(setEmployee(employeeId))}
+            onClick={() => handleClick(employee.id)}
           >
             <Button
               size="small"
@@ -51,18 +58,23 @@ const MemberCard = ({ employee }) => {
 };
 
 export default function TeamMembers({ employees }) {
+  const { handleEmployeeChange } = useFilter();
   return (
     <div
       style={{
-        maxWidth: '1200px',
+        width: 'min(1200px, 100% - 2rem)',
         marginInline: 'auto',
-        paddingInline: '4rem',
+        // paddingInline: "4rem",
       }}
     >
       <h3 style={{ textAlign: 'center' }}>Our Team</h3>
       <Grid container spacing={4}>
         {employees.map((employee) => (
-          <MemberCard key={employee.id} employee={employee} />
+          <MemberCard
+            key={employee.id}
+            employee={employee}
+            handleClick={handleEmployeeChange}
+          />
         ))}
       </Grid>
     </div>

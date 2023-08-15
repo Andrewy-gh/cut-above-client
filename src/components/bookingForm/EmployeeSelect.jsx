@@ -4,12 +4,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { selectAllEmployees } from '../../features/employeeSlice';
-import { useEmployeeSelection } from '../../hooks/useEmployeeSelection';
+import { useFilter } from '../../hooks/useFilter';
 import { theme } from '../../styles/styles';
 
 export default function EmployeeSelect() {
   const employees = useSelector(selectAllEmployees);
-  const { employee, handleEmployeeChange } = useEmployeeSelection();
+  const { employee, handleEmployeeChange } = useFilter();
   return (
     <FormControl fullWidth>
       <InputLabel>Choose a barber</InputLabel>

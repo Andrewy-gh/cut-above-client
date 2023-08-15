@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useRegisterAccountMutation } from '../features/registerSlice';
+import Overlay from '../components/Overlay';
 
-//
+import { useNotification } from '../hooks/useNotification';
+
 export default function Register() {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -13,6 +17,8 @@ export default function Register() {
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState('');
   const [registerAccount] = useRegisterAccountMutation();
+
+  const { handleSuccess, handleError } = useNotification();
 
   const handlePwdChange = (e) => {
     setError(false);
@@ -45,67 +51,81 @@ export default function Register() {
         lastName,
         email,
         password,
-      });
-    } catch (error) {
-      console.error(error);
+      }).unwrap();
+      if (newUser.success) {
+        navigate('/login');
+        handleSuccess(newUser.message);
+      }
+    } catch (err) {
+      handleError(err);
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div
-        style={{
-          display: 'flex',
-          gap: '2rem',
-          justifyContent: 'space-between',
-          marginBottom: '1rem',
-        }}
-      >
-        <TextField
-          label="First name"
-          margin="normal"
-          fullWidth
-          value={firstName}
-          onChange={({ target }) => setFirstName(target.value)}
-        ></TextField>
-        <TextField
-          label="Last name"
-          margin="normal"
-          fullWidth
-          value={lastName}
-          onChange={({ target }) => setLastName(target.value)}
-        ></TextField>
+    <Overlay>
+      <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
+        <h3 style={{ textAlign: 'center' }}>Sign up</h3>
+        <form onSubmit={handleSubmit}>
+          <div
+            style={{
+              display: 'flex',
+              gap: '1rem',
+              justifyContent: 'space-between',
+              marginBottom: '1rem',
+            }}
+          >
+            <TextField
+              label="First name"
+              margin="normal"
+              fullWidth
+              value={firstName}
+              onChange={({ target }) => setFirstName(target.value)}
+            ></TextField>
+            <TextField
+              label="Last name"
+              margin="normal"
+              fullWidth
+              value={lastName}
+              onChange={({ target }) => setLastName(target.value)}
+            ></TextField>
+          </div>
+          <TextField
+            label="Email"
+            required
+            fullWidth
+            value={email}
+            onChange={({ target }) => setEmail(target.value)}
+          ></TextField>
+          <TextField
+            error={error}
+            label="Password"
+            type="password"
+            required
+            fullWidth
+            margin="normal"
+            value={password}
+            onChange={handlePwdChange}
+          ></TextField>
+          <TextField
+            error={error}
+            helperText={helperText}
+            label="Confirm password"
+            type="password"
+            required
+            fullWidth
+            margin="normal"
+            value={confirmPwd}
+            onChange={handleConfirmPwdChange}
+          ></TextField>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{ mt: 2, mb: 3 }}
+          >
+            Signup
+          </Button>
+        </form>
       </div>
-      <TextField
-        label="Email"
-        required
-        fullWidth
-        value={email}
-        onChange={({ target }) => setEmail(target.value)}
-      ></TextField>
-      <TextField
-        error={error}
-        label="Password"
-        type="password"
-        required
-        fullWidth
-        margin="normal"
-        value={password}
-        onChange={handlePwdChange}
-      ></TextField>
-      <TextField
-        error={error}
-        helperText={helperText}
-        label="Confirm password"
-        type="password"
-        required
-        fullWidth
-        margin="normal"
-        value={confirmPwd}
-        onChange={handleConfirmPwdChange}
-      ></TextField>
-      <Button type="submit" variant="contained" fullWidth sx={{ mt: 2, mb: 3 }}>
-        Signup
-      </Button>
-    </form>
+    </Overlay>
   );
 }

@@ -1,7 +1,7 @@
 import DialogContent from '@mui/material/DialogContent';
 import CustomDialog from '../CustomDialog';
 import BookingDialogContent from './BookingDialogContent';
-import { useEmployeeSelection } from '../../hooks/useEmployeeSelection';
+import { useFilter } from '../../hooks/useFilter';
 import EmployeeAccordion from './EmployeeAccordion';
 import EmployeeRadio from './EmployeeRadio';
 import EmployeeEdit from './EmployeeEdit';
@@ -12,7 +12,7 @@ export default function BookingDialog({
   handleAgree,
   handleClose,
 }) {
-  const { employee, handleEmployeeChange } = useEmployeeSelection();
+  const { employee, handleEmployeeChange } = useFilter();
   let employeeOptions;
   if (employee === 'any') {
     employeeOptions = (

@@ -10,47 +10,49 @@ export default function NavDesktop() {
   const token = useSelector(selectCurrentToken);
 
   return (
-    <div
+    <ul
       style={{
         width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 1fr',
       }}
     >
-      <Link to="/bookings">
-        <Button variant="contained">Book now</Button>
-      </Link>
-      <Link to="/">
-        <div
-          style={{
-            fontFamily: 'Corben',
-            fontSize: '1.3125rem',
-            fontWeight: 700,
-          }}
-        >
-          Cut Above
-        </div>
-      </Link>
-      {token ? (
-        <Link to="/account">
-          <IconButton
-            edge="start"
-            sx={{ mr: 1, color: theme.palette.secondary.dark }}
-          >
-            <AccountCircleIcon fontSize="large" />
-          </IconButton>
+      <li style={{ placeSelf: 'center start' }}>
+        <Link to="/bookings">
+          <Button variant="contained">Book now</Button>
         </Link>
+      </li>
+      <li
+        style={{
+          placeSelf: 'center center',
+          fontFamily: 'Corben',
+          fontSize: '1.3125rem',
+          fontWeight: 700,
+        }}
+      >
+        <Link to="/">Cut Above</Link>
+      </li>
+      {token ? (
+        <li style={{ placeSelf: 'center end' }}>
+          <Link to="/account">
+            <IconButton
+              edge="start"
+              sx={{ mr: 1, color: theme.palette.secondary.dark }}
+            >
+              <AccountCircleIcon fontSize="large" />
+            </IconButton>
+          </Link>
+        </li>
       ) : (
-        <div>
+        <li style={{ placeSelf: 'center end' }}>
           <Link to="/signup">
             <Button sx={{ color: theme.palette.secondary.dark }}>Signup</Button>
           </Link>
           <Link to="/login">
             <Button variant="contained">Login</Button>
           </Link>
-        </div>
+        </li>
       )}
-    </div>
+    </ul>
   );
 }

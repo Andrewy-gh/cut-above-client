@@ -56,43 +56,43 @@ const employees = [
 
 export default function Home() {
   return (
-    <>
-      <Box
+    <div style={{ marginBottom: '4rem' }}>
+      {/* <Box
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          margin: '2rem 0',
-          padding: { sm: '0 1rem', md: '0' },
-          overflowX: 'scroll',
-          overflow: { md: 'visible' },
-          flexWrap: { md: 'wrap' },
-          justifyContent: { md: 'center' },
+          display: "flex",
+          alignItems: "center",
+          margin: "2rem 0",
+          padding: { sm: "0 1rem", md: "0" },
+          overflowX: "scroll",
+          overflow: { md: "visible" },
+          flexWrap: { md: "wrap" },
+          justifyContent: { md: "center" },
         }}
       >
         {people.map(({ name, id }) => (
           <Box
             key={id}
             sx={{
-              backgroundColor: 'lightblue',
-              border: '0',
-              borderRadius: '5px',
-              color: 'hotpink',
-              fontSize: '1rem',
-              letterSpacing: '2px',
-              lineHeight: '1.5rem',
-              padding: '4px 1rem',
-              marginRight: '0.5rem',
-              marginBottom: '0.5rem',
+              backgroundColor: "lightblue",
+              border: "0",
+              borderRadius: "5px",
+              color: "hotpink",
+              fontSize: "1rem",
+              letterSpacing: "2px",
+              lineHeight: "1.5rem",
+              padding: "4px 1rem",
+              marginRight: "0.5rem",
+              marginBottom: "0.5rem",
             }}
           >
             {name}
           </Box>
         ))}
-      </Box>
+      </Box> */}
       <Hero />
       <Services />
       <TeamMembers employees={employees} />
       <ContactUs />
-    </>
+    </div>
   );
 }

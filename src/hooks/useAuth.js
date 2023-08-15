@@ -11,6 +11,7 @@ import {
   selectCurrentUserRole,
   setCredentials,
 } from '../features/auth/authSlice';
+import { useNotification } from './useNotification';
 
 export function useAuth() {
   const dispatch = useDispatch();
@@ -21,26 +22,33 @@ export function useAuth() {
   const [login] = useLoginMutation();
   const [logout] = useLogoutMutation();
 
+  const { handleSuccess, handleError } = useNotification();
+
   const handleLogin = async (email, password) => {
-    const loggedInUser = await login({
-      email: email.toLowerCase(),
-      password,
-    }).unwrap();
-    if (loggedInUser.success) {
-      dispatch(
-        setCredentials({
-          user: loggedInUser.user,
-          role: loggedInUser.role,
-          token: loggedInUser.token,
-        })
-      );
-      navigate('/account');
+    try {
+      const loggedInUser = await login({
+        email: email.trim().toLowerCase(),
+        password,
+      }).unwrap();
+      if (loggedInUser.success) {
+        dispatch(
+          setCredentials({
+            user: loggedInUser.user,
+            role: loggedInUser.role,
+            token: loggedInUser.token,
+          })
+        );
+        handleSuccess(loggedInUser.message);
+        navigate('/account');
+      }
+    } catch (err) {
+      handleError(err);
     }
   };
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout().unwrap();
       dispatch(logoutUser());
     } catch (error) {
       console.error('Error logging out: ', error);

@@ -8,6 +8,13 @@ import { useAuth } from '../../hooks/useAuth';
 import { navigation } from '../../data/data';
 import { renderLink } from '../../utils/navigation';
 import { theme } from '../../styles/styles';
+import logoTop from '../../assets/cover-logo-top-small.png';
+
+const listItemStyle = {
+  fontFamily: 'Corben',
+  fontSize: '1.25rem',
+  fontWeight: 700,
+};
 
 export default function DrawerMenu() {
   const { role, token, handleLogout } = useAuth();
@@ -21,61 +28,62 @@ export default function DrawerMenu() {
         height: '100dvh',
         width: '100vw',
         backgroundColor: theme.palette.primary.main,
-        display: 'grid',
-        gridTemplateRows: 'auto 1fr auto',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
       }}
     >
       <div>
-        <IconButton
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            mt: 2,
-            mb: 2,
-            paddingRight: 2,
-          }}
-          onClick={() => setOpen(false)}
-        >
-          <CloseIcon sx={{ color: theme.palette.secondary.main }} />
-        </IconButton>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '.75rem',
-        }}
-      >
-        {navigation.map((link) =>
-          renderLink(link, token, role) ? (
-            <div
-              key={link.id}
-              style={{ fontFamily: 'Corben', fontWeight: 700 }}
-            >
-              <Link to={link.path}>{link.name}</Link>
-            </div>
-          ) : null
-        )}
-        {token && (
-          <div
-            onClick={handleLogout}
-            style={{ fontFamily: 'Corben', fontWeight: 700, cursor: 'pointer' }}
+        <div>
+          <IconButton
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              mt: 2,
+              mb: 2,
+              paddingInline: 2,
+            }}
+            onClick={() => setOpen(false)}
           >
-            Logout
-          </div>
-        )}
+            <CloseIcon sx={{ color: theme.palette.secondary.main }} />
+          </IconButton>
+        </div>
+        <ul
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '1rem',
+            marginTop: '10%',
+            marginBottom: '5rem',
+          }}
+        >
+          {navigation.map((link) =>
+            renderLink(link, token, role) ? (
+              <li key={link.id} style={listItemStyle}>
+                <Link to={link.path}>{link.name}</Link>
+              </li>
+            ) : null
+          )}
+          {token && (
+            <li
+              onClick={handleLogout}
+              style={{ ...listItemStyle, cursor: 'pointer' }}
+            >
+              Logout
+            </li>
+          )}
+        </ul>
       </div>
       <div
         style={{
           display: 'flex',
           justifyContent: 'center',
-          // width: "clamp(200px, 60%, 300px)",
-          height: '30px',
-          width: '30px',
+          width: 'clamp(200px, 60%, 300px)',
+          marginInline: 'auto',
         }}
       >
-        <img src="https://placehold.co/1600x900" alt="placeholder image" />
+        <img src={logoTop} alt="Cut Above Barbershop logo image" />
       </div>
     </div>
   );

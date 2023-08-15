@@ -45,6 +45,7 @@ export default function ChangePassword() {
         fullWidth
         value={newPassword}
         onChange={handleNewPasswordChange}
+        sx={{ marginBlock: '.5rem' }}
       ></TextField>
       <TextField
         label="Confirm new Password"
@@ -55,6 +56,7 @@ export default function ChangePassword() {
         fullWidth
         value={confirmNewPassword}
         onChange={handleConfirmNewPasswordChange}
+        sx={{ marginBlock: '.5rem' }}
       ></TextField>
       <Button type="submit" variant="contained" fullWidth sx={{ mt: 2, mb: 3 }}>
         Change Password

@@ -1,12 +1,13 @@
-import Typography from '@mui/material/Typography';
+import { theme } from '../styles/styles';
+import logoSide from '../assets/cover-logo-side-small.png';
 
 const Copyright = () => {
   return (
-    <Typography variant="body2" color="text.secondary">
+    <p style={{ fontSize: '14px', fontWeight: '500' }}>
       {'Copyright © '}
       {new Date().getFullYear()}
       {'.'}
-    </Typography>
+    </p>
   );
 };
 
@@ -14,7 +15,9 @@ export default function Footer() {
   return (
     <footer
       style={{
-        backgroundColor: 'grey',
+        width: '100%',
+        padding: '.75rem .75rem',
+        backgroundColor: theme.palette.primary.main,
       }}
     >
       <div
@@ -25,6 +28,12 @@ export default function Footer() {
         }}
       >
         <Copyright />
+        <div style={{ width: 'clamp(150px, 40%, 250px)' }}>
+          <img
+            src={logoSide}
+            alt="Cut Above Barbershop logo image side variation"
+          />
+        </div>
       </div>
     </footer>
   );

@@ -1,90 +1,52 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useScheduleQuery } from '../../hooks/useScheduleQuery';
-import UpdateApptStatus from './UpdateApptStatus';
+import StatusColumn from './StatusColumn';
+import StatusTab from './StatusTab';
 import { formatDateFull } from '../../utils/date';
-
-const column = {
-  margin: '.5rem',
-  border: '1px solid white',
-  borderRadius: '.125rem',
-  // width: '220px',
-  padding: '1rem',
-  display: 'flex',
-  flexDirection: 'column',
-};
-
-const StatusColumns = ({ appointments }) => {
-  const scheduled = appointments.filter((appt) => appt.status === 'scheduled');
-  const checkedIn = appointments.filter((appt) => appt.status === 'checked-in');
-  const completed = appointments.filter((appt) => appt.status === 'completed');
-
-  return (
-    <div style={{ marginInline: 'auto' }}>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-        }}
-      >
-        <div style={column}>
-          <h2>Scheduled</h2>
-          {scheduled.map((e) => (
-            <div key={e.id}>
-              <div>Client: {e.client}</div>
-              <div>Employee: {e.employee}</div>
-              <div>Start: {e.start}</div>
-              <div>Service: {e.service}</div>
-              <UpdateApptStatus appointment={e} newStatus={'checked-in'} />
-            </div>
-          ))}
-        </div>
-        <div style={column}>
-          <h2>Checked In</h2>
-          {checkedIn.map((e) => (
-            <div key={e.id}>
-              <div>Client: {e.client}</div>
-              <div>Employee: {e.employee}</div>
-              <div>Start: {e.start}</div>
-              <div>Service: {e.service}</div>
-              <UpdateApptStatus appointment={e} newStatus={'completed'} />
-            </div>
-          ))}
-        </div>
-        <div style={column}>
-          <h2>Completed</h2>
-          {completed.map((e) => (
-            <div key={e.id}>
-              <div>Client: {e.client}</div>
-              <div>Employee: {e.employee}</div>
-              <div>Start: {e.start}</div>
-              <div>Service: {e.service}</div>
-              <UpdateApptStatus appointment={e} newStatus={'scheduled'} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export default function ApptStatusBoard() {
   const { id } = useParams();
   const { appointments } = useScheduleQuery(id);
+  const [status, setStatus] = useState('scheduled');
+  const scheduled = appointments.filter((appt) => appt.status === 'scheduled');
+  const checkedIn = appointments.filter((appt) => appt.status === 'checked-in');
+  const completed = appointments.filter((appt) => appt.status === 'completed');
+  const statuses = [
+    { id: 1, name: 'scheduled', data: scheduled },
+    { id: 2, name: 'checked-in', data: checkedIn },
+    { id: 3, name: 'completed', data: completed },
+  ];
+  const filteredAppointments = statuses.find((st) => st.name === status).data;
   let content;
   if (appointments.length < 1) {
-    content = <div>No Appointments made</div>;
+    content = <h5>No Appointments made</h5>;
   } else {
     content = (
       <>
-        <h2 style={{ padding: '1rem' }}>
-          {formatDateFull(appointments[0].date)}
-        </h2>
-        <StatusColumns appointments={appointments} />
+        <h5>{formatDateFull(appointments[0].start)}</h5>
+        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+          {statuses.map((status) => (
+            <StatusTab
+              key={statuses.id}
+              handleClick={() => setStatus(status.name)}
+              name={status.name}
+              data={status.data}
+            />
+          ))}
+        </div>
+        <StatusColumn appointments={filteredAppointments} status={status} />
       </>
     );
   }
   return (
-    <div>
+    <div
+      style={{
+        width: 'min(80ch, 100% - 2rem)',
+        marginInline: 'auto',
+        marginBottom: '4rem',
+      }}
+    >
       <Link to="/schedule">Go Back to Schedule </Link>
       {content}
     </div>

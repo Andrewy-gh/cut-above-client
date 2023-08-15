@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logoutUser, updateUserDetails } from '../features/auth/authSlice';
 import {
   useChangeUserEmailMutation,
@@ -8,7 +8,6 @@ import {
 
 export function useAccount() {
   const dispatch = useDispatch();
-  const auth = useSelector(({ auth }) => auth);
   const [changeUserEmail] = useChangeUserEmailMutation();
   const [changeUserPassword] = useChangeUserPasswordMutation();
   const [deleteUser] = useDeleteUserMutation();

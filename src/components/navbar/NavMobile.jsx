@@ -13,7 +13,7 @@ export default function NavMobile() {
       }}
     >
       <DrawerMenu />
-      <Link to="/*">
+      <Link to="/">
         <Typography variant="h5" component="div">
           Cut Above
         </Typography>
