@@ -1,33 +1,29 @@
-import { Suspense } from "react";
-import { Outlet } from "react-router-dom";
-import NavBar from "./navbar";
-import Footer from "./Footer";
-import Notification from "./Notification";
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
+import NavBar from './navbar';
+import Footer from './Footer';
+import Notification from './Notification';
 
 export default function Layout() {
   return (
     <>
       <div
         style={{
-          minHeight: "100vh",
-          minHeight: "100dvh",
+          minHeight: '100vh',
+          minHeight: '100dvh',
           // display: 'grid',
           // gridTemplateRows: 'auto 1fr auto',
-          display: "flex",
-          flexDirection: "column",
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
-        <div>
-          <NavBar />
-        </div>
-        <div style={{ flexGrow: "1" }}>
+        <NavBar />
+        <div style={{ flexGrow: '1' }}>
           <Suspense fallback={<div>Loading...</div>}>
             <Outlet />
           </Suspense>
         </div>
-        <div>
-          <Footer />
-        </div>
+        <Footer />
       </div>
       <Notification />
     </>
