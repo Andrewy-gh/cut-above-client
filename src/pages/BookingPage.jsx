@@ -21,29 +21,30 @@ export default function BookingPage() {
     handleOpen();
   };
 
-  let message;
-  if (rescheduling) message = <div>Please book your new appointment</div>;
+  let message = rescheduling
+    ? 'Please book your new appointment'
+    : 'Schedule your appointment';
+
+  const handleAgree = () => {
+    handleBooking({
+      date,
+      start: selection.start,
+      end: selection.end,
+      service: service.name,
+      employee,
+    });
+    handleClose();
+  };
 
   return (
     <div style={{ marginBottom: '4rem' }}>
-      <h3 style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        Schedule your appointment
-      </h3>
-      {message}
+      <h3 style={{ textAlign: 'center', marginBottom: '3rem' }}>{message}</h3>
       <BookingForm handleOpen={handleSelectAndOpen} />
       <BookingDialog
         open={open}
         handleClose={handleClose}
         selection={selection}
-        handleAgree={() =>
-          handleBooking({
-            date,
-            start: selection.start,
-            end: selection.end,
-            service: service.name,
-            employee,
-          })
-        }
+        handleAgree={handleAgree}
       />
     </div>
   );

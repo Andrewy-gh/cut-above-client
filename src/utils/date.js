@@ -16,7 +16,7 @@ export const formatDateSlash = (date) => dayjs(date).format('MM/DD/YYYY');
 // client side format ex: Monday August 21, 2023
 export const formatDateFull = (date) => dayjs(date).format('dddd LL');
 
-// ex: 10:00am 6:00pm
+// ex: 10:00am 6:00pm used in component render
 export const formatDateToTime = (date) => dayjs(date).format('h:mma');
 
 export const formatTime = (time) => dayjs(time, 'HH:mm').format('h:mma');
