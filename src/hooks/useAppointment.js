@@ -29,7 +29,7 @@ export function useAppointment() {
       const cancelledAppt = await cancelAppointment({ id }).unwrap();
       if (cancelledAppt.success) handleSuccess(cancelledAppt.message);
       const formattedDate = formatDateSlash(cancelledAppt.data.date);
-      const formattedTime = formatTime(cancelledAppt.data.time);
+      const formattedTime = formatTime(cancelledAppt.data.start);
       if (!rescheduling) {
         const sentCancellation = await sendCancellation({
           employee: cancelledAppt.data.employee,

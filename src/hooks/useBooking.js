@@ -40,6 +40,7 @@ export function useBooking() {
         employee,
         date: formatDateSlash(date),
         time: formatTime(start),
+        emailId: newAppt.data.emailId,
       });
       console.log('modification response: ', sentModification);
     } else {

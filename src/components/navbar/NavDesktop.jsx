@@ -28,6 +28,7 @@ export default function NavDesktop() {
           fontFamily: 'Corben',
           fontSize: '1.3125rem',
           fontWeight: 700,
+          color: theme.palette.secondary.main,
         }}
       >
         <Link to="/">Cut Above</Link>

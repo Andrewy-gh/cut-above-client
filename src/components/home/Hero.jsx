@@ -44,10 +44,9 @@ export default function Hero() {
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
           }}
         >
-          If you&apos;re looking for a top-quality haircut service in a
-          welcoming and relaxing environment, look no further than our
-          barbershop. Book your appointment today and let us help you achieve
-          the perfect haircut!
+          If you&apos;re looking for a top-quality haircut service in a relaxing
+          environment, look no further! Book your appointment today and let us
+          help you achieve the perfect haircut!
         </p>
         <div style={{ textAlign: 'center' }}>
           <Link to="/reserve">

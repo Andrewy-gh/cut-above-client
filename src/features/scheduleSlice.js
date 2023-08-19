@@ -29,7 +29,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: schedule,
       }),
-      invalidatesTags: ['Schedule'],
+      invalidatesTags: ['Appointment', 'Schedule'],
     }),
     updateSchedule: builder.mutation({
       query: (schedule) => ({
@@ -37,7 +37,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body: schedule,
       }),
-      invalidatesTags: ['Schedule'],
+      invalidatesTags: ['Appointment', 'Schedule'],
     }),
   }),
 });

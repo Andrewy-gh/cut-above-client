@@ -54,7 +54,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         url: `/api/appointment/${appointment.id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Appointment'],
+      invalidatesTags: ['Appointment', 'Schedule'],
     }),
   }),
 });
