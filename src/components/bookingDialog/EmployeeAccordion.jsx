@@ -13,7 +13,7 @@ export default function EmployeeAccordion({ children }) {
   //   selectEmployeeById(state, employeeId)
   // );
   return (
-    <Accordion>
+    <Accordion style={{ backgroundColor: '#393939' }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>Choose an employee: </Typography>
       </AccordionSummary>

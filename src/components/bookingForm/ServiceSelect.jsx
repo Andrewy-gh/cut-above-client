@@ -24,7 +24,7 @@ export default function ServiceSelect() {
               duration={service.duration}
               key={service.id}
             >
-              {service.name}
+              {service.name} - {service.duration} minutes
             </MenuItem>
           );
         })}

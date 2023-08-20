@@ -6,6 +6,7 @@ import { useAppointment } from '../hooks/useAppointment';
 import { useBooking } from '../hooks/useBooking';
 import { useFilter } from '../hooks/useFilter';
 import { useDialog } from '../hooks/useDialog';
+import { useAuth } from '../hooks/useAuth';
 
 export default function BookingPage() {
   const { employees } = useEmployeesQuery();
@@ -15,6 +16,7 @@ export default function BookingPage() {
   const { open, handleClose, handleOpen } = useDialog();
   const { handleBooking } = useBooking();
   const { rescheduling } = useAppointment();
+  const { token } = useAuth;
 
   const handleSelectAndOpen = (data) => {
     handleSelectionChange(data);
@@ -26,6 +28,10 @@ export default function BookingPage() {
     : 'Schedule your appointment';
 
   const handleAgree = () => {
+    if (!token) {
+      alert('no token');
+      return;
+    }
     handleBooking({
       date,
       start: selection.start,

@@ -14,6 +14,7 @@ const listItemStyle = {
   fontFamily: 'Corben',
   fontSize: '1.25rem',
   fontWeight: 700,
+  color: theme.palette.secondary.main,
 };
 
 export default function DrawerMenu() {
