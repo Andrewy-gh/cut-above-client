@@ -31,7 +31,7 @@ const MemberCard = ({ employee, handleClick }) => {
             {employee.firstName}
           </h4>
           <p
-            className="body2"
+            className="body1"
             style={{ textAlign: 'center', marginInline: 'auto' }}
           >
             {employee.profile}

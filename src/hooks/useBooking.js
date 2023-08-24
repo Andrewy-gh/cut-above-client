@@ -9,6 +9,7 @@ import {
   useUpdateScheduleMutation,
 } from '../features/scheduleSlice';
 import { useAppointment } from './useAppointment';
+import { useNotification } from './useNotification';
 import { formatDateSlash, formatTime } from '../utils/date';
 
 export function useBooking() {
@@ -19,38 +20,44 @@ export function useBooking() {
   const scheduleByDate = useSelector(selectScheduleByDate);
   const { rescheduling, cancelId, handleCancel, handleRescheduling } =
     useAppointment();
+  const { handleSuccess, handleError } = useNotification();
 
   const handleBooking = async ({ date, start, end, service, employee }) => {
-    const newAppt = await addAppointment({
-      date,
-      start,
-      end,
-      service,
-      employee,
-    }).unwrap();
-    const updatedSchedule = await updateSchedule({
-      id: scheduleByDate.id,
-      appointment: newAppt.data.id,
-    }).unwrap();
-    console.log(updatedSchedule);
-    if (rescheduling && cancelId) {
-      handleCancel(cancelId);
-      handleRescheduling();
-      const sentModification = await sendModification({
+    try {
+      const newAppt = await addAppointment({
+        date,
+        start,
+        end,
+        service,
         employee,
-        date: formatDateSlash(date),
-        time: formatTime(start),
-        emailId: newAppt.data.emailId,
-      });
-      console.log('modification response: ', sentModification);
-    } else {
-      const sentConfirmation = await sendConfirmation({
-        employee,
-        date: formatDateSlash(date),
-        time: formatTime(start),
-        emailId: newAppt.data.emailId,
-      });
-      console.log('confirmation response: ', sentConfirmation);
+      }).unwrap();
+      if (newAppt.success) handleSuccess(newAppt.message);
+      const updatedSchedule = await updateSchedule({
+        id: scheduleByDate.id,
+        appointment: newAppt.data.id,
+      }).unwrap();
+      console.log(updatedSchedule);
+      if (rescheduling && cancelId) {
+        handleCancel(cancelId);
+        handleRescheduling();
+        const sentModification = await sendModification({
+          employee,
+          date: formatDateSlash(date),
+          time: formatTime(start),
+          emailId: newAppt.data.emailId,
+        });
+        console.log('modification response: ', sentModification);
+      } else {
+        const sentConfirmation = await sendConfirmation({
+          employee,
+          date: formatDateSlash(date),
+          time: formatTime(start),
+          emailId: newAppt.data.emailId,
+        });
+        console.log('confirmation response: ', sentConfirmation);
+      }
+    } catch (err) {
+      handleError(err);
     }
   };
 

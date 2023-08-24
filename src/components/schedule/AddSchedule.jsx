@@ -32,9 +32,7 @@ export default function AddSchedule() {
         open: dayjs(open).format('HH:mm'),
         close: dayjs(close).format('HH:mm'),
       }).unwrap();
-      if (newSchedule.success) {
-        handleSuccess(newSchedule.message);
-      }
+      if (newSchedule.success) handleSuccess(newSchedule.message);
     } catch (err) {
       handleError(err);
     }

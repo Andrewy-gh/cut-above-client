@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useEmployeesQuery } from '../hooks/useEmployeesQuery';
 import { useScheduleQuery } from '../hooks/useScheduleQuery';
 import BookingForm from '../components/bookingForm';
@@ -7,8 +8,10 @@ import { useBooking } from '../hooks/useBooking';
 import { useFilter } from '../hooks/useFilter';
 import { useDialog } from '../hooks/useDialog';
 import { useAuth } from '../hooks/useAuth';
+import { useNotification } from '../hooks/useNotification';
 
 export default function BookingPage() {
+  const navigate = useNavigate();
   const { employees } = useEmployeesQuery();
   const { schedules } = useScheduleQuery();
   const { date, employee, selection, service, handleSelectionChange } =
@@ -16,7 +19,8 @@ export default function BookingPage() {
   const { open, handleClose, handleOpen } = useDialog();
   const { handleBooking } = useBooking();
   const { rescheduling } = useAppointment();
-  const { token } = useAuth;
+  const { token } = useAuth();
+  const { handleError } = useNotification();
 
   const handleSelectAndOpen = (data) => {
     handleSelectionChange(data);
@@ -29,7 +33,8 @@ export default function BookingPage() {
 
   const handleAgree = () => {
     if (!token) {
-      alert('no token');
+      handleError('Please login to complete booking');
+      navigate('/login');
       return;
     }
     handleBooking({
@@ -43,7 +48,15 @@ export default function BookingPage() {
   };
 
   return (
-    <div style={{ marginBottom: '4rem' }}>
+    <div
+      style={{
+        marginBottom: '4rem',
+        minHeight: 'calc(100vh - 4rem)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+      }}
+    >
       <h3 style={{ textAlign: 'center', marginBottom: '3rem' }}>{message}</h3>
       <BookingForm handleOpen={handleSelectAndOpen} />
       <BookingDialog
@@ -51,6 +64,7 @@ export default function BookingPage() {
         handleClose={handleClose}
         selection={selection}
         handleAgree={handleAgree}
+        token={token}
       />
     </div>
   );

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -48,8 +49,18 @@ function BookingDialogContent({
   handleAgree,
   handleClose,
   selection,
+  token,
 }) {
   const { date, service } = useFilter();
+
+  let loggedIn;
+  if (!token) {
+    loggedIn = (
+      <Button style={{ color: '#E0A00D' }}>
+        <Link to="/login">Login</Link>
+      </Button>
+    );
+  }
   return (
     <>
       <BookingDialogTitle onClose={handleClose}>
@@ -69,7 +80,8 @@ function BookingDialogContent({
       </DialogContent>
       {children}
       <DialogActions>
-        <Button onClick={handleAgree} autoFocus>
+        {loggedIn}
+        <Button onClick={handleAgree} autoFocus style={{ marginLeft: 'auto' }}>
           Book Now
         </Button>
       </DialogActions>

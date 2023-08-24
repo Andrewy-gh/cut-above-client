@@ -47,11 +47,17 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   let title;
+  let timesAvailable;
   let availableTimes;
   if (timeSlots.length > 0) {
+    timesAvailable = `Choose Your Time - ${
+      timeSlots.length > 1
+        ? timeSlots.length + ' slots available'
+        : '1 slot available'
+    }`;
     title = (
-      <Typography variant="h6" align="center" sx={{ mb: 4 }}>
-        Times Available
+      <Typography variant="h5" align="center" sx={{ mb: 4 }}>
+        {timesAvailable}
       </Typography>
     );
     availableTimes = (
