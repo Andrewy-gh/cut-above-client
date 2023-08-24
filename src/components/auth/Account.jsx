@@ -15,23 +15,29 @@ export default function Account() {
     navigate('/login');
   }
 
+  const adminRoutes = (
+    <>
+      <div className="body1">
+        <Link to="/schedule">View schedule</Link>
+      </div>
+      <div className="body1">
+        <Link to="/add">Add a new schedule</Link>
+      </div>
+    </>
+  );
+
   return (
     <div>
       <h3>{welcome} Account page</h3>
       <p>Current user privileges: {role}</p>
       <p>{info}</p>
-      <div>
+      <div className="body1">
         <Link to="/account/settings">Account settings</Link>
       </div>
-      <div>
-        <Link to="/schedule">View schedule</Link>
-      </div>
-      <div>
-        <Link to="/add">Add a new schedule</Link>
-      </div>
-      <div>
+      <div className="body1">
         <Link to="/appointments">View your appointments</Link>
       </div>
+      {role === 'admin' && adminRoutes}
       <div>
         <LogoutButton />
       </div>
