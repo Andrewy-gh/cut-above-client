@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import CancelAppointment from './CancelAppointment';
 import ModifyAppointment from './ModifyAppointment';
-// import { useAppointment } from '../../hooks/useAppointment';
 import { useEmployeesQuery } from '../../hooks/useEmployeesQuery';
 import {
   selectAllAppointment,
@@ -9,34 +8,8 @@ import {
 } from '../../features/appointments/apptApiSlice';
 import { useSelector } from 'react-redux';
 
-const fontSize = {
-  fontSize: '1rem',
-};
-
-const Employee = ({ employeeId }) => {
-  const { employee } = useEmployeesQuery(employeeId);
-  if (!employee) return <div>Loading...</div>;
-  return <div>{employee.firstName}</div>;
-};
-
-const Appointment = ({ children, appointment }) => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '1rem',
-        flexWrap: 'wrap',
-      }}
-    >
-      <div style={fontSize}>{appointment.date}</div>
-      <div style={fontSize}>{appointment.start}</div>
-      <div style={fontSize}>{appointment.service}</div>
-      {children}
-    </div>
-  );
-};
+import Appointment from './Appointment';
+import Employee from '../Employee';
 
 export default function Appointments() {
   const { data } = useGetAppointmentQuery();
@@ -57,23 +30,54 @@ export default function Appointments() {
     content = (
       <>
         <h4 style={{ textAlign: 'center' }}>Upcoming appointments</h4>
-        <div>
+        <div style={{ width: 'min(80ch, 100% - 2rem)', marginInline: 'auto' }}>
           {futureItems.map((appt) => (
-            <Appointment key={appt.id} appointment={appt}>
-              <Employee employeeId={appt.employee} />
-              <ModifyAppointment appointment={appt} />
-              <CancelAppointment appointment={appt} />
-            </Appointment>
+            <div
+              key={appt.id}
+              className="appointment-card"
+              style={{ gap: '1rem', justifyContent: 'space-between' }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <div>
+                  <Appointment appointment={appt} />
+                  <Employee employeeId={appt.employee} />
+                </div>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '1rem',
+                }}
+              >
+                <div style={{ flexGrow: '0' }}>
+                  <ModifyAppointment appointment={appt} />
+                </div>
+                <div style={{ flexGrow: '0' }}>
+                  <CancelAppointment appointment={appt} />
+                </div>
+              </div>
+            </div>
           ))}
         </div>
         {pastItems.length > 0 && (
           <h4 style={{ textAlign: 'center' }}>Past appointments</h4>
         )}
-        <div>
+        <div style={{ width: 'min(80ch, 100% - 2rem)', marginInline: 'auto' }}>
           {pastItems.map((appt) => (
-            <Appointment key={appt.id} appointment={appt}>
-              <Employee employeeId={appt.employee} />
-            </Appointment>
+            <div
+              key={appt.id}
+              className="appointment-card"
+              style={{ flexDirection: 'column' }}
+            >
+              <Appointment key={appt.id} appointment={appt}>
+                <Employee employeeId={appt.employee} />
+              </Appointment>
+            </div>
           ))}
         </div>
       </>

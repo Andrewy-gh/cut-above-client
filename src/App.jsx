@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'production') disableReactDevTools();
 // Lazy-loaded components
 const Account = lazy(() => import('./components/auth/Account'));
 const AddSchedule = lazy(() => import('./components/schedule/AddSchedule'));
-const Appointment = lazy(() => import('./pages/Appointment'));
+const AppointmentPage = lazy(() => import('./pages/AppointmentPage'));
 const Appointments = lazy(() => import('./components/appointments/index'));
 const RequireAuth = lazy(() => import('./components/auth/RequireAuth'));
 const Schedule = lazy(() => import('./components/schedule/Schedule'));
@@ -31,7 +31,7 @@ export default function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/appointment/:id" element={<Appointment />} />
+            <Route path="/appointment/:id" element={<AppointmentPage />} />
             <Route path="/bookings" element={<BookingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Register />} />

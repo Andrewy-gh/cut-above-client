@@ -98,3 +98,13 @@ h5 {
 .body2 {
   font-size: var(--step--1);
 }
+
+.appointment-card {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: auto;
+  background-color: #1f1f1f;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}

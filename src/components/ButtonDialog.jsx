@@ -3,6 +3,7 @@ import CustomDialog from './CustomDialog';
 
 export default function ButtonDialog({
   children,
+  color,
   buttonStyle,
   buttonText,
   fullWidth,
@@ -18,6 +19,7 @@ export default function ButtonDialog({
         onClick={handleOpen}
         fullWidth={fullWidth}
         sx={buttonStyle}
+        color={color}
       >
         {buttonText}
       </Button>
