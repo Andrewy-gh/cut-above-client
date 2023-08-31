@@ -5,30 +5,37 @@ import {
   useChangeUserPasswordMutation,
   useDeleteUserMutation,
 } from '../features/userSlice';
+import { useNotification } from './useNotification';
 
 export function useAccount() {
   const dispatch = useDispatch();
   const [changeUserEmail] = useChangeUserEmailMutation();
   const [changeUserPassword] = useChangeUserPasswordMutation();
   const [deleteUser] = useDeleteUserMutation();
+  const { handleSuccess, handleError } = useNotification();
 
   const handleUserEmailChange = async (newEmailObj) => {
     try {
       const updatedUser = await changeUserEmail(newEmailObj).unwrap();
       if (updatedUser.success) {
         dispatch(updateUserDetails(updatedUser.user));
+        handleSuccess(updatedUser.message);
+        return true;
       }
     } catch (error) {
-      console.error(`Error changing email: ${error}`);
+      handleError(`Error changing email: ${error}`);
     }
   };
 
   const handleUserPasswordChange = async (newPasswordObj) => {
     try {
       const updatedUser = await changeUserPassword(newPasswordObj).unwrap();
-      if (updatedUser.success) console.log(updatedUser.message);
+      if (updatedUser.success) {
+        handleSuccess(updatedUser.message);
+        return true;
+      }
     } catch (error) {
-      console.error(`Error changing password: ${error}`);
+      handleError(`Error changing password: ${error}`);
     }
   };
 
@@ -36,10 +43,11 @@ export function useAccount() {
     try {
       const deletedUser = await deleteUser().unwrap();
       if (deletedUser.success) {
+        handleSuccess(deletedUser.message);
         dispatch(logoutUser());
       }
     } catch (error) {
-      console.error(`Error deleting user: ${error}`);
+      handleError(`Error deleting user: ${error}`);
     }
   };
   return { handleUserEmailChange, handleUserPasswordChange, handleUserDelete };

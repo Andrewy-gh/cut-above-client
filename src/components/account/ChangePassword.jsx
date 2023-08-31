@@ -30,7 +30,13 @@ export default function ChangePassword() {
         setHelperText('Passwords do not match');
         return;
       }
-      await handleUserPasswordChange({ password: newPassword });
+      const passwordChanged = await handleUserPasswordChange({
+        password: newPassword,
+      });
+      if (passwordChanged) {
+        setNewPassword('');
+        setConfirmNewPassword('');
+      }
     } catch (error) {
       console.error(error);
     }

@@ -23,21 +23,21 @@ export default function ChangeEmail() {
   };
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      if (newEmail !== confirmNewEmail) {
-        setError(true);
-        setHelperText('Emails do not match');
-        return;
-      }
-      setNewEmail((newEmail) => {
-        const trimmedEmail = newEmail.trim();
-        const lowercaseEmail = trimmedEmail.toLowerCase();
-        return lowercaseEmail;
-      });
-      await handleUserEmailChange({ email: newEmail });
-    } catch (error) {
-      console.error(error);
+    e.preventDefault();
+    if (newEmail !== confirmNewEmail) {
+      setError(true);
+      setHelperText('Emails do not match');
+      return;
+    }
+    setNewEmail((newEmail) => {
+      const trimmedEmail = newEmail.trim();
+      const lowercaseEmail = trimmedEmail.toLowerCase();
+      return lowercaseEmail;
+    });
+    const emailChanged = await handleUserEmailChange({ email: newEmail });
+    if (emailChanged) {
+      setNewEmail('');
+      setConfirmNewEmail('');
     }
   };
 
