@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import NavBar from './navbar';
 import Footer from './Footer';
 import Notification from './Notification';
+import LoadingSpinner from './LoadingSpinner';
 
 export default function Layout() {
   return (
@@ -19,7 +20,7 @@ export default function Layout() {
       >
         <NavBar />
         <div style={{ flexGrow: '1' }}>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<LoadingSpinner />}>
             <Outlet />
           </Suspense>
         </div>

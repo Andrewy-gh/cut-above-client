@@ -6,6 +6,7 @@ import Hero from '../components/home/Hero';
 import andre from '../assets/images/andre.jpg';
 import obi from '../assets/images/obi.jpg';
 import salah from '../assets/images/salah.jpg';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const people = [
   { id: 1, name: 'Matthew' },

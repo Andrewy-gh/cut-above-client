@@ -1,4 +1,5 @@
 import UpdateApptStatus from './UpdateApptStatus';
+import Employee from '../Employee';
 
 const column = {
   border: '1px solid white',
@@ -24,7 +25,7 @@ export default function StatusColumn({ appointments, status }) {
       {appointments.map((appt) => (
         <div key={appt.id}>
           <div>Client: {appt.client}</div>
-          <div>Employee: {appt.employee}</div>
+          <Employee employeeId={appt.employee} />
           <div>Start: {appt.start}</div>
           <div>Service: {appt.service}</div>
           <UpdateApptStatus appointment={appt} newStatus={newStatus} />

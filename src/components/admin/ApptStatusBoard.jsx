@@ -28,7 +28,7 @@ export default function ApptStatusBoard() {
         <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
           {statuses.map((status) => (
             <StatusTab
-              key={statuses.id}
+              key={status.id}
               handleClick={() => setStatus(status.name)}
               name={status.name}
               data={status.data}
