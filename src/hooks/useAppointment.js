@@ -53,7 +53,7 @@ export function useAppointment() {
   const handleStatusUpdate = async (appointment, newStatus) => {
     try {
       const statusUpdate = await updateAppointment({
-        ...appointment,
+        id: appointment.id,
         status: newStatus,
       }).unwrap();
       if (statusUpdate.success) handleSuccess(statusUpdate.message);
