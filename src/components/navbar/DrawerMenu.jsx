@@ -12,9 +12,10 @@ import logoTop from '../../assets/cover-logo-top-small.png';
 
 const listItemStyle = {
   fontFamily: 'Corben',
-  fontSize: '1.25rem',
+  fontSize: '2rem',
   fontWeight: 700,
   color: theme.palette.secondary.main,
+  marginBottom: '1rem',
 };
 
 export default function DrawerMenu() {
@@ -40,13 +41,15 @@ export default function DrawerMenu() {
             sx={{
               display: 'flex',
               justifyContent: 'flex-end',
-              mt: 2,
-              mb: 2,
+              mt: 1,
+              mb: 10,
               paddingInline: 2,
             }}
             onClick={() => setOpen(false)}
           >
-            <CloseIcon sx={{ color: theme.palette.secondary.main }} />
+            <CloseIcon
+              sx={{ color: theme.palette.secondary.main, fontSize: '2rem' }}
+            />
           </IconButton>
         </div>
         <ul
@@ -99,7 +102,7 @@ export default function DrawerMenu() {
           color: theme.palette.secondary.dark,
         }}
       >
-        <MenuIcon />
+        <MenuIcon style={{ fontSize: '2rem' }} />
       </IconButton>
       <Drawer open={open} anchor={'left'} onClose={() => setOpen(false)}>
         {getList()}
