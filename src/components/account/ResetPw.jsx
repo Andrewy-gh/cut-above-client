@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useParams } from 'react-router-dom';
+import {useNotification} from '../../hooks/useNotification'
 
 export default function ResetPw() {
   const { token } = useParams();
@@ -15,23 +16,24 @@ export default function ResetPw() {
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState('');
 
+  const {handleError} = useNotification()
+
   useEffect(() => {
     // Validate the token when the component mounts
-    // fetch(`/api/validate-token/${token}`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     if (data.message === 'Token is valid') {
-    //       setIsValidToken(true);
-    //     } else {
-    //       setMessage(
-    //         'Invalid or expired token. Please request a new password reset link.'
-    //       );
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     setMessage('An error occurred.');
-    //   });
-    setIsValidToken(true);
+    fetch(`/api/validate-token/${token}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message === 'Token is valid') {
+          setIsValidToken(true);
+        } else {
+          handleError(
+            'Invalid or expired token. Please request a new password reset link.'
+          );
+        }
+      })
+      .catch((error) => {
+        handleError('An error occurred.');
+      });
   }, [token]);
 
   const handleNewPasswordChange = (e) => {
