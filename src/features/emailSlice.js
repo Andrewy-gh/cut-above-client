@@ -23,6 +23,13 @@ export const emailSlice = apiSlice.injectEndpoints({
         body: email,
       }),
     }),
+    sendPasswordReset: builder.mutation({
+      query: (email) => ({
+        url: '/api/email/reset-pw',
+        method: 'POST',
+        body: email,
+      }),
+    }),
   }),
 });
 
@@ -30,4 +37,5 @@ export const {
   useSendConfirmationMutation,
   useSendModificationMutation,
   useSendCancellationMutation,
+  useSendPasswordResetMutation,
 } = emailSlice;

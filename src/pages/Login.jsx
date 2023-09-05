@@ -1,36 +1,52 @@
-import { useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import { useAuth } from "../hooks/useAuth";
-import Overlay from "../components/Overlay";
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { useAuth } from '../hooks/useAuth';
+import Overlay from '../components/Overlay';
+import { useNotification } from '../hooks/useNotification';
+
+import { useSendPasswordResetMutation } from '../features/emailSlice';
 
 export default function Login() {
-  const [view, setView] = useState('login')
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [view, setView] = useState('login');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const [helperText, setHelperText] = useState('');
   const { handleLogin } = useAuth();
+
+  const { handleSuccess, handleError } = useNotification();
+  const [sendPasswordReset] = useSendPasswordResetMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       handleLogin(email, password);
-    } catch (error) {
-      console.error(error);
-      setError(error);
+    } catch (err) {
+      handleError(err);
     }
   };
   const handleReset = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-console.log('resetting pw')
+      const emailRegex =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!emailRegex.test(email)) {
+        setError(true);
+        setHelperText('invalid email');
+        return;
+      }
+      const sentResetEmail = await sendPasswordReset({ email }).unwrap();
+      if (sentResetEmail.success) handleSuccess(sentResetEmail.message);
     } catch (err) {
-      console.error(err)
+      handleError(err);
     }
-  }
-  let content
+  };
+  let content;
   if (view === 'login') {
-    content = (<><h3 style={{ textAlign: "center" }}>Log in</h3>
+    content = (
+      <>
+        <h3 style={{ textAlign: 'center' }}>Log in</h3>
         <form onSubmit={handleSubmit}>
           <TextField
             label="Email"
@@ -59,14 +75,21 @@ console.log('resetting pw')
             Login
           </Button>
         </form>
-        <button onClick={()=> setView('reset')}>Reset Password</button></>)
+        <button onClick={() => setView('reset')}>Reset Password</button>
+      </>
+    );
   } else {
-    content = (<> <h3 style={{ textAlign: "center" }}>Reset Password</h3><form onSubmit={handleReset}>
+    content = (
+      <>
+        {' '}
+        <h3 style={{ textAlign: 'center' }}>Reset Password</h3>
+        <form onSubmit={handleReset}>
           <TextField
             label="Email"
             required
             fullWidth
             value={email}
+            helperText={helperText}
             onChange={({ target }) => setEmail(target.value)}
           ></TextField>
           <Button
@@ -77,12 +100,15 @@ console.log('resetting pw')
           >
             Reset password
           </Button>
-        </form><button onClick={()=> setView('login')}>Login</button></>)
+        </form>
+        <button onClick={() => setView('login')}>Login</button>
+      </>
+    );
   }
 
   return (
     <Overlay>
-      <div style={{ width: "min(40ch, 100% - 2rem)", marginInline: "auto" }}>
+      <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
         {content}
       </div>
     </Overlay>

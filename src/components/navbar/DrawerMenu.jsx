@@ -12,7 +12,7 @@ import logoTop from '../../assets/cover-logo-top-small.png';
 
 const listItemStyle = {
   fontFamily: 'Corben',
-  fontSize: '2rem',
+  fontSize: '1.5rem',
   fontWeight: 700,
   color: theme.palette.secondary.main,
   marginBottom: '1rem',
@@ -42,7 +42,7 @@ export default function DrawerMenu() {
               display: 'flex',
               justifyContent: 'flex-end',
               mt: 1,
-              mb: 10,
+              mb: 8,
               paddingInline: 2,
             }}
             onClick={() => setOpen(false)}
@@ -59,7 +59,7 @@ export default function DrawerMenu() {
             alignItems: 'center',
             gap: '1rem',
             marginTop: '10%',
-            marginBottom: '5rem',
+            marginBottom: '2rem',
           }}
         >
           {navigation.map((link) =>

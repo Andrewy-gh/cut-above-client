@@ -22,6 +22,7 @@ const Unauthorized = lazy(() => import('./components/auth/Unauthorized'));
 const ApptStatusBoard = lazy(() =>
   import('./components/admin/ApptStatusBoard')
 );
+const ResetPw = lazy(() => import('./components/account/ResetPw'));
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
             <Route path="/bookings" element={<BookingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Register />} />
+            <Route path="/resetpw/:token" element={<ResetPw />} />
             <Route element={<RequireAuth />}>
               <Route path="/account" element={<Account />} />
               <Route path="/account/settings" element={<Settings />} />
