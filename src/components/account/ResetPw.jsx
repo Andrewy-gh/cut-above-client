@@ -1,26 +1,25 @@
 import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useParams } from 'react-router-dom';
-import {useNotification} from '../../hooks/useNotification'
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useNotification } from '../../hooks/useNotification';
+import { useAccount } from '../../hooks/useAccount';
 
 export default function ResetPw() {
-  const { token } = useParams();
+  let [searchParams, setSearchParams] = useSearchParams();
   const [isValidToken, setIsValidToken] = useState(false);
-  console.log('====================================');
-  console.log(token);
-  console.log('====================================');
-
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState('');
+  const { handleUserPasswordReset } = useAccount();
 
-  const {handleError} = useNotification()
+  let token = searchParams.get('token');
+  const { handleError } = useNotification();
 
   useEffect(() => {
-    // Validate the token when the component mounts
-    fetch(`/api/validate-token/${token}`)
+    console.log('lol! the token is ', token);
+    fetch(`http://localhost:3001/api/user/validate-token/${token}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.message === 'Token is valid') {
@@ -31,7 +30,7 @@ export default function ResetPw() {
           );
         }
       })
-      .catch((error) => {
+      .catch((err) => {
         handleError('An error occurred.');
       });
   }, [token]);
@@ -56,8 +55,9 @@ export default function ResetPw() {
         setHelperText('Passwords do not match');
         return;
       }
-      const passwordChanged = await handleUserPasswordChange({
-        password: newPassword,
+      const passwordChanged = await handleUserPasswordReset({
+        token,
+        newPassword,
       });
       if (passwordChanged) {
         setNewPassword('');
@@ -68,7 +68,7 @@ export default function ResetPw() {
     }
   };
 
-  if (token) {
+  if (isValidToken) {
     return (
       <form onSubmit={handleSubmit}>
         <TextField

@@ -36,7 +36,7 @@ export default function App() {
             <Route path="/bookings" element={<BookingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Register />} />
-            <Route path="/resetpw/:token" element={<ResetPw />} />
+            <Route path="/resetpw" element={<ResetPw />} />
             <Route element={<RequireAuth />}>
               <Route path="/account" element={<Account />} />
               <Route path="/account/settings" element={<Settings />} />
