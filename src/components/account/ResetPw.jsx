@@ -22,9 +22,9 @@ export default function ResetPw() {
     async function validateResetToken(token) {
       try {
         const res = await fetch(
-          `http://localhost:3001/api/user/validate-token/${token}`
+          `https://cutaboveshop.fly.dev/api/user/validate-token/${token}`
         );
-        const data = res.json();
+        const data = await res.json();
         if (data.message === 'Token is valid') {
           setIsValidToken(true);
         } else {
@@ -72,43 +72,46 @@ export default function ResetPw() {
   let content;
   if (isValidToken) {
     content = (
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label="New Password"
-          type="password"
-          required
-          fullWidth
-          value={newPassword}
-          onChange={handleNewPasswordChange}
-          sx={{ marginBlock: '.5rem' }}
-        ></TextField>
-        <TextField
-          label="Confirm new Password"
-          type="password"
-          error={error}
-          helperText={helperText}
-          required
-          fullWidth
-          value={confirmNewPassword}
-          onChange={handleConfirmNewPasswordChange}
-          sx={{ marginBlock: '.5rem' }}
-        ></TextField>
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth
-          sx={{ mt: 2, mb: 3 }}
-        >
-          Change Password
-        </Button>
-      </form>
+      <>
+        <h3 style={{ textAlign: 'center' }}>Reset password</h3>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="New Password"
+            type="password"
+            required
+            fullWidth
+            value={newPassword}
+            onChange={handleNewPasswordChange}
+            sx={{ marginBlock: '.5rem' }}
+          ></TextField>
+          <TextField
+            label="Confirm new Password"
+            type="password"
+            error={error}
+            helperText={helperText}
+            required
+            fullWidth
+            value={confirmNewPassword}
+            onChange={handleConfirmNewPasswordChange}
+            sx={{ marginBlock: '.5rem' }}
+          ></TextField>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{ mt: 2, mb: 3 }}
+          >
+            Change Password
+          </Button>
+        </form>
+      </>
     );
   } else {
     content = (
       <>
-        <h3 style={{ textAlign: 'center' }}>
+        <h5 style={{ textAlign: 'center' }}>
           Oops looks like an error happened...
-        </h3>
+        </h5>
         <Link to="/login">
           <p style={{ textAlign: 'center' }}>
             Click <u>here</u> to request a password reset again
@@ -118,7 +121,7 @@ export default function ResetPw() {
     );
   }
   return (
-    <div style={{ width: 'min(80ch, 100% - 2rem)', marginInline: 'auto' }}>
+    <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
       {content}
     </div>
   );
