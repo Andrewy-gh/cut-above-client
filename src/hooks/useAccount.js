@@ -4,6 +4,7 @@ import {
   useChangeUserEmailMutation,
   useChangeUserPasswordMutation,
   useDeleteUserMutation,
+  useResetUserPasswordMutation,
 } from '../features/userSlice';
 import { useNotification } from './useNotification';
 
@@ -12,6 +13,8 @@ export function useAccount() {
   const [changeUserEmail] = useChangeUserEmailMutation();
   const [changeUserPassword] = useChangeUserPasswordMutation();
   const [deleteUser] = useDeleteUserMutation();
+  const [resetUserPassword] = useResetUserPasswordMutation();
+
   const { handleSuccess, handleError } = useNotification();
 
   const handleUserEmailChange = async (newEmailObj) => {
@@ -50,5 +53,22 @@ export function useAccount() {
       handleError(`Error deleting user: ${error}`);
     }
   };
-  return { handleUserEmailChange, handleUserPasswordChange, handleUserDelete };
+
+  const handleUserPasswordReset = async (newCredentials) => {
+    try {
+      const updatedUser = await resetUserPassword(newCredentials).unwrap();
+      if (updatedUser.success) {
+        handleSuccess(updatedUser.message);
+        return true;
+      }
+    } catch (err) {
+      handleError(err);
+    }
+  };
+  return {
+    handleUserEmailChange,
+    handleUserPasswordChange,
+    handleUserDelete,
+    handleUserPasswordReset,
+  };
 }

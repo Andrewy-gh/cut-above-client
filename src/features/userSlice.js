@@ -37,6 +37,14 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
+    resetUserPassword: builder.mutation({
+      query: (password) => ({
+        url: '/api/user/resetpw',
+        method: 'POST',
+        body: password,
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
@@ -45,6 +53,7 @@ export const {
   useChangeUserEmailMutation,
   useChangeUserPasswordMutation,
   useDeleteUserMutation,
+  useResetUserPasswordMutation,
 } = extendedApiSlice;
 
 export const selectUsersResult = extendedApiSlice.endpoints.getUsers.select();

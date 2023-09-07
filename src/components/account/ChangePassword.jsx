@@ -23,22 +23,18 @@ export default function ChangePassword() {
   };
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      if (newPassword !== confirmNewPassword) {
-        setError(true);
-        setHelperText('Passwords do not match');
-        return;
-      }
-      const passwordChanged = await handleUserPasswordChange({
-        password: newPassword,
-      });
-      if (passwordChanged) {
-        setNewPassword('');
-        setConfirmNewPassword('');
-      }
-    } catch (error) {
-      console.error(error);
+    e.preventDefault();
+    if (newPassword !== confirmNewPassword) {
+      setError(true);
+      setHelperText('Passwords do not match');
+      return;
+    }
+    const passwordChanged = await handleUserPasswordChange({
+      password: newPassword,
+    });
+    if (passwordChanged) {
+      setNewPassword('');
+      setConfirmNewPassword('');
     }
   };
 
