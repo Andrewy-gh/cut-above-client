@@ -75,7 +75,12 @@ export default function Login() {
             Login
           </Button>
         </form>
-        <button onClick={() => setView('reset')}>Reset Password</button>
+        <div
+          style={{ fontFamily: 'Corben', fontWeight: '700', cursor: 'pointer' }}
+          onClick={() => setView('reset')}
+        >
+          Forgot password?
+        </div>
       </>
     );
   } else {
@@ -101,7 +106,12 @@ export default function Login() {
             Reset password
           </Button>
         </form>
-        <button onClick={() => setView('login')}>Login</button>
+        <div
+          style={{ fontFamily: 'Corben', fontWeight: '700', cursor: 'pointer' }}
+          onClick={() => setView('login')}
+        >
+          Login
+        </div>
       </>
     );
   }

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import hero from '../../assets/images/hero.jpg';
+import hero from '../../assets/images/hero.webp';
 import { theme } from '../../styles/styles';
 
 export default function Hero() {

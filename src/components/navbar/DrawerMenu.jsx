@@ -8,7 +8,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { navigation } from '../../data/data';
 import { renderLink } from '../../utils/navigation';
 import { theme } from '../../styles/styles';
-import logoTop from '../../assets/cover-logo-top-small.png';
+import logoTop from '../../assets/cover-logo-top-small.webp';
 
 const listItemStyle = {
   fontFamily: 'Corben',

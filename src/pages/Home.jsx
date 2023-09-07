@@ -1,12 +1,10 @@
-import Box from '@mui/material/Box';
 import ContactUs from '../components/home/ContactUs';
 import Services from '../components/home/Services';
 import TeamMembers from '../components/home/TeamMembers';
 import Hero from '../components/home/Hero';
-import andre from '../assets/images/andre.jpg';
-import obi from '../assets/images/obi.jpg';
-import salah from '../assets/images/salah.jpg';
-import LoadingSpinner from '../components/LoadingSpinner';
+import andre from '../assets/images/andre.webp';
+import obi from '../assets/images/obi.webp';
+import salah from '../assets/images/salah.webp';
 
 const people = [
   { id: 1, name: 'Matthew' },

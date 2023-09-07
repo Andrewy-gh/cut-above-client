@@ -1,5 +1,5 @@
 import { theme } from '../styles/styles';
-import logoSide from '../assets/cover-logo-side-small.png';
+import logoSide from '../assets/cover-logo-side-small.webp';
 
 const Copyright = () => {
   return (

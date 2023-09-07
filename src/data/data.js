@@ -1,6 +1,6 @@
-import haircut from '../assets/images/haircut.jpg';
-import beard from '../assets/images/beard.jpg';
-import shave from '../assets/images/shave.jpg';
+import haircut from '../assets/images/haircut.webp';
+import beard from '../assets/images/beard.webp';
+import shave from '../assets/images/shave.webp';
 
 export const navigation = [
   { id: 1, name: 'Home', path: '/' },
