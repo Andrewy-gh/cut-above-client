@@ -24,6 +24,38 @@ export function useBooking() {
 
   const handleBooking = async ({ date, start, end, service, employee }) => {
     try {
+      // const newAppt = await addAppointment({
+      //   date,
+      //   start,
+      //   end,
+      //   service,
+      //   employee,
+      // }).unwrap();
+      // if (newAppt.success) handleSuccess(newAppt.message);
+      // const updatedSchedule = await updateSchedule({
+      //   id: scheduleByDate.id,
+      //   appointment: newAppt.data.id,
+      // }).unwrap();
+      // console.log(updatedSchedule);
+      // if (rescheduling && cancelId) {
+      //   handleCancel(cancelId);
+      //   handleRescheduling();
+      //   const sentModification = await sendModification({
+      //     employee,
+      //     date: formatDateSlash(date),
+      //     time: formatTime(start),
+      //     emailId: newAppt.data.emailId,
+      //   });
+      //   console.log('modification response: ', sentModification);
+      // } else {
+      //   const sentConfirmation = await sendConfirmation({
+      //     employee,
+      //     date: formatDateSlash(date),
+      //     time: formatTime(start),
+      //     emailId: newAppt.data.emailId,
+      //   });
+      //   console.log('confirmation response: ', sentConfirmation);
+      // }
       const newAppt = await addAppointment({
         date,
         start,
@@ -32,30 +64,6 @@ export function useBooking() {
         employee,
       }).unwrap();
       if (newAppt.success) handleSuccess(newAppt.message);
-      const updatedSchedule = await updateSchedule({
-        id: scheduleByDate.id,
-        appointment: newAppt.data.id,
-      }).unwrap();
-      console.log(updatedSchedule);
-      if (rescheduling && cancelId) {
-        handleCancel(cancelId);
-        handleRescheduling();
-        const sentModification = await sendModification({
-          employee,
-          date: formatDateSlash(date),
-          time: formatTime(start),
-          emailId: newAppt.data.emailId,
-        });
-        console.log('modification response: ', sentModification);
-      } else {
-        const sentConfirmation = await sendConfirmation({
-          employee,
-          date: formatDateSlash(date),
-          time: formatTime(start),
-          emailId: newAppt.data.emailId,
-        });
-        console.log('confirmation response: ', sentConfirmation);
-      }
     } catch (err) {
       handleError(err);
     }

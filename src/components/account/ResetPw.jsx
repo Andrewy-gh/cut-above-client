@@ -22,7 +22,8 @@ export default function ResetPw() {
     async function validateResetToken(token) {
       try {
         const res = await fetch(
-          `https://cutaboveshop.fly.dev/api/user/validate-token/${token}`
+          `http://localhost:3001/api/user/validate-token/${token}`
+          // `https://cutaboveshop.fly.dev/api/user/validate-token/${token}`
         );
         const data = await res.json();
         if (data.message === 'Token is valid') {
