@@ -2,13 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   useCancelAppointmentMutation,
-  useUpdateAppointmentMutation,
+  useUpdateAppointmentStatusMutation,
 } from '../features/appointments/apptApiSlice';
 import { useSendCancellationMutation } from '../features/emailSlice';
 import {
   beginRescheduling,
   endRescheduling,
-  selectCancelId,
+  selectModifyingApptId,
   selectRescheduling,
 } from '../features/appointments/appointmentSlice';
 import { useNotification } from '../hooks/useNotification';
@@ -18,9 +18,9 @@ export function useAppointment() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const rescheduling = useSelector(selectRescheduling);
-  const cancelId = useSelector(selectCancelId);
+  const modifyingApptId = useSelector(selectModifyingApptId);
   const [cancelAppointment] = useCancelAppointmentMutation();
-  const [updateAppointment] = useUpdateAppointmentMutation();
+  const [updateAppointmentStatus] = useUpdateAppointmentStatusMutation();
   const [sendCancellation] = useSendCancellationMutation();
   const { handleSuccess, handleError } = useNotification();
 
@@ -43,16 +43,16 @@ export function useAppointment() {
     }
   };
 
-  const handleModify = (id) => {
+  const handleBeginRescheduling = (id) => {
     dispatch(beginRescheduling(id));
     navigate('/bookings');
   };
 
-  const handleRescheduling = () => dispatch(endRescheduling());
+  const handleEndRescheduling = () => dispatch(endRescheduling());
 
   const handleStatusUpdate = async (appointment, newStatus) => {
     try {
-      const statusUpdate = await updateAppointment({
+      const statusUpdate = await updateAppointmentStatus({
         id: appointment.id,
         status: newStatus,
       }).unwrap();
@@ -63,12 +63,11 @@ export function useAppointment() {
   };
 
   return {
-    // appointments,
     rescheduling,
-    cancelId,
+    modifyingApptId,
     handleCancel,
-    handleModify,
-    handleRescheduling,
+    handleBeginRescheduling,
+    handleEndRescheduling,
     handleStatusUpdate,
   };
 }

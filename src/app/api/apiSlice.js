@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setCredentials, logoutUser } from '../../features/auth/authSlice';
-import { LocalFireDepartment } from '@mui/icons-material';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:3001',

@@ -41,9 +41,17 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Appointment', 'Schedule'],
     }),
-    updateAppointment: builder.mutation({
+    modifyAppointment: builder.mutation({
       query: (appointment) => ({
         url: `/api/appointment/${appointment.id}`,
+        method: 'PUT',
+        body: appointment,
+      }),
+      invalidatesTags: ['Appointment', 'Schedule'],
+    }),
+    updateAppointmentStatus: builder.mutation({
+      query: (appointment) => ({
+        url: `/api/appointment/status/${appointment.id}`,
         method: 'PUT',
         body: appointment,
       }),
@@ -63,7 +71,8 @@ export const {
   useGetAppointmentQuery,
   useGetSingleAppointmentQuery,
   useAddAppointmentMutation,
-  useUpdateAppointmentMutation,
+  useModifyAppointmentMutation,
+  useUpdateAppointmentStatusMutation,
   useCancelAppointmentMutation,
 } = extendedApiSlice;
 

@@ -2,15 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const appointmentSlice = createSlice({
   name: 'appointment',
-  initialState: { rescheduling: false, cancelId: null },
+  initialState: { rescheduling: false, modifyingApptId: null },
   reducers: {
     beginRescheduling(state, action) {
       state.rescheduling = true;
-      state.cancelId = action.payload;
+      state.modifyingApptId = action.payload;
     },
     endRescheduling(state) {
       state.rescheduling = false;
-      state.cancelId = null;
+      state.modifyingApptId = null;
     },
   },
 });
@@ -20,4 +20,5 @@ export const { beginRescheduling, endRescheduling } = appointmentSlice.actions;
 export default appointmentSlice.reducer;
 
 export const selectRescheduling = (state) => state.appointment.rescheduling;
-export const selectCancelId = (state) => state.appointment.cancelId;
+export const selectModifyingApptId = (state) =>
+  state.appointment.modifyingApptId;
