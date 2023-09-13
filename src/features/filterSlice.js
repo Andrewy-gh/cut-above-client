@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getRandomEmployee } from '../utils/employee';
-
-const currentDate = new Date().toISOString();
+import { initialCurrentDate } from '../utils/date';
 
 const filterSlice = createSlice({
   name: 'filter',
   initialState: {
-    date: currentDate,
+    date: initialCurrentDate,
     dateDisabled: false,
     employee: 'any',
     holdStatus: false,

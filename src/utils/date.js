@@ -5,6 +5,8 @@ dayjs.locale('en');
 
 export const currentDate = dayjs();
 
+export const initialCurrentDate = dayjs().format('YYYY-MM-DD');
+
 export const oneMonthFromCurrent = dayjs().add(1, 'month');
 
 // server format
@@ -21,7 +23,12 @@ export const formatDateToTime = (date) => dayjs(date).format('h:mma');
 
 export const formatTime = (time) => dayjs(time, 'HH:mm').format('h:mma');
 
-export const findAvailableTimeSlots = (schedule, duration, employees) => {
+export const findAvailableTimeSlots = (
+  schedule,
+  duration,
+  employees,
+  employee
+) => {
   const { open, close, appointments } = schedule;
   const timeFormat = 'HH:mm';
   const searchIncrement = 15;
@@ -38,7 +45,8 @@ export const findAvailableTimeSlots = (schedule, duration, employees) => {
       break;
     }
 
-    const availableEmployees = employees.filter((employeeId) => {
+    const selectedEmployees = employee !== 'any' ? [employee] : employees;
+    const availableEmployees = selectedEmployees.filter((employeeId) => {
       const employeeAppointments = appointments.filter(
         (appointment) => appointment.employee === employeeId
       );

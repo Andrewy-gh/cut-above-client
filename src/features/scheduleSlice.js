@@ -1,7 +1,7 @@
 import { createSelector, createEntityAdapter } from '@reduxjs/toolkit';
 import { apiSlice } from '../app/api/apiSlice';
 import { selectEmployeeIds } from './employeeSlice';
-import { selectDate, selectService } from './filterSlice';
+import { selectDate, selectEmployee, selectService } from './filterSlice';
 import { findAvailableTimeSlots, formatDate } from '../utils/date';
 
 // import dayjs from 'dayjs';
@@ -81,7 +81,8 @@ export const selectScheduleByFilter = createSelector(
   selectScheduleByDate,
   selectService,
   selectEmployeeIds,
-  (schedule, service, employees) => {
+  selectEmployee,
+  (schedule, service, employees, employee) => {
     // console.log('slice by filter:', schedule, service, employees);
     if (!schedule) {
       return [];
@@ -89,7 +90,8 @@ export const selectScheduleByFilter = createSelector(
     const availableTimeSlots = findAvailableTimeSlots(
       schedule,
       service.duration,
-      employees
+      employees,
+      employee
     );
     return availableTimeSlots;
   }
