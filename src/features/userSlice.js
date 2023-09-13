@@ -45,6 +45,12 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
+    validateToken: builder.query({
+      query: (token) => `/api/user/validate-token/${token}`,
+      transformResponse: (responseData) => {
+        return responseData;
+      },
+    }),
   }),
 });
 
@@ -54,6 +60,7 @@ export const {
   useChangeUserPasswordMutation,
   useDeleteUserMutation,
   useResetUserPasswordMutation,
+  useValidateTokenQuery,
 } = extendedApiSlice;
 
 export const selectUsersResult = extendedApiSlice.endpoints.getUsers.select();

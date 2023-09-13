@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEmployeesQuery } from '../hooks/useEmployeesQuery';
 import { useScheduleQuery } from '../hooks/useScheduleQuery';
@@ -23,11 +23,10 @@ export default function BookingPage() {
   const { token } = useAuth();
   const { handleError } = useNotification();
 
-  const {id} = useParams()
-  let [search, setSearchParams] = useSearchParams()
+  const { id } = useParams();
+  let [searchParams, setSearchParams] = useSearchParams();
   const [isValidToken, setIsValidToken] = useState(false);
-  let emailToken = searchParams.get('token')
-
+  let emailToken = searchParams.get('token');
 
   const handleSelectAndOpen = (data) => {
     handleSelectionChange(data);
