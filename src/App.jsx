@@ -33,7 +33,7 @@ export default function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/appointment/:id" element={<AppointmentPage />} />
-            <Route path="/bookings" element={<BookingPage />} />
+            <Route path="/bookings/:id" element={<BookingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Register />} />
             <Route path="/resetpw" element={<ResetPw />} />

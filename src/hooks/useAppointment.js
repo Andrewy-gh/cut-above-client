@@ -43,9 +43,14 @@ export function useAppointment() {
     }
   };
 
-  const handleBeginRescheduling = (id) => {
+  const handleBeginRescheduling = (id, token) => {
     dispatch(beginRescheduling(id));
-    navigate('/bookings');
+    if (token) {
+navigate(`/bookings/${id}/?token=${token}`);
+    } else {
+
+      navigate(`/bookings/${id}`);
+    }
   };
 
   const handleEndRescheduling = () => dispatch(endRescheduling());

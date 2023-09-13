@@ -12,7 +12,7 @@ const dialog = (appointment, employee) => {
   };
 };
 
-export default function ModifyAppointment({ appointment }) {
+export default function ModifyAppointment({ appointment, token }) {
   const { open, handleOpen, handleClose } = useDialog();
   const { employee } = useEmployeesQuery(appointment.employee);
   const { handleBeginRescheduling } = useAppointment();
@@ -30,7 +30,7 @@ export default function ModifyAppointment({ appointment }) {
     >
       <CustomDialogContent
         dialog={dialogProps}
-        handleAgree={() => handleBeginRescheduling(appointment.id)}
+        handleAgree={() => handleBeginRescheduling(appointment.id, token)}
         handleClose={handleClose}
       />
     </ButtonDialog>
