@@ -44,11 +44,13 @@ export function useAppointment() {
   };
 
   const handleBeginRescheduling = (id, token) => {
-    dispatch(beginRescheduling(id));
+    // dispatch(beginRescheduling(id));
     if (token) {
-navigate(`/bookings/${id}/?token=${token}`);
+      console.log('====================================');
+      console.log('token present: ', token);
+      console.log('====================================');
+      navigate(`/bookings/${id}/?token=${token}`);
     } else {
-
       navigate(`/bookings/${id}`);
     }
   };

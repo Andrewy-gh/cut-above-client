@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEmployeesQuery } from '../hooks/useEmployeesQuery';
 import { useScheduleQuery } from '../hooks/useScheduleQuery';
@@ -10,23 +10,50 @@ import { useFilter } from '../hooks/useFilter';
 import { useDialog } from '../hooks/useDialog';
 import { useAuth } from '../hooks/useAuth';
 import { useNotification } from '../hooks/useNotification';
+import { useValidateTokenQuery } from '../features/userSlice';
 
 export default function BookingPage() {
   const navigate = useNavigate();
-  const { employees } = useEmployeesQuery();
-  const { schedules } = useScheduleQuery();
+  const { data: employees } = useEmployeesQuery();
+  const { data: schedules } = useScheduleQuery();
   const { date, employee, selection, service, handleSelectionChange } =
     useFilter();
   const { open, handleClose, handleOpen } = useDialog();
   const { handleBooking } = useBooking();
-  const { rescheduling } = useAppointment();
+  // const { rescheduling } = useAppointment();
   const { token } = useAuth();
   const { handleError } = useNotification();
 
   const { id } = useParams();
   let [searchParams, setSearchParams] = useSearchParams();
-  const [isValidToken, setIsValidToken] = useState(false);
   let emailToken = searchParams.get('token');
+  console.log('====================================');
+  console.log('params: ', id, emailToken);
+  console.log('====================================');
+
+  const {
+    data: tokenStatus,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useValidateTokenQuery(emailToken, { skip: !emailToken });
+  console.log('tokenStatus: ', tokenStatus);
+  console.log('isLoading', isLoading);
+  console.log('isSuccess', isSuccess);
+  console.log('isError', isError);
+  console.log('error', error);
+
+  const [rescheduling, setRescheduling] = useState(null);
+  useEffect(() => {
+    if (id) {
+      setRescheduling(true);
+    }
+  }, [id]);
+
+  if (emailToken && tokenStatus && tokenStatus.error) {
+    handleError('Token is not valid');
+  }
 
   const handleSelectAndOpen = (data) => {
     handleSelectionChange(data);
@@ -38,21 +65,27 @@ export default function BookingPage() {
     : 'Schedule your appointment';
 
   const handleAgree = () => {
-    if (!token) {
+    console.log('====================================');
+    console.log('emailToken is present: ', emailToken);
+    console.log('====================================');
+    if (!token && !emailToken) {
       handleError('Please login to complete booking');
       navigate('/login');
       return;
     }
     handleBooking({
+      id,
       date,
       start: selection.start,
       end: selection.end,
       service: service.name,
       employee,
+      emailToken,
     });
     handleClose();
   };
 
+  // ! conditional: emailToken present, but validated error return error message
   return (
     <div
       style={{

@@ -12,16 +12,25 @@ export function useBooking() {
     useAppointment();
   const { handleSuccess, handleError } = useNotification();
 
-  const handleBooking = async ({ date, start, end, service, employee }) => {
+  const handleBooking = async ({
+    id,
+    date,
+    start,
+    end,
+    service,
+    employee,
+    emailToken,
+  }) => {
     try {
-      if (rescheduling && modifyingApptId) {
+      if (id) {
         const modifiedAppt = await modifyAppointment({
-          id: modifyingApptId,
+          id,
           date,
           start,
           end,
           service,
           employee,
+          emailToken,
         }).unwrap();
         if (modifiedAppt.success) {
           handleSuccess(modifiedAppt.message);
@@ -41,6 +50,35 @@ export function useBooking() {
       handleError(err);
     }
   };
+  // const handleBooking = async ({ date, start, end, service, employee }) => {
+  //   try {
+  //     if (rescheduling && modifyingApptId) {
+  //       const modifiedAppt = await modifyAppointment({
+  //         id: modifyingApptId,
+  //         date,
+  //         start,
+  //         end,
+  //         service,
+  //         employee,
+  //       }).unwrap();
+  //       if (modifiedAppt.success) {
+  //         handleSuccess(modifiedAppt.message);
+  //         handleEndRescheduling();
+  //       }
+  //     } else {
+  //       const newAppt = await addAppointment({
+  //         date,
+  //         start,
+  //         end,
+  //         service,
+  //         employee,
+  //       }).unwrap();
+  //       if (newAppt.success) handleSuccess(newAppt.message);
+  //     }
+  //   } catch (err) {
+  //     handleError(err);
+  //   }
+  // };
 
   return {
     handleBooking,
