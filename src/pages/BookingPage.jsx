@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { useEmployeesQuery } from '../hooks/useEmployeesQuery';
 import { useScheduleQuery } from '../hooks/useScheduleQuery';
 import BookingForm from '../components/bookingForm';
 import BookingDialog from '../components/bookingDialog';
-import { useAppointment } from '../hooks/useAppointment';
 import { useBooking } from '../hooks/useBooking';
 import { useFilter } from '../hooks/useFilter';
 import { useDialog } from '../hooks/useDialog';
@@ -20,29 +24,21 @@ export default function BookingPage() {
     useFilter();
   const { open, handleClose, handleOpen } = useDialog();
   const { handleBooking } = useBooking();
-  // const { rescheduling } = useAppointment();
   const { token } = useAuth();
   const { handleError } = useNotification();
 
   const { id } = useParams();
   let [searchParams, setSearchParams] = useSearchParams();
   let emailToken = searchParams.get('token');
-  console.log('====================================');
-  console.log('params: ', id, emailToken);
-  console.log('====================================');
 
   const {
     data: tokenStatus,
     isLoading,
-    isSuccess,
     isError,
-    error,
-  } = useValidateTokenQuery(emailToken, { skip: !emailToken });
-  console.log('tokenStatus: ', tokenStatus);
-  console.log('isLoading', isLoading);
-  console.log('isSuccess', isSuccess);
-  console.log('isError', isError);
-  console.log('error', error);
+  } = useValidateTokenQuery(
+    { option: 'email', token: emailToken },
+    { skip: !emailToken }
+  );
 
   const [rescheduling, setRescheduling] = useState(null);
   useEffect(() => {
@@ -65,9 +61,6 @@ export default function BookingPage() {
     : 'Schedule your appointment';
 
   const handleAgree = () => {
-    console.log('====================================');
-    console.log('emailToken is present: ', emailToken);
-    console.log('====================================');
     if (!token && !emailToken) {
       handleError('Please login to complete booking');
       navigate('/login');
@@ -85,26 +78,47 @@ export default function BookingPage() {
     handleClose();
   };
 
-  // ! conditional: emailToken present, but validated error return error message
-  return (
-    <div
-      style={{
-        marginBottom: '4rem',
-        minHeight: 'calc(100vh - 4rem)',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-      }}
-    >
-      <h3 style={{ textAlign: 'center', marginBottom: '3rem' }}>{message}</h3>
-      <BookingForm handleOpen={handleSelectAndOpen} />
-      <BookingDialog
-        open={open}
-        handleClose={handleClose}
-        selection={selection}
-        handleAgree={handleAgree}
-        token={token}
-      />
-    </div>
-  );
+  let content;
+  if (isLoading) {
+    content = <p>Loading...</p>;
+  } else if (emailToken && isError) {
+    // emailToken present but it is not valid
+    content = (
+      <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
+        <>
+          <h5 style={{ textAlign: 'center' }}>
+            Oops looks like an error happened...
+          </h5>
+          <Link to="/login">
+            <p style={{ textAlign: 'center' }}>
+              Please <u>login</u> to modify your appointment.
+            </p>
+          </Link>
+        </>
+      </div>
+    );
+  } else {
+    content = (
+      <div
+        style={{
+          marginBottom: '4rem',
+          minHeight: 'calc(100vh - 4rem)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-around',
+        }}
+      >
+        <h3 style={{ textAlign: 'center', marginBottom: '3rem' }}>{message}</h3>
+        <BookingForm handleOpen={handleSelectAndOpen} />
+        <BookingDialog
+          open={open}
+          handleClose={handleClose}
+          selection={selection}
+          handleAgree={handleAgree}
+          token={token}
+        />
+      </div>
+    );
+  }
+  return <>{content}</>;
 }

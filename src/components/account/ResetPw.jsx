@@ -21,7 +21,7 @@ export default function ResetPw() {
     isLoading,
     isSuccess,
     isError,
-  } = useValidateTokenQuery(token);
+  } = useValidateTokenQuery({ option: 'reset', token });
 
   const handleNewPasswordChange = (e) => {
     setError(false);

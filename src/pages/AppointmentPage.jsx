@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useParams, useSearchParams } from 'react-router-dom';
 import CancelAppointment from '../components/appointments/CancelAppointment';
 import ModifyAppointment from '../components/appointments/ModifyAppointment';
@@ -10,56 +11,19 @@ export default function AppointmentPage() {
   const { id } = useParams();
   let [searchParams, setSearchParams] = useSearchParams();
   let token = searchParams.get('token');
-  console.log('====================================');
-  console.log('params: ', id, token);
-  console.log('====================================');
   const {
     data: tokenStatus,
     isLoading: isTokenStatusLoading,
     isSuccess: isTokenStatusSuccess,
     isError: isTokenStatusError,
-    error: tokenStatusError,
-  } = useValidateTokenQuery(token);
-  console.log('====================================');
-  console.log('tokenStatus: ', tokenStatus);
-  console.log('====================================');
+  } = useValidateTokenQuery({ option: 'email', token });
 
   const {
     data: appointment,
     isLoading,
     isSuccess,
     isError,
-    error,
-  } = useGetSingleAppointmentQuery(id);
-  console.log('====================================');
-  console.log('appointment: ', appointment);
-  console.log('====================================');
-
-  // useEffect(() => {
-  //   async function validateEmailToken(token) {
-  //     try {
-  //       const res = await fetch(
-  //         `http://localhost:3001/api/user/validate-token/${token}`
-  //         // `https://cutaboveshop.fly.dev/api/user/validate-token/${token}`
-  //       );
-  //       const data = await res.json();
-  //       if (data.message === 'Token is valid') {
-  //         setIsValidToken(true);
-  //       } else {
-  //         handleError(
-  //           'Invalid or expired token. Please request a new password reset link.'
-  //         );
-  //         navigate('/login');
-  //       }
-  //     } catch (err) {
-  //       handleError('An error occurred.');
-  //     }
-  //   }
-  //   if (token) {
-  //     console.log('token present');
-  //     validateEmailToken(token);
-  //   }
-  // }, [token]);
+  } = useGetSingleAppointmentQuery(id, { skip: isTokenStatusError });
 
   let content;
   if (isLoading || isTokenStatusLoading) {
@@ -106,7 +70,22 @@ export default function AppointmentPage() {
       </>
     );
   } else if (isError || isTokenStatusError) {
-    content = <p>{error || tokenStatusError}</p>;
+    content = (
+      <>
+        <h5 style={{ textAlign: 'center' }}>
+          Oops looks like an error happened...
+        </h5>
+        <Link to="/login">
+          <p style={{ textAlign: 'center' }}>
+            Please <u>login</u> to access your appointment information.
+          </p>
+        </Link>
+      </>
+    );
   }
-  return <>{content}</>;
+  return (
+    <div style={{ width: 'min(80ch, 100% - 2rem)', marginInline: 'auto' }}>
+      {content}
+    </div>
+  );
 }

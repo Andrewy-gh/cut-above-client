@@ -46,7 +46,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['User'],
     }),
     validateToken: builder.query({
-      query: (token) => `/api/user/validate-token/${token}`,
+      query: (req) => `/api/user/validate-token/${req.option}/${req.token}`,
       transformResponse: (responseData) => {
         return responseData;
       },
