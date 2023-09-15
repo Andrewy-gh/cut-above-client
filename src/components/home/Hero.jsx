@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <div
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url(${hero})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url(${hero})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         aspectRatio: '16 / 9',
@@ -43,9 +43,8 @@ export default function Hero() {
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
           }}
         >
-          If you&apos;re looking for a top-quality haircut service in a relaxing
-          environment, look no further! Book your appointment today and let us
-          help you achieve the perfect haircut!
+          Book your appointment today and let us help you achieve the perfect
+          haircut!
         </p>
         <div style={{ textAlign: 'center' }}>
           <Link to="/reserve">
