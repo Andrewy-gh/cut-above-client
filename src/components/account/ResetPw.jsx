@@ -49,8 +49,8 @@ export default function ResetPw() {
     if (passwordChanged) {
       setNewPassword('');
       setConfirmNewPassword('');
-      navigate('/login');
     }
+    navigate('/login');
   };
 
   let content;

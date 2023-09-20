@@ -24,20 +24,32 @@ export function useAppointment() {
   const [sendCancellation] = useSendCancellationMutation();
   const { handleSuccess, handleError } = useNotification();
 
-  const handleCancel = async (id) => {
+  const handleCancel = async (id, emailToken) => {
+    console.log('====================================');
+    console.log('cancelling');
+    console.log('====================================');
     try {
-      const cancelledAppt = await cancelAppointment({ id }).unwrap();
-      if (cancelledAppt.success) handleSuccess(cancelledAppt.message);
-      const formattedDate = formatDateSlash(cancelledAppt.data.date);
-      const formattedTime = formatTime(cancelledAppt.data.start);
-      if (!rescheduling) {
-        const sentCancellation = await sendCancellation({
-          employee: cancelledAppt.data.employee,
-          date: formattedDate,
-          time: formattedTime,
-        });
-        console.log('cancellation email response: ', sentCancellation);
+      const cancelledAppt = await cancelAppointment({
+        id,
+        emailToken,
+      }).unwrap();
+      console.log('====================================');
+      console.log('cancelledAppt', cancelledAppt);
+      console.log('====================================');
+      if (cancelledAppt.success) {
+        handleSuccess(cancelledAppt.message);
+        navigate('/');
       }
+      // const formattedDate = formatDateSlash(cancelledAppt.data.date);
+      // const formattedTime = formatTime(cancelledAppt.data.start);
+      // if (!rescheduling) {
+      //   const sentCancellation = await sendCancellation({
+      //     employee: cancelledAppt.data.employee,
+      //     date: formattedDate,
+      //     time: formattedTime,
+      //   });
+      //   console.log('cancellation email response: ', sentCancellation);
+      // }
     } catch (err) {
       handleError(err);
     }
@@ -46,9 +58,6 @@ export function useAppointment() {
   const handleBeginRescheduling = (id, token) => {
     // dispatch(beginRescheduling(id));
     if (token) {
-      console.log('====================================');
-      console.log('token present: ', token);
-      console.log('====================================');
       navigate(`/bookings/${id}/?token=${token}`);
     } else {
       navigate(`/bookings/${id}`);

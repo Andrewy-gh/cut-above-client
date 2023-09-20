@@ -26,7 +26,7 @@ export default function Schedules() {
       <div>
         <Link to="/account">Back to account page</Link>
       </div>
-      <h5>Schedule</h5>
+      <h5>{schedules.length < 1 ? 'No Schedules available' : 'Schedules'}</h5>
       <div>{content}</div>
     </div>
   );

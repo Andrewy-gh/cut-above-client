@@ -17,7 +17,7 @@ const buttonStyle = {
   color: theme.palette.secondary.dark,
 };
 
-export default function CancelAppointment({ appointment }) {
+export default function CancelAppointment({ appointment, token }) {
   const { open, handleOpen, handleClose } = useDialog();
   const { employee } = useEmployeesQuery(appointment.employee);
   const { handleCancel } = useAppointment();
@@ -37,7 +37,7 @@ export default function CancelAppointment({ appointment }) {
     >
       <CustomDialogContent
         dialog={dialogProps}
-        handleAgree={() => handleCancel(appointment.id)}
+        handleAgree={() => handleCancel(appointment.id, token)}
         handleClose={handleClose}
       />
     </ButtonDialog>
