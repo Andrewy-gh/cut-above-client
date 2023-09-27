@@ -11,9 +11,6 @@ export default function Layout() {
       <div
         style={{
           minHeight: '100vh',
-          minHeight: '100dvh',
-          // display: 'grid',
-          // gridTemplateRows: 'auto 1fr auto',
           display: 'flex',
           flexDirection: 'column',
         }}

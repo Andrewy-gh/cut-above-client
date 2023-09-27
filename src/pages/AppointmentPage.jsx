@@ -16,24 +16,13 @@ export default function AppointmentPage() {
     isLoading: isTokenStatusLoading,
     isSuccess: isTokenStatusSuccess,
     isError: isTokenStatusError,
-    error: tokenError,
   } = useValidateTokenQuery({ option: 'email', token });
-  console.log('====================================');
-  console.log('data:', tokenStatus);
-  console.log('====================================');
   const {
     data: appointment,
     isLoading,
     isSuccess,
     isError,
-    error: apptError,
   } = useGetSingleAppointmentQuery(id, { skip: isTokenStatusError });
-  console.log('====================================');
-  console.log('appointment', apptError, isError);
-  console.log('====================================');
-  console.log('tokenError', tokenError, isTokenStatusError);
-  console.log('====================================');
-  console.log('====================================');
   let content;
   if (isLoading || isTokenStatusLoading) {
     return <p>Loading...</p>;

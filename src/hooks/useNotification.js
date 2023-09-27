@@ -16,7 +16,6 @@ export function useNotification() {
   const handleSuccess = (message) => dispatch(setSuccess(message));
   const handleError = (err) => {
     // redux returns data
-    console.log('err notification: ', err);
     const errorMessage = err?.data?.error || JSON.stringify(err);
     dispatch(setError(`Error: ${errorMessage}`));
   };

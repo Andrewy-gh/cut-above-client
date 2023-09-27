@@ -27,7 +27,6 @@ export default function DrawerMenu() {
       onClick={() => setOpen(false)}
       style={{
         height: '100vh',
-        height: '100dvh',
         width: '100vw',
         backgroundColor: theme.palette.primary.main,
         display: 'flex',

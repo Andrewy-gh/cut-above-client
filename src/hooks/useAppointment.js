@@ -4,15 +4,12 @@ import {
   useCancelAppointmentMutation,
   useUpdateAppointmentStatusMutation,
 } from '../features/appointments/apptApiSlice';
-import { useSendCancellationMutation } from '../features/emailSlice';
 import {
-  beginRescheduling,
   endRescheduling,
   selectModifyingApptId,
   selectRescheduling,
 } from '../features/appointments/appointmentSlice';
 import { useNotification } from '../hooks/useNotification';
-import { formatDateSlash, formatTime } from '../utils/date';
 
 export function useAppointment() {
   const dispatch = useDispatch();
@@ -21,42 +18,24 @@ export function useAppointment() {
   const modifyingApptId = useSelector(selectModifyingApptId);
   const [cancelAppointment] = useCancelAppointmentMutation();
   const [updateAppointmentStatus] = useUpdateAppointmentStatusMutation();
-  const [sendCancellation] = useSendCancellationMutation();
   const { handleSuccess, handleError } = useNotification();
 
   const handleCancel = async (id, emailToken) => {
-    console.log('====================================');
-    console.log('cancelling');
-    console.log('====================================');
     try {
       const cancelledAppt = await cancelAppointment({
         id,
         emailToken,
       }).unwrap();
-      console.log('====================================');
-      console.log('cancelledAppt', cancelledAppt);
-      console.log('====================================');
       if (cancelledAppt.success) {
         handleSuccess(cancelledAppt.message);
         navigate('/');
       }
-      // const formattedDate = formatDateSlash(cancelledAppt.data.date);
-      // const formattedTime = formatTime(cancelledAppt.data.start);
-      // if (!rescheduling) {
-      //   const sentCancellation = await sendCancellation({
-      //     employee: cancelledAppt.data.employee,
-      //     date: formattedDate,
-      //     time: formattedTime,
-      //   });
-      //   console.log('cancellation email response: ', sentCancellation);
-      // }
     } catch (err) {
       handleError(err);
     }
   };
 
   const handleBeginRescheduling = (id, token) => {
-    // dispatch(beginRescheduling(id));
     if (token) {
       navigate(`/bookings/${id}/?token=${token}`);
     } else {
