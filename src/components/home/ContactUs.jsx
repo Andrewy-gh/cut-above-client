@@ -1,16 +1,26 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import { useSendMessageResponseMutation } from '../../features/emailSlice';
 
 export default function ContactUs() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+
+  const [sendMessageResponse] = useSendMessageResponseMutation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(firstName, lastName, email, message);
+    const sentMessageResponse = await sendMessageResponse({
+      submitter: email,
+      message,
+    }).unwrap();
+    console.log('====================================');
+    console.log('sent message response: ', sentMessageResponse);
+    console.log('====================================');
   };
   return (
     <div
