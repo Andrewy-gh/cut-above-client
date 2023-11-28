@@ -18,7 +18,7 @@ export default function ContactUs() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(firstName, lastName, email, message);
+    const contactDetails = { firstName, lastName, email, message };
     try {
       if (!emailIsValid(email)) {
         setError(true);
@@ -26,12 +26,8 @@ export default function ContactUs() {
         return;
       }
       const sentMessageResponse = await sendMessageResponse({
-        submitter: email,
-        message,
+        contactDetails,
       }).unwrap();
-      console.log('====================================');
-      console.log('sent message response: ', sentMessageResponse);
-      console.log('====================================');
       if (sentMessageResponse.success) {
         handleSuccess(sentMessageResponse.message);
         setFirstName('');
