@@ -7,6 +7,8 @@ import { useNotification } from '../hooks/useNotification';
 
 import { useSendPasswordResetMutation } from '../features/emailSlice';
 
+import { emailIsValid } from '../utils/email';
+
 export default function Login() {
   const [view, setView] = useState('login');
   const [email, setEmail] = useState('');
@@ -29,9 +31,7 @@ export default function Login() {
   const handleReset = async (e) => {
     e.preventDefault();
     try {
-      const emailRegex =
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if (!emailRegex.test(email)) {
+      if (!emailIsValid(email)) {
         setError(true);
         setHelperText('invalid email');
         return;
@@ -86,7 +86,6 @@ export default function Login() {
   } else {
     content = (
       <>
-        {' '}
         <h3 style={{ textAlign: 'center' }}>Reset Password</h3>
         <form onSubmit={handleReset}>
           <TextField

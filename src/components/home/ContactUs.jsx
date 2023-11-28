@@ -2,26 +2,48 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useSendMessageResponseMutation } from '../../features/emailSlice';
+import { useNotification } from '../../hooks/useNotification';
+import { emailIsValid } from '../../utils/email';
 
 export default function ContactUs() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [error, setError] = useState(false);
+  const [helperText, setHelperText] = useState('');
 
+  const { handleSuccess, handleError } = useNotification();
   const [sendMessageResponse] = useSendMessageResponseMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(firstName, lastName, email, message);
-    const sentMessageResponse = await sendMessageResponse({
-      submitter: email,
-      message,
-    }).unwrap();
-    console.log('====================================');
-    console.log('sent message response: ', sentMessageResponse);
-    console.log('====================================');
+    try {
+      if (!emailIsValid(email)) {
+        setError(true);
+        setHelperText('invalid email');
+        return;
+      }
+      const sentMessageResponse = await sendMessageResponse({
+        submitter: email,
+        message,
+      }).unwrap();
+      console.log('====================================');
+      console.log('sent message response: ', sentMessageResponse);
+      console.log('====================================');
+      if (sentMessageResponse.success) {
+        handleSuccess(sentMessageResponse.message);
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setMessage('');
+      }
+    } catch (err) {
+      handleError(err);
+    }
   };
+
   return (
     <div
       style={{
@@ -60,6 +82,8 @@ export default function ContactUs() {
           ></TextField>
         </div>
         <TextField
+          error={error}
+          helperText={helperText}
           label="Email"
           required
           fullWidth
