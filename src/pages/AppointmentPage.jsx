@@ -1,23 +1,36 @@
-import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import CancelAppointment from '../components/appointments/CancelAppointment';
 import ModifyAppointment from '../components/appointments/ModifyAppointment';
 import { useGetSingleAppointmentQuery } from '../features/appointments/apptApiSlice';
+import { useValidateTokenQuery } from '../features/userSlice';
 import Appointment from '../components/appointments/Appointment';
 import Employee from '../components/Employee';
 
 export default function AppointmentPage() {
   const { id } = useParams();
+  let [searchParams, setSearchParams] = useSearchParams();
+  let token = searchParams.get('token');
+  const {
+    data: tokenStatus,
+    isLoading: isTokenStatusLoading,
+    isSuccess: isTokenStatusSuccess,
+    isError: isTokenStatusError,
+  } = useValidateTokenQuery({ option: 'email', token });
   const {
     data: appointment,
     isLoading,
     isSuccess,
     isError,
-    error,
-  } = useGetSingleAppointmentQuery(id);
+  } = useGetSingleAppointmentQuery(id, { skip: isTokenStatusError });
   let content;
-  if (isLoading) {
+  if (isLoading || isTokenStatusLoading) {
     return <p>Loading...</p>;
-  } else if (isSuccess) {
+  } else if (
+    isSuccess &&
+    isTokenStatusSuccess &&
+    tokenStatus.message === 'Token is valid'
+  ) {
     content = (
       <>
         <h4 style={{ textAlign: 'center' }}>Your Upcoming Appointment</h4>
@@ -44,18 +57,33 @@ export default function AppointmentPage() {
               }}
             >
               <div style={{ flexGrow: '0' }}>
-                <ModifyAppointment appointment={appointment} />
+                <ModifyAppointment appointment={appointment} token={token} />
               </div>
               <div style={{ flexGrow: '0' }}>
-                <CancelAppointment appointment={appointment} />
+                <CancelAppointment appointment={appointment} token={token} />
               </div>
             </div>
           </div>
         </div>
       </>
     );
-  } else if (isError) {
-    content = <p>{error}</p>;
+  } else if (isError || isTokenStatusError) {
+    content = (
+      <>
+        <h5 style={{ textAlign: 'center' }}>
+          Oops looks like an error happened...
+        </h5>
+        <Link to="/login">
+          <p style={{ textAlign: 'center' }}>
+            Please <u>login</u> to access your appointment information.
+          </p>
+        </Link>
+      </>
+    );
   }
-  return <>{content}</>;
+  return (
+    <div style={{ width: 'min(80ch, 100% - 2rem)', marginInline: 'auto' }}>
+      {content}
+    </div>
+  );
 }

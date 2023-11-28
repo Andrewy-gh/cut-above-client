@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { useNotification } from '../../hooks/useNotification';
 import { useAccount } from '../../hooks/useAccount';
+import { useValidateTokenQuery } from '../../features/userSlice';
 
 export default function ResetPw() {
   const navigate = useNavigate();
   let [searchParams, setSearchParams] = useSearchParams();
-  const [isValidToken, setIsValidToken] = useState(false);
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [error, setError] = useState(false);
@@ -16,30 +15,13 @@ export default function ResetPw() {
   const { handleUserPasswordReset } = useAccount();
 
   let token = searchParams.get('token');
-  const { handleError } = useNotification();
 
-  useEffect(() => {
-    async function validateResetToken(token) {
-      try {
-        const res = await fetch(
-          `http://localhost:3001/api/user/validate-token/${token}`
-          // `https://cutaboveshop.fly.dev/api/user/validate-token/${token}`
-        );
-        const data = await res.json();
-        if (data.message === 'Token is valid') {
-          setIsValidToken(true);
-        } else {
-          handleError(
-            'Invalid or expired token. Please request a new password reset link.'
-          );
-          navigate('/login');
-        }
-      } catch (err) {
-        handleError('An error occurred.');
-      }
-    }
-    validateResetToken(token);
-  }, [token]);
+  const {
+    data: tokenStatus,
+    isLoading,
+    isSuccess,
+    isError,
+  } = useValidateTokenQuery({ option: 'reset', token });
 
   const handleNewPasswordChange = (e) => {
     setError(false);
@@ -68,10 +50,13 @@ export default function ResetPw() {
       setNewPassword('');
       setConfirmNewPassword('');
     }
+    navigate('/login');
   };
 
   let content;
-  if (isValidToken) {
+  if (isLoading) {
+    return <p>Loading...</p>;
+  } else if (isSuccess && tokenStatus.message === 'Token is valid') {
     content = (
       <>
         <h3 style={{ textAlign: 'center' }}>Reset password</h3>
@@ -107,7 +92,7 @@ export default function ResetPw() {
         </form>
       </>
     );
-  } else {
+  } else if (isError) {
     content = (
       <>
         <h5 style={{ textAlign: 'center' }}>
