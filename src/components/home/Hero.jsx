@@ -23,17 +23,6 @@ export default function Hero() {
         }}
       >
         <h1 style={{ textAlign: 'center' }}>Experience a Cut Above The Rest</h1>
-        {/* <Typography
-          variant="body2"
-          align="center"
-          sx={{ fontWeight: { xs: 400, sm: 500 } }}
-          paragraph
-        >
-          If you&apos;re looking for a top-quality haircut service in a
-          welcoming and relaxing environment, look no further than our
-          barbershop. Book your appointment today and let us help you achieve
-          the perfect haircut!
-        </Typography> */}
         <p
           className="body1"
           style={{
@@ -47,7 +36,7 @@ export default function Hero() {
           haircut!
         </p>
         <div style={{ textAlign: 'center' }}>
-          <Link to="/reserve">
+          <Link to="/bookings">
             <Button variant="contained">Schedule an appointment</Button>
           </Link>
         </div>
