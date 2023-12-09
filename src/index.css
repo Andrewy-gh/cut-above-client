@@ -99,6 +99,11 @@ h5 {
   font-size: var(--step--1);
 }
 
+.container {
+  width: min(80ch, 100% - 2rem);
+  margin-inline: auto;
+}
+
 .appointment-card {
   display: flex;
   flex-wrap: wrap;

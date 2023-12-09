@@ -3,11 +3,6 @@ import LogoutButton from '../LogoutButton';
 import { useAuth } from '../../hooks/useAuth';
 import styles from './styles.module.css';
 
-const containerStyle = {
-  width: 'min(80ch, 100% - 2rem)',
-  marginInline: 'auto',
-};
-
 const headerStyle = {
   textAlign: 'center',
   textWrap: 'balance',
@@ -35,7 +30,7 @@ export default function Account() {
 
   return (
     <>
-      <div style={containerStyle}>
+      <div className="container">
         <h5 className={styles.header}>{welcome} Account page</h5>
         <p>Current user privileges: {role}</p>
         <div className="body1">
