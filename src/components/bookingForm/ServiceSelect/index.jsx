@@ -2,8 +2,8 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { useFilter } from '../../hooks/useFilter';
-import { theme } from '../../styles/styles';
+import { useFilter } from '../../../hooks/useFilter';
+import { theme } from '../../../styles/styles';
 
 export default function ServiceSelect() {
   const { services, service, handleServiceChange } = useFilter();

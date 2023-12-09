@@ -3,9 +3,9 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { selectAllEmployees } from '../../features/employeeSlice';
-import { useFilter } from '../../hooks/useFilter';
-import { theme } from '../../styles/styles';
+import { selectAllEmployees } from '../../../features/employeeSlice';
+import { useFilter } from '../../../hooks/useFilter';
+import { theme } from '../../../styles/styles';
 
 export default function EmployeeSelect() {
   const employees = useSelector(selectAllEmployees);
