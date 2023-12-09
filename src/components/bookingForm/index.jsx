@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import DatePicker from '../datePickers/DatePicker';
 import EmployeeSelect from './EmployeeSelect';
 import ServiceSelect from './ServiceSelect';
-import AvailableTimes from './AvailableTimes';
+import AvailableTimes from './AvailableTimes/';
 import { useFilter } from '../../hooks/useFilter';
 import { selectScheduleByFilter } from '../../features/scheduleSlice';
 import { currentDate, oneMonthFromCurrent } from '../../utils/date';

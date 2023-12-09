@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Grid from '@mui/material/Grid';
-import { useFilter } from '../../../hooks/useFilter';
+import { useFilter } from '@/hooks/useFilter';
 import styles from './styles.module.css';
 
 const MemberCard = ({ employee, handleClick }) => {
