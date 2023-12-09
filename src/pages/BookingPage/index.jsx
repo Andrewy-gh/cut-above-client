@@ -5,16 +5,17 @@ import {
   useParams,
   useSearchParams,
 } from 'react-router-dom';
-import { useEmployeesQuery } from '../hooks/useEmployeesQuery';
-import { useScheduleQuery } from '../hooks/useScheduleQuery';
-import BookingForm from '../components/bookingForm';
-import BookingDialog from '../components/bookingDialog';
-import { useBooking } from '../hooks/useBooking';
-import { useFilter } from '../hooks/useFilter';
-import { useDialog } from '../hooks/useDialog';
-import { useAuth } from '../hooks/useAuth';
-import { useNotification } from '../hooks/useNotification';
-import { useValidateTokenQuery } from '../features/userSlice';
+import { useEmployeesQuery } from '@/hooks/useEmployeesQuery';
+import { useScheduleQuery } from '@/hooks/useScheduleQuery';
+import BookingForm from '@/components/bookingForm';
+import BookingDialog from '@/components/bookingDialog';
+import { useBooking } from '@/hooks/useBooking';
+import { useFilter } from '@/hooks/useFilter';
+import { useDialog } from '@/hooks/useDialog';
+import { useAuth } from '@/hooks/useAuth';
+import { useNotification } from '@/hooks/useNotification';
+import { useValidateTokenQuery } from '@/features/userSlice';
+import styles from './styles.module.css';
 
 export default function BookingPage() {
   const navigate = useNavigate();
@@ -84,31 +85,21 @@ export default function BookingPage() {
   } else if (emailToken && isError) {
     // emailToken present but it is not valid
     content = (
-      <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
-        <>
-          <h5 style={{ textAlign: 'center' }}>
-            Oops looks like an error happened...
-          </h5>
-          <Link to="/login">
-            <p style={{ textAlign: 'center' }}>
-              Please <u>login</u> to modify your appointment.
-            </p>
-          </Link>
-        </>
+      <div className={styles.container}>
+        <h5 style={{ textAlign: 'center' }}>
+          Oops looks like an error happened...
+        </h5>
+        <Link to="/login">
+          <p style={{ textAlign: 'center' }}>
+            Please <u>login</u> to modify your appointment.
+          </p>
+        </Link>
       </div>
     );
   } else {
     content = (
-      <div
-        style={{
-          marginBottom: '4rem',
-          minHeight: 'calc(100vh - 4rem)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-around',
-        }}
-      >
-        <h3 style={{ textAlign: 'center', marginBottom: '3rem' }}>{message}</h3>
+      <div className={styles.flex_container}>
+        <h3 className={styles.header}>{message}</h3>
         <BookingForm handleOpen={handleSelectAndOpen} />
         <BookingDialog
           open={open}
