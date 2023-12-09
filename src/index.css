@@ -104,6 +104,10 @@ h5 {
   margin-inline: auto;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .appointment-card {
   display: flex;
   flex-wrap: wrap;
