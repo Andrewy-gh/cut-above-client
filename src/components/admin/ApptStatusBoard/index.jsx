@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useScheduleQuery } from '../../hooks/useScheduleQuery';
-import StatusColumn from './StatusColumn';
-import StatusTab from './StatusTab';
-import { formatDateFull, formatDateToTime } from '../../utils/date';
+import { useScheduleQuery } from '../../../hooks/useScheduleQuery';
+import StatusColumn from '../StatusColumn';
+import StatusTab from '../StatusTab';
+import { formatDateFull, formatDateToTime } from '../../../utils/date';
 
 export default function ApptStatusBoard() {
   const { id } = useParams();
@@ -16,6 +16,9 @@ export default function ApptStatusBoard() {
         start: formatDateToTime(appt.start),
       };
     });
+  console.log('====================================');
+  console.log(formatTimeAppt);
+  console.log('====================================');
   const [status, setStatus] = useState('scheduled');
   const scheduled = formatTimeAppt.filter(
     (appt) => appt.status === 'scheduled'

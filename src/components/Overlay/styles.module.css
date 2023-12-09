@@ -1,11 +1,12 @@
 .container {
-  position: elativ;
+  position: relative;
   width: 100%;
   height: 100vh;
+  background: url('@/assets/images/hero.webp') center/cover no-repeat;
 }
 
 .overlay {
-  position: bsolut;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
