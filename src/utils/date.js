@@ -102,3 +102,21 @@ export const roundedCurrentDate = () => {
   const roundedPlusHour = rounded.add(1, 'hour');
   return roundedPlusHour;
 };
+
+// splits schedules or appointments by upcoming and past
+export const splitByUpcomingAndPast = (dateObj) => {
+  const upcoming = [];
+  const past = [];
+  const presentDate = new Date();
+  if (dateObj.length > 0) {
+    dateObj.forEach((dateItem) => {
+      const currItemDate = new Date(dateItem.date);
+      if (currItemDate < presentDate) {
+        past.push(dateItem);
+      } else {
+        upcoming.push(dateItem);
+      }
+    });
+  }
+  return [upcoming, past];
+};

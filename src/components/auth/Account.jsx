@@ -2,14 +2,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import LogoutButton from '../LogoutButton';
 import { useAuth } from '../../hooks/useAuth';
 
+const containerStyle = {
+  width: 'min(80ch, 100% - 2rem)',
+  marginInline: 'auto',
+};
+
+const headerStyle = {
+  textAlign: 'center',
+};
+
 export default function Account() {
   const navigate = useNavigate();
   const { email, role, token } = useAuth();
   const welcome = email ? `Welcome ${email} to the ` : 'Welcome to the ';
-  const tokenAbbr = token && `${token.slice(-9)}...`;
-  const info = token
-    ? `Logged in with token: ${tokenAbbr}`
-    : 'No user logged in';
 
   if (!token) {
     navigate('/login');
@@ -27,10 +32,9 @@ export default function Account() {
   );
 
   return (
-    <div>
-      <h3>{welcome} Account page</h3>
+    <div style={containerStyle}>
+      <h5 style={headerStyle}>{welcome} Account page</h5>
       <p>Current user privileges: {role}</p>
-      <p>{info}</p>
       <div className="body1">
         <Link to="/account/settings">Account settings</Link>
       </div>
