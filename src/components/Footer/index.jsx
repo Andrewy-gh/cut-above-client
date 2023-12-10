@@ -1,9 +1,10 @@
-import { theme } from '../styles/styles';
-import logoSide from '../assets/cover-logo-side-small.webp';
+import { theme } from '@/styles/styles';
+import logoSide from '@/assets/cover-logo-side-small.webp';
+import styles from './styles.module.css';
 
 const Copyright = () => {
   return (
-    <p style={{ fontSize: '14px', fontWeight: '500' }}>
+    <p className={styles.font}>
       {'Copyright © '}
       {new Date().getFullYear()}
       {'.'}
@@ -14,24 +15,17 @@ const Copyright = () => {
 export default function Footer() {
   return (
     <footer
+      className={styles.spacing}
       style={{
-        width: '100%',
-        padding: '.75rem .75rem',
         backgroundColor: theme.palette.primary.main,
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
+      <div className={styles.flex}>
         <Copyright />
         <div style={{ width: 'clamp(150px, 40%, 250px)' }}>
           <img
             src={logoSide}
-            alt="Cut Above Barbershop logo image side variation"
+            alt="Cut Above Barbershop logo image - side variation"
           />
         </div>
       </div>
