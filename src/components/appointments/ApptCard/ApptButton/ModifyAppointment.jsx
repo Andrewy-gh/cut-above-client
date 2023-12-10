@@ -1,26 +1,21 @@
-import ButtonDialog from '../ButtonDialog';
-import CustomDialogContent from '../CustomDialogContent';
+import ButtonDialog from '../../../ButtonDialog';
+import CustomDialogContent from '../../../CustomDialogContent';
 import { useAppointment } from '@/hooks/useAppointment';
 import { useDialog } from '@/hooks/useDialog';
 import { useEmployeesQuery } from '@/hooks/useEmployeesQuery';
-import { theme } from '@/styles/styles';
 
 const dialog = (appointment, employee) => {
   return {
-    button: 'Cancel',
-    title: `Are you sure you want to cancel your ${appointment.service}?`,
+    button: 'Modify',
+    title: `Are you sure you want to modify your ${appointment.service}?`,
     content: `With ${employee.firstName} on ${appointment.date} at ${appointment.start}?`,
   };
 };
 
-const buttonStyle = {
-  color: theme.palette.secondary.dark,
-};
-
-export default function CancelAppointment({ appointment, token }) {
+export default function ModifyAppointment({ appointment, token }) {
   const { open, handleOpen, handleClose } = useDialog();
   const { employee } = useEmployeesQuery(appointment.employee);
-  const { handleCancel } = useAppointment();
+  const { handleBeginRescheduling } = useAppointment();
 
   if (!employee) return <div>Loading...</div>;
 
@@ -32,12 +27,10 @@ export default function CancelAppointment({ appointment, token }) {
       open={open}
       handleOpen={handleOpen}
       handleClose={handleClose}
-      color={'error'}
-      buttonStyle={buttonStyle}
     >
       <CustomDialogContent
         dialog={dialogProps}
-        handleAgree={() => handleCancel(appointment.id, token)}
+        handleAgree={() => handleBeginRescheduling(appointment.id, token)}
         handleClose={handleClose}
       />
     </ButtonDialog>

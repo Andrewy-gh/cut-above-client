@@ -1,5 +1,5 @@
-import CancelAppointment from '@/components/appointments/CancelAppointment';
-import ModifyAppointment from '@/components/appointments/ModifyAppointment';
+import CancelAppointment from '@/components/appointments/ApptCard/ApptButton/CancelAppointment';
+import ModifyAppointment from '@/components/appointments/ApptCard/ApptButton/ModifyAppointment';
 import Appointment from '@/components/appointments/Appointment';
 import Employee from '@/components/Employee';
 import styles from './styles.module.css';

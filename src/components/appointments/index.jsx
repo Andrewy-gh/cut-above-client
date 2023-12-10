@@ -4,79 +4,32 @@ import {
   selectAllAppointment,
   useGetAppointmentQuery,
 } from '@/features/appointments/apptApiSlice';
-import CancelAppointment from './CancelAppointment';
-import ModifyAppointment from './ModifyAppointment';
-import Appointment from './Appointment';
-import Employee from '../Employee';
+import UpcomingCard from './ApptCard/UpcomingCard';
+import PastCard from './ApptCard/PastCard';
+import { splitByUpcomingAndPast } from '@/utils/date';
+import styles from './styles.module.css';
 
 // This is the user's Appointments page when accessed through the Profile
 export default function Appointments() {
   const { data } = useGetAppointmentQuery();
   const appointments = useSelector(selectAllAppointment);
   let content;
-  const futureItems = [];
-  const pastItems = [];
-  const presentDate = new Date();
   if (appointments.length > 0) {
-    appointments.forEach((appt) => {
-      const apptDate = new Date(appt.date);
-      if (apptDate < presentDate) {
-        pastItems.push(appt);
-      } else {
-        futureItems.push(appt);
-      }
-    });
+    const [upcomingAppts, pastAppts] = splitByUpcomingAndPast(appointments);
     content = (
       <>
         <h4 className="text-center">Upcoming appointments</h4>
         <div className="container-lg">
-          {futureItems.map((appt) => (
-            <div
-              key={appt.id}
-              className="appointment-card"
-              style={{ gap: '1rem', justifyContent: 'space-between' }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <div>
-                  <Appointment appointment={appt} />
-                  <Employee employeeId={appt.employee} />
-                </div>
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  gap: '1rem',
-                }}
-              >
-                <div className="grow-0">
-                  <ModifyAppointment appointment={appt} />
-                </div>
-                <div className="grow-0">
-                  <CancelAppointment appointment={appt} />
-                </div>
-              </div>
-            </div>
+          {upcomingAppts.map((appt) => (
+            <UpcomingCard key={appt.id} appt={appt} />
           ))}
         </div>
-        {pastItems.length > 0 && (
+        {pastAppts.length > 0 && (
           <h4 className="text-center">Past appointments</h4>
         )}
         <div className="container-lg">
-          {pastItems.map((appt) => (
-            <div
-              key={appt.id}
-              className="appointment-card"
-              style={{ flexDirection: 'column' }}
-            >
-              <Appointment key={appt.id} appointment={appt}>
-                <Employee employeeId={appt.employee} />
-              </Appointment>
-            </div>
+          {pastAppts.map((appt) => (
+            <PastCard key={appt.id} appt={appt} />
           ))}
         </div>
       </>
@@ -86,7 +39,7 @@ export default function Appointments() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <div className={styles.container}>
       <div>
         <Link to="/account">Go back to account page</Link>
       </div>
