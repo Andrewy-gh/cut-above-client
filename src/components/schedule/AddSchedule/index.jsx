@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import DateRangePicker from '../datePickers/DateRangePicker';
+import DateRangePicker from '@/components/datePickers/DateRangePicker';
 import dayjs from 'dayjs';
-import { useAddScheduleMutation } from '../../features/scheduleSlice';
-import { useNotification } from '../../hooks/useNotification';
+import { useAddScheduleMutation } from '@/features/scheduleSlice';
+import { useNotification } from '@/hooks/useNotification';
+import styles from './styles.module.css';
 
 export default function AddSchedule() {
   const openTime = '10:00';
@@ -38,17 +39,8 @@ export default function AddSchedule() {
     }
   };
   return (
-    <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          gap: '1rem',
-          marginTop: '.5rem',
-        }}
-      >
+    <div className="container-sm">
+      <div className={styles.flex}>
         <h5>Choose your dates:</h5>
         <DateRangePicker
           dates={dates}

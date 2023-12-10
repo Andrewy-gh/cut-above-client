@@ -8,7 +8,7 @@ import { theme } from '@/styles/styles';
 export default function NavBar() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   return (
-    <div style={{ marginBottom: 2 }}>
+    <div>
       <AppBar
         component="nav"
         position="relative"

@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'production') disableReactDevTools();
 const Account = lazy(() => import('./components/auth/Account'));
 const AddSchedule = lazy(() => import('./components/schedule/AddSchedule'));
 const AppointmentPage = lazy(() => import('./pages/AppointmentPage'));
-const Appointments = lazy(() => import('./components/appointments/index'));
+const Appointments = lazy(() => import('./components/appointments'));
 const RequireAuth = lazy(() => import('./components/auth/RequireAuth'));
 const Schedule = lazy(() => import('./components/schedule/Schedule'));
 const Settings = lazy(() => import('./components/account/Settings'));
