@@ -111,10 +111,5 @@ export default function BookingPage() {
       </div>
     );
   }
-  return (
-    <>
-      <h1>Hello</h1>
-      {content}
-    </>
-  );
+  return <>{content}</>;
 }
