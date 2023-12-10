@@ -11,7 +11,7 @@ import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
 // Lazy-loaded components
-const Account = lazy(() => import('./components/auth/Account'));
+const Account = lazy(() => import('./pages/Account'));
 const AddSchedule = lazy(() => import('./components/schedule/AddSchedule'));
 const AppointmentPage = lazy(() => import('./pages/AppointmentPage'));
 const Appointments = lazy(() => import('./components/appointments'));

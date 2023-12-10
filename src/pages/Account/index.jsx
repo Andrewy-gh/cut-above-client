@@ -1,12 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
-import LogoutButton from '../LogoutButton';
-import { useAuth } from '../../hooks/useAuth';
+import LogoutButton from '@/components/account/LogoutButton';
+import { useAuth } from '@/hooks/useAuth';
 import styles from './styles.module.css';
-
-const headerStyle = {
-  textAlign: 'center',
-  textWrap: 'balance',
-};
 
 export default function Account() {
   const navigate = useNavigate();
@@ -32,7 +27,6 @@ export default function Account() {
     <>
       <div className="container-lg">
         <h5 className={styles.header}>{welcome} Account page</h5>
-        <p>Current user privileges: {role}</p>
         <div className="body1">
           <Link to="/account/settings">Account settings</Link>
         </div>
