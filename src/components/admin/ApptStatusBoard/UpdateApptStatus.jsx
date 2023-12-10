@@ -1,8 +1,8 @@
-import ButtonDialog from '../ButtonDialog';
-import CustomDialogContent from '../CustomDialogContent';
-import { useAppointment } from '../../hooks/useAppointment';
-import { useEmployeesQuery } from '../../hooks/useEmployeesQuery';
-import { useDialog } from '../../hooks/useDialog';
+import ButtonDialog from '../../ButtonDialog';
+import CustomDialogContent from '../../CustomDialogContent';
+import { useAppointment } from '../../../hooks/useAppointment';
+import { useEmployeesQuery } from '../../../hooks/useEmployeesQuery';
+import { useDialog } from '../../../hooks/useDialog';
 
 const dialog = (newStatus) => {
   let content;

@@ -1,8 +1,8 @@
 import UpdateApptStatus from './UpdateApptStatus';
-import Employee from '../Employee';
-import Appointment from '../appointments/Appointment';
-import ModifyAppointment from '../appointments/ModifyAppointment';
-import CancelAppointment from '../appointments/CancelAppointment';
+import Employee from '../../Employee';
+import Appointment from '../../appointments/Appointment';
+import ModifyAppointment from '../../appointments/ModifyAppointment';
+import CancelAppointment from '../../appointments/CancelAppointment';
 
 const column = {
   // border: '1px solid white',
@@ -55,13 +55,13 @@ export default function StatusColumn({ appointments, status }) {
               flexWrap: 'wrap',
             }}
           >
-            <div style={{ flexGrow: '0' }}>
+            <div className="grow-0">
               <UpdateApptStatus appointment={appt} newStatus={newStatus} />
             </div>
-            <div style={{ flexGrow: '0' }}>
+            <div className="grow-0">
               <ModifyAppointment appointment={appt} />
             </div>
-            <div style={{ flexGrow: '0' }}>
+            <div className="grow-0">
               <CancelAppointment appointment={appt} />
             </div>
           </div>

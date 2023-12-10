@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useScheduleQuery } from '@/hooks/useScheduleQuery';
-import StatusColumn from '../StatusColumn';
-import StatusTab from '../StatusTab';
+import StatusColumn from './StatusColumn';
+import StatusTab from './StatusTab';
 import { formatDateFull, sortAndFormatApptByStartTime } from '@/utils/date';
-import { filterByApptStatus } from '@/utils/apptstatus';
+import { filterByApptStatus } from '@/utils/apptStatus';
 import styles from './styles.module.css';
 
 export default function ApptStatusBoard() {

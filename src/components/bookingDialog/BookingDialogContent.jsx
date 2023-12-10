@@ -66,7 +66,7 @@ function BookingDialogContent({
       <BookingDialogTitle onClose={handleClose}>
         Complete your Booking
       </BookingDialogTitle>
-      <DialogContent style={{ flexGrow: '0' }}>
+      <DialogContent className="grow-0">
         <div style={flex}>
           <ContentCutIcon />
           <div>{service.name}</div>

@@ -12,17 +12,17 @@ if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
 // Lazy-loaded components
 const Account = lazy(() => import('./pages/Account'));
-const AddSchedule = lazy(() => import('./components/schedule/AddSchedule'));
 const AppointmentPage = lazy(() => import('./pages/AppointmentPage'));
+const ResetPw = lazy(() => import('./pages/ResetPw'));
+const AddSchedule = lazy(() => import('./components/admin/AddSchedule'));
 const Appointments = lazy(() => import('./components/appointments'));
 const RequireAuth = lazy(() => import('./components/auth/RequireAuth'));
-const Schedule = lazy(() => import('./components/schedule/Schedule'));
+const Schedule = lazy(() => import('./components/admin/Schedule'));
 const Settings = lazy(() => import('./components/account/Settings'));
 const Unauthorized = lazy(() => import('./components/auth/Unauthorized'));
 const ApptStatusBoard = lazy(() =>
   import('./components/admin/ApptStatusBoard')
 );
-const ResetPw = lazy(() => import('./pages/ResetPw'));
 
 export default function App() {
   return (

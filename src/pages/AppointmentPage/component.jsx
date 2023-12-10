@@ -17,10 +17,10 @@ export default function Component({ appointment, token }) {
             </div>
           </div>
           <div className={styles.gap_4}>
-            <div className={styles.grow_0}>
+            <div className="grow-0">
               <ModifyAppointment appointment={appointment} token={token} />
             </div>
-            <div className={styles.grow_0}>
+            <div className="grow-0">
               <CancelAppointment appointment={appointment} token={token} />
             </div>
           </div>

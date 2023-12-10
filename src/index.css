@@ -123,6 +123,10 @@ h5 {
   margin-bottom: 4rem;
 }
 
+.grow-0 {
+  flex-grow: 0;
+}
+
 .appointment-card {
   display: flex;
   flex-wrap: wrap;

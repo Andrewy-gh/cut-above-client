@@ -53,10 +53,10 @@ export default function Appointments() {
                   gap: '1rem',
                 }}
               >
-                <div style={{ flexGrow: '0' }}>
+                <div className="grow-0">
                   <ModifyAppointment appointment={appt} />
                 </div>
-                <div style={{ flexGrow: '0' }}>
+                <div className="grow-0">
                   <CancelAppointment appointment={appt} />
                 </div>
               </div>

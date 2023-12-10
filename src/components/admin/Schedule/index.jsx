@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useScheduleQuery } from '../../hooks/useScheduleQuery';
+import { useScheduleQuery } from '../../../hooks/useScheduleQuery';
 import ScheduleCard from './ScheduleCard';
 import styles from './styles.module.css';
 

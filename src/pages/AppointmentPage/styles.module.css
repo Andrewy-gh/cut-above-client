@@ -19,7 +19,3 @@
   display: flex;
   gap: 1rem;
 }
-
-.grow_0 {
-  flex-grow: 0;
-}
