@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import Appointment from './Appointment';
 import Employee from '../Employee';
 
+// This is the user's Appointments page when accessed through the Profile
 export default function Appointments() {
   const { data } = useGetAppointmentQuery();
   const appointments = useSelector(selectAllAppointment);
@@ -29,7 +30,7 @@ export default function Appointments() {
     });
     content = (
       <>
-        <h4 style={{ textAlign: 'center' }}>Upcoming appointments</h4>
+        <h4 className="text-center">Upcoming appointments</h4>
         <div style={{ width: 'min(80ch, 100% - 2rem)', marginInline: 'auto' }}>
           {futureItems.map((appt) => (
             <div
@@ -65,7 +66,7 @@ export default function Appointments() {
           ))}
         </div>
         {pastItems.length > 0 && (
-          <h4 style={{ textAlign: 'center' }}>Past appointments</h4>
+          <h4 className="text-center">Past appointments</h4>
         )}
         <div style={{ width: 'min(80ch, 100% - 2rem)', marginInline: 'auto' }}>
           {pastItems.map((appt) => (
@@ -83,7 +84,7 @@ export default function Appointments() {
       </>
     );
   } else {
-    content = <h4 style={{ textAlign: 'center' }}>No appointments made</h4>;
+    content = <h4 className="text-center">No appointments made</h4>;
   }
 
   return (

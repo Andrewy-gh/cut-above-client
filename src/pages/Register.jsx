@@ -63,7 +63,7 @@ export default function Register() {
   return (
     <Overlay>
       <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
-        <h3 style={{ textAlign: 'center' }}>Sign up</h3>
+        <h3 className="text-center">Sign up</h3>
         <form onSubmit={handleSubmit}>
           <div
             style={{

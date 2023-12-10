@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { useAccount } from '../../hooks/useAccount';
-import { useValidateTokenQuery } from '../../features/userSlice';
+import { useAccount } from '@/hooks/useAccount';
+import { useValidateTokenQuery } from '@/features/userSlice';
 
 // This is the Reset Password page when accessed through email
 export default function ResetPw() {
@@ -60,7 +60,7 @@ export default function ResetPw() {
   } else if (isSuccess && tokenStatus.message === 'Token is valid') {
     content = (
       <>
-        <h3 style={{ textAlign: 'center' }}>Reset password</h3>
+        <h3 className="text-center">Reset password</h3>
         <form onSubmit={handleSubmit}>
           <TextField
             label="New Password"
@@ -96,11 +96,9 @@ export default function ResetPw() {
   } else if (isError) {
     content = (
       <>
-        <h5 style={{ textAlign: 'center' }}>
-          Oops looks like an error happened...
-        </h5>
+        <h5 className="text-center">Oops looks like an error happened...</h5>
         <Link to="/login">
-          <p style={{ textAlign: 'center' }}>
+          <p className="text-center">
             Click <u>here</u> to request a password reset again
           </p>
         </Link>

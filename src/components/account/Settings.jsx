@@ -18,16 +18,16 @@ export default function Settings() {
         Account settings
       </h1>
       <div>
-        <h3 style={{ textAlign: 'center' }}>Update Email</h3>
+        <h3 className="text-center">Update Email</h3>
         <ChangeEmail />
       </div>
       <div>
-        <h3 style={{ textAlign: 'center' }}>Update Password</h3>
+        <h3 className="text-center">Update Password</h3>
 
         <ChangePassword />
       </div>
       <div style={{ marginInline: 'auto' }}>
-        <h3 style={{ textAlign: 'center' }}>Delete Account</h3>
+        <h3 className="text-center">Delete Account</h3>
         <DeleteAccount />
       </div>
     </div>
