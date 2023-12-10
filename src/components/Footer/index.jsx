@@ -22,7 +22,7 @@ export default function Footer() {
     >
       <div className={styles.flex}>
         <Copyright />
-        <div style={{ width: 'clamp(150px, 40%, 250px)' }}>
+        <div className={styles.spacing_scale}>
           <img
             src={logoSide}
             alt="Cut Above Barbershop logo image - side variation"
