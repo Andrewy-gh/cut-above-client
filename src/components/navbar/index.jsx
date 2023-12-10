@@ -3,7 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import NavDesktop from './NavDesktop';
 import NavMobile from './NavMobile';
-import { theme } from '../../styles/styles';
+import { theme } from '@/styles/styles';
 
 export default function NavBar() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
