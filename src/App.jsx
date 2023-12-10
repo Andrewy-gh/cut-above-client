@@ -1,12 +1,12 @@
 import { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CssBaseline, ThemeProvider, responsiveFontSizes } from '@mui/material';
-import Layout from './components/Layout';
+import Layout from '@/components/Layout';
 import BookingPage from '@/pages/BookingPage';
 import Home from '@/pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import { theme } from './styles/styles';
+import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import { theme } from '@/styles/styles';
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
