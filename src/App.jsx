@@ -22,7 +22,7 @@ const Unauthorized = lazy(() => import('./components/auth/Unauthorized'));
 const ApptStatusBoard = lazy(() =>
   import('./components/admin/ApptStatusBoard')
 );
-const ResetPw = lazy(() => import('./components/account/ResetPw'));
+const ResetPw = lazy(() => import('./pages/ResetPw'));
 
 export default function App() {
   return (
