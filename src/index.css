@@ -99,7 +99,12 @@ h5 {
   font-size: var(--step--1);
 }
 
-.container {
+.container-sm {
+  width: min(40ch, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.container-lg {
   width: min(80ch, 100% - 2rem);
   margin-inline: auto;
 }

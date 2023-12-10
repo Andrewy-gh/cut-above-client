@@ -30,7 +30,7 @@ export default function Account() {
 
   return (
     <>
-      <div className="container">
+      <div className="container-lg">
         <h5 className={styles.header}>{welcome} Account page</h5>
         <p>Current user privileges: {role}</p>
         <div className="body1">
