@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useSendMessageResponseMutation } from '../../../features/emailSlice';
-import { useNotification } from '../../../hooks/useNotification';
-import { emailIsValid } from '../../../utils/email';
+import { useSendMessageResponseMutation } from '@/features/emailSlice';
+import { useNotification } from '@/hooks/useNotification';
+import { emailIsValid } from '@/utils/email';
 import styles from './styles.module.css';
 
 export default function ContactUs() {

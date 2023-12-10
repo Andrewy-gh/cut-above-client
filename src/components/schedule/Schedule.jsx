@@ -3,7 +3,7 @@ import { useScheduleQuery } from '../../hooks/useScheduleQuery';
 import ScheduleCard from './ScheduleCard';
 import styles from './styles.module.css';
 
-// This page list all upcoming and past schedules
+// This is an admin page which list all upcoming and past schedules
 export default function Schedules() {
   const { schedules, upcomingSchedules, pastSchedules } = useScheduleQuery();
   let content;
