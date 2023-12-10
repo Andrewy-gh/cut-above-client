@@ -7,28 +7,16 @@ import IconButton from '@mui/material/IconButton';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import CloseIcon from '@mui/icons-material/Close';
-import { formatDateFull, formatTime } from '../../utils/date';
-import { useFilter } from '../../hooks/useFilter';
-import { theme } from '../../styles/styles';
-
-const flex = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '.5rem',
-  marginBottom: '1rem',
-};
+import { formatDateFull, formatTime } from '@/utils/date';
+import { useFilter } from '@/hooks/useFilter';
+import { theme } from '@/styles/styles';
+import styles from './styles.module.css';
 
 const BookingDialogTitle = ({ children, onClose }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        gap: '1rem',
-      }}
-    >
+    <div className={styles.flex_sb}>
       <DialogTitle>{children}</DialogTitle>
-      <div style={{ padding: '.25rem' }}>
+      <div className={styles.padding}>
         {onClose ? (
           <IconButton
             onClick={onClose}
@@ -56,9 +44,9 @@ function BookingDialogContent({
   let loggedIn;
   if (!token) {
     loggedIn = (
-      <Button style={{ color: '#E0A00D' }}>
-        <Link to="/login">Login</Link>
-      </Button>
+      <Link to="/login">
+        <Button style={{ color: '#E0A00D' }}>Login</Button>
+      </Link>
     );
   }
   return (
@@ -67,12 +55,12 @@ function BookingDialogContent({
         Complete your Booking
       </BookingDialogTitle>
       <DialogContent className="grow-0">
-        <div style={flex}>
+        <div className={styles.flex}>
           <ContentCutIcon />
           <div>{service.name}</div>
           <div>{service.duration} minutes</div>
         </div>
-        <div style={flex}>
+        <div className={styles.flex}>
           <CalendarMonthIcon />
           <div>{formatDateFull(date)}</div>
           <div>{formatTime(selection.start)}</div>

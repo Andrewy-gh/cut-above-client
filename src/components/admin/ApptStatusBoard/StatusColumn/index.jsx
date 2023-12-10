@@ -1,5 +1,5 @@
 import UpdateApptStatus from '../UpdateApptStatus';
-import Employee from '../../../Employee';
+import Employee from '@/components/Employee';
 import ApptTitle from '@/components/appointments/ApptCard/ApptTitle';
 import ModifyAppointment from '@/components/appointments/ApptCard/ApptButton/ModifyAppointment';
 import CancelAppointment from '@/components/appointments/ApptCard/ApptButton/CancelAppointment';
