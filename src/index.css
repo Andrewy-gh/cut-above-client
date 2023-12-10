@@ -58,6 +58,7 @@ li {
   list-style-type: none;
 }
 
+/* ? Typography */
 h1,
 h2,
 h3,
@@ -111,6 +112,15 @@ h5 {
 
 .text-center {
   text-align: center;
+}
+
+/* ! Spacing */
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
 }
 
 .appointment-card {

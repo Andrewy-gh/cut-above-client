@@ -1,40 +1,20 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useScheduleQuery } from '../../../hooks/useScheduleQuery';
+import { useScheduleQuery } from '@/hooks/useScheduleQuery';
 import StatusColumn from '../StatusColumn';
 import StatusTab from '../StatusTab';
-import { formatDateFull, formatDateToTime } from '../../../utils/date';
+import { formatDateFull, sortAndFormatApptByStartTime } from '@/utils/date';
+import { filterByApptStatus } from '@/utils/apptstatus';
+import styles from './styles.module.css';
 
 export default function ApptStatusBoard() {
   const { id } = useParams();
   const { appointments } = useScheduleQuery(id);
-  const formatTimeAppt = [...appointments]
-    .sort((a, b) => new Date(a.start) - new Date(b.start))
-    .map((appt) => {
-      return {
-        ...appt,
-        start: formatDateToTime(appt.start),
-      };
-    });
-  console.log('====================================');
-  console.log(formatTimeAppt);
-  console.log('====================================');
+  const formatTimeAppt = sortAndFormatApptByStartTime(appointments);
   const [status, setStatus] = useState('scheduled');
-  const scheduled = formatTimeAppt.filter(
-    (appt) => appt.status === 'scheduled'
-  );
-  const checkedIn = formatTimeAppt.filter(
-    (appt) => appt.status === 'checked-in'
-  );
-  const completed = formatTimeAppt.filter(
-    (appt) => appt.status === 'completed'
-  );
-  const statuses = [
-    { id: 1, name: 'scheduled', data: scheduled },
-    { id: 2, name: 'checked-in', data: checkedIn },
-    { id: 3, name: 'completed', data: completed },
-  ];
+  const statuses = filterByApptStatus(formatTimeAppt);
   const filteredAppointments = statuses.find((st) => st.name === status).data;
+
   let content;
   if (formatTimeAppt.length < 1) {
     content = <h5>No Appointments made</h5>;
@@ -42,14 +22,7 @@ export default function ApptStatusBoard() {
     content = (
       <>
         <h5>{formatDateFull(formatTimeAppt[0].date)}</h5>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '1rem',
-            marginBottom: '1rem',
-          }}
-        >
+        <div className={styles.flex}>
           {statuses.map((status) => (
             <StatusTab
               key={status.id}
@@ -64,13 +37,7 @@ export default function ApptStatusBoard() {
     );
   }
   return (
-    <div
-      style={{
-        width: 'min(80ch, 100% - 2rem)',
-        marginInline: 'auto',
-        marginBottom: '4rem',
-      }}
-    >
+    <div className="container-lg mb-16">
       <Link to="/schedule">Go Back to Schedule </Link>
       {content}
     </div>

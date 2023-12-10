@@ -1,13 +1,11 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CancelAppointment from './CancelAppointment';
-import ModifyAppointment from './ModifyAppointment';
-import { useEmployeesQuery } from '../../hooks/useEmployeesQuery';
 import {
   selectAllAppointment,
   useGetAppointmentQuery,
-} from '../../features/appointments/apptApiSlice';
-import { useSelector } from 'react-redux';
-
+} from '@/features/appointments/apptApiSlice';
+import CancelAppointment from './CancelAppointment';
+import ModifyAppointment from './ModifyAppointment';
 import Appointment from './Appointment';
 import Employee from '../Employee';
 
@@ -31,7 +29,7 @@ export default function Appointments() {
     content = (
       <>
         <h4 className="text-center">Upcoming appointments</h4>
-        <div style={{ width: 'min(80ch, 100% - 2rem)', marginInline: 'auto' }}>
+        <div className="container-lg">
           {futureItems.map((appt) => (
             <div
               key={appt.id}
@@ -68,7 +66,7 @@ export default function Appointments() {
         {pastItems.length > 0 && (
           <h4 className="text-center">Past appointments</h4>
         )}
-        <div style={{ width: 'min(80ch, 100% - 2rem)', marginInline: 'auto' }}>
+        <div className="container-lg">
           {pastItems.map((appt) => (
             <div
               key={appt.id}

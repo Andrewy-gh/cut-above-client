@@ -120,3 +120,14 @@ export const splitByUpcomingAndPast = (dateObj) => {
   }
   return [upcoming, past];
 };
+
+export const sortAndFormatApptByStartTime = (apptObj) => {
+  return apptObj
+    .toSorted((a, b) => new Date(a.start) - new Date(b.start))
+    .map((appt) => {
+      return {
+        ...appt,
+        start: formatDateToTime(appt.start),
+      };
+    });
+};
