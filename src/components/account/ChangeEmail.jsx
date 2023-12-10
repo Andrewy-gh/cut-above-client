@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useAccount } from '../../hooks/useAccount';
+import { useAccount } from '@/hooks/useAccount';
+import { cleanEmail, emailIsValid } from '@/utils/email';
 
 export default function ChangeEmail() {
   const [newEmail, setNewEmail] = useState('');
@@ -24,16 +25,17 @@ export default function ChangeEmail() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!emailIsValid(newEmail)) {
+      setError(true);
+      setHelperText('Invalid email');
+      return;
+    }
     if (newEmail !== confirmNewEmail) {
       setError(true);
       setHelperText('Emails do not match');
       return;
     }
-    setNewEmail((newEmail) => {
-      const trimmedEmail = newEmail.trim();
-      const lowercaseEmail = trimmedEmail.toLowerCase();
-      return lowercaseEmail;
-    });
+    setNewEmail((newEmail) => cleanEmail(newEmail));
     const emailChanged = await handleUserEmailChange({ email: newEmail });
     if (emailChanged) {
       setNewEmail('');

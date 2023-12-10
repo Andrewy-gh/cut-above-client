@@ -1,8 +1,8 @@
 import ButtonDialog from '../ButtonDialog';
 import CustomDialogContent from '../CustomDialogContent';
-import { useAppointment } from '../../hooks/useAppointment';
-import { useDialog } from '../../hooks/useDialog';
-import { useEmployeesQuery } from '../../hooks/useEmployeesQuery';
+import { useAppointment } from '@/hooks/useAppointment';
+import { useDialog } from '@/hooks/useDialog';
+import { useEmployeesQuery } from '@/hooks/useEmployeesQuery';
 
 const dialog = (appointment, employee) => {
   return {
