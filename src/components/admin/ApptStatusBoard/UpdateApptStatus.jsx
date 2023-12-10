@@ -1,7 +1,7 @@
-import ButtonDialog from '../../ButtonDialog';
-import CustomDialogContent from '../../CustomDialogContent';
-import { useAppointment } from '../../../hooks/useAppointment';
-import { useDialog } from '../../../hooks/useDialog';
+import ButtonDialog from '@/components/ButtonDialog';
+import CustomDialogContent from '@/components/CustomDialogContent';
+import { useAppointment } from '@/hooks/useAppointment';
+import { useDialog } from '@/hooks/useDialog';
 
 const dialog = (newStatus) => {
   let content;

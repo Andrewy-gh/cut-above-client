@@ -1,5 +1,5 @@
 import { theme } from '../../../../styles/styles';
-import styles from './style.module.css';
+import styles from './styles.module.css';
 
 const outlineStyle = {
   outline: `solid ${theme.palette.secondary.dark}`,
