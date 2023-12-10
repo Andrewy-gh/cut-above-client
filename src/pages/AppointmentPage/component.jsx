@@ -1,6 +1,6 @@
 import CancelAppointment from '@/components/appointments/ApptCard/ApptButton/CancelAppointment';
 import ModifyAppointment from '@/components/appointments/ApptCard/ApptButton/ModifyAppointment';
-import Appointment from '@/components/appointments/Appointment';
+import ApptTitle from '@/components/appointments/ApptCard/ApptTitle';
 import Employee from '@/components/Employee';
 import styles from './styles.module.css';
 
@@ -12,7 +12,7 @@ export default function Component({ appointment, token }) {
         <div className={styles.appointment_card}>
           <div className={styles.flex_col}>
             <div>
-              <Appointment appointment={appointment} />
+              <ApptTitle appointment={appointment} />
               <Employee employeeId={appointment.employee} />
             </div>
           </div>

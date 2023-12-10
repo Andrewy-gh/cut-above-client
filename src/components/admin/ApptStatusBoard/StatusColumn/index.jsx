@@ -1,6 +1,6 @@
 import UpdateApptStatus from '../UpdateApptStatus';
 import Employee from '../../../Employee';
-import Appointment from '@/components/appointments/Appointment';
+import ApptTitle from '@/components/appointments/ApptCard/ApptTitle';
 import ModifyAppointment from '@/components/appointments/ApptCard/ApptButton/ModifyAppointment';
 import CancelAppointment from '@/components/appointments/ApptCard/ApptButton/CancelAppointment';
 import styles from './styles.module.css';
@@ -21,7 +21,7 @@ export default function StatusColumn({ appointments, status }) {
         <div key={appt.id} className={styles.appointment_card}>
           <div className={styles.flex_col}>
             <div>
-              <Appointment appointment={appt} />
+              <ApptTitle appointment={appt} />
               <Employee employeeId={appt.employee} />
             </div>
           </div>
