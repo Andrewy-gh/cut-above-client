@@ -7,7 +7,6 @@ import { theme } from '../../../styles/styles';
 export default function ScheduleCard({ schedule }) {
   return (
     <div
-      key={schedule.id}
       className={styles.card}
       style={{ outline: `solid ${theme.palette.primary.dark}` }}
     >
