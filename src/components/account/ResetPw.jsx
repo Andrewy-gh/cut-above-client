@@ -5,6 +5,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAccount } from '../../hooks/useAccount';
 import { useValidateTokenQuery } from '../../features/userSlice';
 
+// This is the Reset Password page when accessed through email
 export default function ResetPw() {
   const navigate = useNavigate();
   let [searchParams, setSearchParams] = useSearchParams();

@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useAuth } from '../hooks/useAuth';
-import Overlay from '../components/Overlay';
-import { useNotification } from '../hooks/useNotification';
-
-import { useSendPasswordResetMutation } from '../features/emailSlice';
-
-import { emailIsValid } from '../utils/email';
+import { useAuth } from '@/hooks/useAuth';
+import { useNotification } from '@/hooks/useNotification';
+import { useSendPasswordResetMutation } from '@/features/emailSlice';
+import Overlay from '@/components/Overlay';
+import { emailIsValid } from '@/utils/email';
+import styles from './styles.module.css';
 
 export default function Login() {
   const [view, setView] = useState('login');
@@ -46,7 +45,7 @@ export default function Login() {
   if (view === 'login') {
     content = (
       <>
-        <h3 style={{ textAlign: 'center' }}>Log in</h3>
+        <h3 className="text-center">Log in</h3>
         <form onSubmit={handleSubmit}>
           <TextField
             label="Email"
@@ -75,10 +74,7 @@ export default function Login() {
             Login
           </Button>
         </form>
-        <div
-          style={{ fontFamily: 'Corben', fontWeight: '700', cursor: 'pointer' }}
-          onClick={() => setView('reset')}
-        >
+        <div className={styles.font} onClick={() => setView('reset')}>
           Forgot password?
         </div>
       </>
@@ -86,7 +82,7 @@ export default function Login() {
   } else {
     content = (
       <>
-        <h3 style={{ textAlign: 'center' }}>Reset Password</h3>
+        <h3 className="text-center">Reset Password</h3>
         <form onSubmit={handleReset}>
           <TextField
             label="Email"
@@ -105,10 +101,7 @@ export default function Login() {
             Reset password
           </Button>
         </form>
-        <div
-          style={{ fontFamily: 'Corben', fontWeight: '700', cursor: 'pointer' }}
-          onClick={() => setView('login')}
-        >
+        <div className={styles.font} onClick={() => setView('login')}>
           Login
         </div>
       </>
@@ -117,9 +110,7 @@ export default function Login() {
 
   return (
     <Overlay>
-      <div style={{ width: 'min(40ch, 100% - 2rem)', marginInline: 'auto' }}>
-        {content}
-      </div>
+      <div className="container-sm">{content}</div>
     </Overlay>
   );
 }

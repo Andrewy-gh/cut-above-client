@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEmployeesQuery } from '@/hooks/useEmployeesQuery';
 import { useScheduleQuery } from '@/hooks/useScheduleQuery';
 import BookingForm from '@/components/bookingForm';
@@ -15,6 +10,7 @@ import { useDialog } from '@/hooks/useDialog';
 import { useAuth } from '@/hooks/useAuth';
 import { useNotification } from '@/hooks/useNotification';
 import { useValidateTokenQuery } from '@/features/userSlice';
+import Error from './error';
 import styles from './styles.module.css';
 
 export default function BookingPage() {
@@ -84,18 +80,7 @@ export default function BookingPage() {
     content = <p>Loading...</p>;
   } else if (emailToken && isError) {
     // emailToken present but it is not valid
-    content = (
-      <div className={styles.container}>
-        <h5 style={{ textAlign: 'center' }}>
-          Oops looks like an error happened...
-        </h5>
-        <Link to="/login">
-          <p style={{ textAlign: 'center' }}>
-            Please <u>login</u> to modify your appointment.
-          </p>
-        </Link>
-      </div>
-    );
+    content = <Error />;
   } else {
     content = (
       <div className={styles.flex_container}>

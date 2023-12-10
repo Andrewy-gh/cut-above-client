@@ -1,9 +1,6 @@
 import CancelAppointment from '@/components/appointments/CancelAppointment';
-
 import ModifyAppointment from '@/components/appointments/ModifyAppointment';
-
 import Appointment from '@/components/appointments/Appointment';
-
 import Employee from '@/components/Employee';
 import styles from './styles.module.css';
 
