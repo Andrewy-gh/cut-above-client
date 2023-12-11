@@ -3,8 +3,8 @@ import {
   selectAllSchedule,
   selectScheduleById,
   useGetScheduleQuery,
-} from '../features/scheduleSlice';
-import { splitByUpcomingAndPast } from '../utils/date';
+} from '@/features/scheduleSlice';
+import { splitByUpcomingAndPast } from '@/utils/date';
 
 export function useScheduleQuery(scheduleId) {
   const { data } = useGetScheduleQuery();

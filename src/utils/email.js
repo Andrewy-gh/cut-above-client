@@ -4,8 +4,4 @@ export const emailIsValid = (email) => {
   return emailRegex.test(email);
 };
 
-export const cleanEmail = (email) => {
-  const trimmedEmail = email.trim();
-  const lowercaseEmail = trimmedEmail.toLowerCase();
-  return lowercaseEmail;
-};
+export const cleanEmail = (email) => email.trim().toLowerCase();
