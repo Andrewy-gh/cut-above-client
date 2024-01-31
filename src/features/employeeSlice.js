@@ -8,7 +8,7 @@ const initialState = employeeAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getEmployees: builder.query({
-      query: () => '/api/employee',
+      query: () => '/api/employees',
       transformResponse: (responseData) => {
         return employeeAdapter.setAll(initialState, responseData);
       },

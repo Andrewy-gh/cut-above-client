@@ -54,21 +54,21 @@ export const services = [
 
 export const employees = [
   {
-    id: '64a60e878bdf8a4ac0f98209',
+    id: '0b4e6b4d-b28c-4f82-b9b6-9fec81d773de',
     firstName: 'Andre',
     image: andre,
     profile:
       'Andre has honed his skills and techniques to deliver top-notch grooming services. In his free time, Andre enjoys exploring the outdoors and staying active. He loves hiking, running, and playing sports, and is always up for a new adventure.',
   },
   {
-    id: '64a60f1a8bdf8a4ac0f98210',
+    id: '83010c3d-d9a4-4b36-80d4-dac517c9d554',
     firstName: 'Obi',
     image: obi,
     profile:
       'Meet Obi, our skilled and talented barber who is dedicated to providing his clients with top-notch grooming services. He loves to travel and discover new cultures, and is always planning his next adventure. ',
   },
   {
-    id: '64a60fcec756d17d2dea4592',
+    id: '078c99f4-1431-47aa-b74c-45da0ca1b2f6',
     firstName: 'Salah',
     image: salah,
     profile:
