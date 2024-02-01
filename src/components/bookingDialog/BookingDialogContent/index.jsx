@@ -37,12 +37,12 @@ function BookingDialogContent({
   handleAgree,
   handleClose,
   selection,
-  token,
+  user,
 }) {
   const { date, service } = useFilter();
 
   let loggedIn;
-  if (!token) {
+  if (!user) {
     loggedIn = (
       <Link to="/login">
         <Button style={{ color: '#E0A00D' }}>Login</Button>

@@ -6,20 +6,20 @@ import Error from './error';
 export default function ResetPw() {
   let [searchParams, setSearchParams] = useSearchParams();
 
-  let token = searchParams.get('token');
+  let emailToken = searchParams.get('token');
 
   const {
     data: tokenStatus,
     isLoading,
     isSuccess,
     isError,
-  } = useValidateTokenQuery({ option: 'reset', token });
+  } = useValidateTokenQuery({ option: 'reset', token: emailToken });
 
   let content;
   if (isLoading) {
     return <p>Loading...</p>;
   } else if (isSuccess && tokenStatus.message === 'Token is valid') {
-    content = <Component token={token} />;
+    content = <Component emailToken={emailToken} />;
   } else if (isError) {
     content = <Error />;
   }

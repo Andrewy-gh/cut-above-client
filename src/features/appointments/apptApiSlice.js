@@ -9,7 +9,7 @@ const initialState = appointmentAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAppointment: builder.query({
-      query: () => '/api/appointment',
+      query: () => '/api/appointments',
       transformResponse: (responseData) => {
         const loadedPosts = responseData
           .sort((a, b) => a.start.localeCompare(b.start))
@@ -23,7 +23,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       providesTags: ['Appointment'],
     }),
     getSingleAppointment: builder.query({
-      query: (id) => `/api/appointment/${id}`,
+      query: (id) => `/api/appointments/${id}`,
       transformResponse: (responseData) => {
         return {
           ...responseData,
@@ -35,7 +35,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     addAppointment: builder.mutation({
       query: (appointment) => ({
-        url: '/api/appointment',
+        url: '/api/appointments',
         method: 'POST',
         body: appointment,
       }),
@@ -43,7 +43,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     modifyAppointment: builder.mutation({
       query: (appointment) => ({
-        url: `/api/appointment/${appointment.id}`,
+        url: `/api/appointments/${appointment.id}`,
         method: 'PUT',
         body: appointment,
       }),
@@ -51,7 +51,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     updateAppointmentStatus: builder.mutation({
       query: (appointment) => ({
-        url: `/api/appointment/status/${appointment.id}`,
+        url: `/api/appointments/status/${appointment.id}`,
         method: 'PUT',
         body: appointment,
       }),
@@ -59,7 +59,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     cancelAppointment: builder.mutation({
       query: (appointment) => ({
-        url: `/api/appointment/${appointment.id}`,
+        url: `/api/appointments/${appointment.id}`,
         method: 'DELETE',
         body: appointment,
       }),

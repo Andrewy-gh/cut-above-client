@@ -17,7 +17,7 @@ export default function UpcomingCard({ appt }) {
       >
         <div>
           <AppTitle appointment={appt} />
-          <Employee employeeId={appt.employee} />
+          <Employee employeeId={appt.employeeId} />
         </div>
       </div>
       <div

@@ -6,7 +6,6 @@ import {
 } from '@/features/auth/authApiSlice';
 import {
   logoutUser,
-  selectCurrentToken,
   selectCurrentUser,
   selectCurrentUserRole,
   setCredentials,
@@ -17,9 +16,8 @@ import { cleanEmail } from '@/utils/email';
 export function useAuth() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const email = useSelector(selectCurrentUser);
+  const user = useSelector(selectCurrentUser);
   const role = useSelector(selectCurrentUserRole);
-  const token = useSelector(selectCurrentToken);
   const [login] = useLoginMutation();
   const [logout] = useLogoutMutation();
 
@@ -34,9 +32,8 @@ export function useAuth() {
       if (loggedInUser.success) {
         dispatch(
           setCredentials({
-            user: loggedInUser.user,
-            role: loggedInUser.role,
-            token: loggedInUser.token,
+            user: loggedInUser.user.email,
+            role: loggedInUser.user.role,
           })
         );
         handleSuccess(loggedInUser.message);
@@ -56,5 +53,5 @@ export function useAuth() {
     }
   };
 
-  return { email, role, token, handleLogin, handleLogout };
+  return { user, role, handleLogin, handleLogout };
 }

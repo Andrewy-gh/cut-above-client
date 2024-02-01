@@ -8,13 +8,13 @@ import Error from './error';
 export default function AppointmentPage() {
   const { id } = useParams();
   let [searchParams, setSearchParams] = useSearchParams();
-  let token = searchParams.get('token');
+  let emailToken = searchParams.get('token');
   const {
     data: tokenStatus,
     isLoading: isTokenStatusLoading,
     isSuccess: isTokenStatusSuccess,
     isError: isTokenStatusError,
-  } = useValidateTokenQuery({ option: 'email', token });
+  } = useValidateTokenQuery({ option: 'email', token: emailToken });
   const {
     data: appointment,
     isLoading,
@@ -29,7 +29,7 @@ export default function AppointmentPage() {
     isTokenStatusSuccess &&
     tokenStatus.message === 'Token is valid'
   ) {
-    content = <Component appointment={appointment} token={token} />;
+    content = <Component appointment={appointment} emailToken={emailToken} />;
   } else if (isError || isTokenStatusError) {
     content = <Error />;
   }

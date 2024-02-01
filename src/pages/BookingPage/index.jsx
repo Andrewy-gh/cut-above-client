@@ -21,7 +21,7 @@ export default function BookingPage() {
     useFilter();
   const { open, handleClose, handleOpen } = useDialog();
   const { handleBooking } = useBooking();
-  const { token } = useAuth();
+  const { user } = useAuth();
   const { handleError } = useNotification();
 
   const { id } = useParams();
@@ -58,7 +58,7 @@ export default function BookingPage() {
     : 'Schedule your appointment';
 
   const handleAgree = () => {
-    if (!token && !emailToken) {
+    if (!user && !emailToken) {
       handleError('Please login to complete booking');
       navigate('/login');
       return;
@@ -91,7 +91,7 @@ export default function BookingPage() {
           handleClose={handleClose}
           selection={selection}
           handleAgree={handleAgree}
-          token={token}
+          user={user}
         />
       </div>
     );

@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useAccount } from '@/hooks/useAccount';
 
-export default function Component({ token }) {
+export default function Component({ emailToken }) {
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -32,7 +32,7 @@ export default function Component({ token }) {
       return;
     }
     const passwordChanged = await handleUserPasswordReset({
-      token,
+      emailToken,
       newPassword,
     });
     if (passwordChanged) {

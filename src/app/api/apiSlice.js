@@ -9,14 +9,14 @@ const baseUrl =
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrl,
   credentials: 'include',
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.token;
-    if (token) {
-      headers.set('authorization', `Bearer ${token}`);
-    }
+  // prepareHeaders: (headers, { getState }) => {
+  //   const token = getState().auth.token;
+  //   if (token) {
+  //     headers.set('authorization', `Bearer ${token}`);
+  //   }
 
-    return headers;
-  },
+  //   return headers;
+  // },
 });
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
@@ -40,7 +40,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 };
 
 export const apiSlice = createApi({
-  baseQuery: baseQueryWithReauth,
+  baseQuery: baseQuery,
   tagTypes: ['Appointment', 'Employee', 'Schedule', 'User'],
   endpoints: (builder) => ({}),
 });

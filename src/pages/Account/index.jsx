@@ -5,10 +5,10 @@ import styles from './styles.module.css';
 
 export default function Account() {
   const navigate = useNavigate();
-  const { email, role, token } = useAuth();
-  const welcome = email ? `Welcome ${email} to the ` : 'Welcome to the ';
+  const { user, role } = useAuth();
+  const welcome = user ? `Welcome ${user} to the ` : 'Welcome to the ';
 
-  if (!token) {
+  if (!user) {
     navigate('/login');
   }
 

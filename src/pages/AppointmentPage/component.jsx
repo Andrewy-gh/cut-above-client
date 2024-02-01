@@ -4,7 +4,7 @@ import ApptTitle from '@/components/appointments/ApptCard/ApptTitle';
 import Employee from '@/components/Employee';
 import styles from './styles.module.css';
 
-export default function Component({ appointment, token }) {
+export default function Component({ appointment, emailToken }) {
   return (
     <>
       <h4 className="text-center">Your Upcoming Appointment</h4>
@@ -18,10 +18,16 @@ export default function Component({ appointment, token }) {
           </div>
           <div className={styles.gap_4}>
             <div className="grow-0">
-              <ModifyAppointment appointment={appointment} token={token} />
+              <ModifyAppointment
+                appointment={appointment}
+                emailToken={emailToken}
+              />
             </div>
             <div className="grow-0">
-              <CancelAppointment appointment={appointment} token={token} />
+              <CancelAppointment
+                appointment={appointment}
+                emailToken={emailToken}
+              />
             </div>
           </div>
         </div>

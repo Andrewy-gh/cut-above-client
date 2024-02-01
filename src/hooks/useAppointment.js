@@ -35,9 +35,9 @@ export function useAppointment() {
     }
   };
 
-  const handleBeginRescheduling = (id, token) => {
-    if (token) {
-      navigate(`/bookings/${id}/?token=${token}`);
+  const handleBeginRescheduling = (id, emailToken) => {
+    if (emailToken) {
+      navigate(`/bookings/${id}/?token=${emailToken}`);
     } else {
       navigate(`/bookings/${id}`);
     }
