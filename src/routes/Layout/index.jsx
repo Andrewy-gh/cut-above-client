@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import NavBar from '../navbar';
-import Footer from '../Footer';
-import Notification from '../Notification';
-import LoadingSpinner from '../LoadingSpinner';
+import NavBar from '../../components/navbar';
+import Footer from '../../components/Footer';
+import Notification from '../../components/Notification';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import styles from './styles.module.css';
 
 export default function Layout() {
