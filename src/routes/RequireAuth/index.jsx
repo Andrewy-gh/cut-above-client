@@ -1,5 +1,6 @@
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
+import PropTypes from 'prop-types';
 
 export default function RequireAuth({ requiredRole }) {
   const { role, user } = useAuth();
@@ -15,3 +16,7 @@ export default function RequireAuth({ requiredRole }) {
 
   return <Outlet />;
 }
+
+RequireAuth.propTypes = {
+  requiredRole: PropTypes.string,
+};

@@ -6,6 +6,9 @@ import Home from '@/routes/Home';
 import Login from '@/routes/Login';
 import Register from '@/routes/Register';
 import ErrorPage from '@/routes/ErrorPage';
+// TODO: React lazy
+import ResetPw from '@/routes/ResetPw';
+import RequireAuth from './routes/RequireAuth';
 // import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 // if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
@@ -32,6 +35,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: '/signup', element: <Register /> },
       { path: '/login', element: <Login /> },
+      { path: '/resetpw', element: <ResetPw /> },
+      { element: <RequireAuth />, children: [] },
     ],
   },
 ]);
