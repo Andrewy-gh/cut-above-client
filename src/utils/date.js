@@ -45,7 +45,6 @@ export const findAvailableTimeSlots = (
   employee
 ) => {
   const { date, open, close, appointments } = schedule;
-  const timeFormat = 'HH:mm';
   const searchIncrement = 15;
   const slots = [];
   const currentEstTime = convertUtcToEst(currentDate);
@@ -58,9 +57,6 @@ export const findAvailableTimeSlots = (
 
   while (slotStart.isBefore(slotEnd)) {
     const currentSlotEnd = slotStart.add(duration, 'minute');
-    const currentSlotStartString = slotStart.format(timeFormat);
-    const currentSlotEndString = currentSlotEnd.format(timeFormat);
-
     if (currentSlotEnd.isAfter(slotEnd)) {
       break;
     }
@@ -68,7 +64,7 @@ export const findAvailableTimeSlots = (
     const selectedEmployees = employee !== 'any' ? [employee] : employees;
     const availableEmployees = selectedEmployees.filter((employeeId) => {
       const employeeAppointments = appointments.filter(
-        (appointment) => appointment.employee === employeeId
+        (appointment) => appointment.employee.id === employeeId
       );
       const employeeBooked = employeeAppointments.some(
         (appointment) =>
@@ -81,8 +77,8 @@ export const findAvailableTimeSlots = (
     if (availableEmployees.length > 0) {
       slots.push({
         id: crypto.randomUUID(),
-        start: currentSlotStartString,
-        end: currentSlotEndString,
+        start: slotStart,
+        end: currentSlotEnd,
         available: availableEmployees,
       });
     }

@@ -9,7 +9,6 @@ import {
   setService,
 } from '@/features/filterSlice';
 import { services } from '@/data/data';
-import { formatDate } from '@/utils/date';
 
 export function useFilter() {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ export function useFilter() {
   const service = useSelector(selectService);
 
   const handleDateChange = (newDate) => {
-    dispatch(setDate(formatDate(newDate)));
+    dispatch(setDate(newDate.toISOString()));
   };
 
   const handleEmployeeChange = (id) => {

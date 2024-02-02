@@ -69,20 +69,16 @@ export const selectScheduleByDate = createSelector(
   // selectDateDisabled,
   // add dateDisabled to below
   (schedule, date) => {
-    // ! Recent change
     const currentEstTime = convertUtcToEst(currentDate);
     const formattedCurrentDate = formatDate(currentEstTime);
     const inputDate = formatDate(date);
-    // ! Recent change
     if (inputDate === formattedCurrentDate) {
       // prevents user from making appointments after closing time if searching for current day appointments
       return schedule.find(
-        (s) =>
-          formatDate(s.date) === inputDate &&
-          checkIsBefore(currentDate, s.close) // currentDate holds the hours and minutes, currentDate and s.close are in UTC
+        (s) => s.date === date && checkIsBefore(currentDate, s.close) // currentDate holds the hours and minutes, currentDate and s.close are in UTC
       );
     } else {
-      return schedule.find((s) => formatDate(s.date) === inputDate);
+      return schedule.find((s) => s.date === date);
     }
   }
 );

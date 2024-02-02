@@ -33,7 +33,7 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
     availableTimes = (
       <div className={containerClass}>
         {timeSlots.map((slot) => {
-          const startTime = formatTime(slot.start);
+          const startTime = formatTime(slot.start); // dayjs obj => 10:45am
           return (
             <div key={slot.id} className={itemClass}>
               <AvailableTime
