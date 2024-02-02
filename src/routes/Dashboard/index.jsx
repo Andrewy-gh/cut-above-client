@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useScheduleQuery } from '@/hooks/useScheduleQuery';
-import StatusColumn from './StatusColumn';
-import StatusTab from './StatusTab';
+import StatusColumn from './components/StatusColumn';
+import StatusTab from './components/StatusTab';
 import { formatDateFull, sortAndFormatApptByStartTime } from '@/utils/date';
 import { filterByApptStatus } from '@/utils/apptStatus';
 import styles from './styles.module.css';
 
-export default function ApptStatusBoard() {
+export default function Dashboard() {
   const { id } = useParams();
   const { appointments } = useScheduleQuery(id);
   const formatTimeAppt = sortAndFormatApptByStartTime(appointments);

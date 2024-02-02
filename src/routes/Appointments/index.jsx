@@ -4,8 +4,8 @@ import {
   selectAllAppointment,
   useGetAppointmentQuery,
 } from '@/features/appointments/apptApiSlice';
-import UpcomingCard from './ApptCard/UpcomingCard';
-import PastCard from './ApptCard/PastCard';
+import UpcomingCard from '@/components/appointments/ApptCard/UpcomingCard';
+import PastCard from '@/components/appointments/ApptCard/PastCard';
 import { splitByUpcomingAndPast } from '@/utils/date';
 import styles from './styles.module.css';
 

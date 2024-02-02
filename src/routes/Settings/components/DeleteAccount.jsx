@@ -1,7 +1,7 @@
-import ButtonDialog from '../../ButtonDialog';
-import CustomDialogContent from '../../CustomDialogContent';
-import { useDialog } from '../../../hooks/useDialog';
-import { useAccount } from '../../../hooks/useAccount';
+import ButtonDialog from '@/components/ButtonDialog';
+import CustomDialogContent from '@/components/CustomDialogContent';
+import { useDialog } from '@/hooks/useDialog';
+import { useAccount } from '@/hooks/useAccount';
 
 const dialog = {
   button: 'Delete Account',

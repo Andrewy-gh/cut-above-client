@@ -8,9 +8,18 @@ import Register from '@/routes/Register';
 import ErrorPage from '@/routes/ErrorPage';
 // TODO: React lazy
 import ResetPw from '@/routes/ResetPw';
-import RequireAuth from './routes/RequireAuth';
-// import { disableReactDevTools } from '@fvilers/disable-react-devtools';
-// if (process.env.NODE_ENV === 'production') disableReactDevTools();
+import RequireAuth from '@/routes/RequireAuth';
+import Account from '@/routes/Account';
+import Settings from '@/routes/Settings';
+import Appointments from '@/routes/Appointments';
+import AppointmentPage from '@/routes/AppointmentPage';
+import AddSchedule from '@/routes/AddSchedule';
+import Schedule from '@/routes/Schedule';
+import Dashboard from '@/routes/Dashboard';
+
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+import Unauthorized from '@/routes/RequireAuth/Unauthorized';
+if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
 // // Lazy-loaded components
 // const Account = lazy(() => import('./pages/Account'));
@@ -33,10 +42,31 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
-      { path: '/signup', element: <Register /> },
-      { path: '/login', element: <Login /> },
-      { path: '/resetpw', element: <ResetPw /> },
-      { element: <RequireAuth />, children: [] },
+      { path: 'signup', element: <Register /> },
+      { path: 'login', element: <Login /> },
+      { path: 'resetpw', element: <ResetPw /> },
+      { path: 'appoinment/:id', element: <AppointmentPage /> },
+      {
+        element: <RequireAuth />,
+        children: [
+          {
+            path: 'account',
+            children: [
+              { index: true, element: <Account /> },
+              { path: 'settings', element: <Settings /> },
+              { path: 'appointments', element: <Appointments /> },
+              {
+                element: <RequireAuth requiredRole="admin" />,
+                children: [
+                  { path: 'add', element: <AddSchedule /> },
+                  { path: 'schedule', element: <Schedule /> },
+                  { path: 'dashboard/:id', element: <Dashboard /> },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 ]);

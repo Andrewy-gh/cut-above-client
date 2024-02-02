@@ -15,10 +15,10 @@ export default function Account() {
   const adminRoutes = (
     <>
       <div className="body1">
-        <Link to="/schedule">View schedule</Link>
+        <Link to="schedule">View schedule</Link>
       </div>
       <div className="body1">
-        <Link to="/add">Add a new schedule</Link>
+        <Link to="add">Add a new schedule</Link>
       </div>
     </>
   );
@@ -28,10 +28,10 @@ export default function Account() {
       <div className="container-lg">
         <h5 className={styles.header}>{welcome} Account page</h5>
         <div className="body1">
-          <Link to="/account/settings">Account settings</Link>
+          <Link to="settings">Account settings</Link>
         </div>
         <div className="body1">
-          <Link to="/appointments">View your appointments</Link>
+          <Link to="appointments">View your appointments</Link>
         </div>
         {role === 'admin' && adminRoutes}
         <div>

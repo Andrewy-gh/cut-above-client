@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { formatDateFull, formatDateToTime } from '../../../utils/date';
+import { formatDateFull, formatDateToTime } from '../../utils/date';
 import styles from './styles.module.css';
-import { theme } from '../../../styles/styles';
+import { theme } from '../../styles/styles';
 
 export default function ScheduleCard({ schedule }) {
   return (
