@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/routes/Layout';
 import Home from '@/routes/Home';
 // import BookingPage from '@/pages/BookingPage';
-// import Login from '@/pages/Login';
+import Login from '@/routes/Login';
 import Register from '@/routes/Register';
 import ErrorPage from '@/routes/ErrorPage';
 // import { disableReactDevTools } from '@fvilers/disable-react-devtools';
@@ -31,6 +31,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: '/signup', element: <Register /> },
+      { path: '/login', element: <Login /> },
     ],
   },
 ]);
