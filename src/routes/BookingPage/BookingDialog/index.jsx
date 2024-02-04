@@ -1,10 +1,10 @@
 import DialogContent from '@mui/material/DialogContent';
-import CustomDialog from '../CustomDialog';
-import BookingDialogContent from './BookingDialogContent';
+import CustomDialog from '../../../components/CustomDialog';
+import BookingDialogContent from '../BookingDialogContent';
 import { useFilter } from '@/hooks/useFilter';
-import EmployeeAccordion from './EmployeeAccordion';
-import EmployeeRadio from './EmployeeRadio';
-import EmployeeEdit from './EmployeeEdit';
+import EmployeeAccordion from '../EmployeeAccordion';
+import EmployeeRadio from '../EmployeeRadio';
+import EmployeeEdit from '../EmployeeEdit';
 
 export default function BookingDialog({
   open,

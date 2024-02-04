@@ -1,7 +1,7 @@
-import Hero from './components/Hero';
-import Services from './components/Services';
-import ContactUs from './components/ContactUs';
-import TeamMembers from './components/TeamMembers';
+import Hero from './Hero';
+import Services from './Services';
+import ContactUs from './ContactUs';
+import TeamMembers from './TeamMembers';
 import { employees } from '@/data/data';
 
 export default function Home() {

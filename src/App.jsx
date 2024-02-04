@@ -2,11 +2,10 @@ import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/routes/Layout';
 import Home from '@/routes/Home';
-// import BookingPage from '@/pages/BookingPage';
+import BookingPage from '@/routes/BookingPage';
 import Login from '@/routes/Login';
 import Register from '@/routes/Register';
 import ErrorPage from '@/routes/ErrorPage';
-// TODO: React lazy
 import ResetPw from '@/routes/ResetPw';
 import RequireAuth from '@/routes/RequireAuth';
 import Account from '@/routes/Account';
@@ -46,6 +45,7 @@ const router = createBrowserRouter([
       { path: 'login', element: <Login /> },
       { path: 'resetpw', element: <ResetPw /> },
       { path: 'appoinment/:id', element: <AppointmentPage /> },
+      { path: 'bookings/:id?', element: <BookingPage /> },
       {
         element: <RequireAuth />,
         children: [

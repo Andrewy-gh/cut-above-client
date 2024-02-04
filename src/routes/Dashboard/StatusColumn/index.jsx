@@ -1,8 +1,8 @@
 import UpdateApptStatus from '../UpdateApptStatus';
 import Employee from '@/components/Employee';
-import ApptTitle from '@/components/appointments/ApptCard/ApptTitle';
-import ModifyAppointment from '@/components/appointments/ApptCard/ApptButton/ModifyAppointment';
-import CancelAppointment from '@/components/appointments/ApptCard/ApptButton/CancelAppointment';
+import ApptTitle from '@/components/ApptCard/ApptTitle';
+import ModifyAppointment from '@/components/ApptCard/ApptButton/ModifyAppointment';
+import CancelAppointment from '@/components/ApptCard/ApptButton/CancelAppointment';
 import styles from './styles.module.css';
 
 export default function StatusColumn({ appointments, status }) {

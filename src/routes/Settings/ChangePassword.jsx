@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useAccount } from '../../../hooks/useAccount';
+import { useAccount } from '../../hooks/useAccount';
 
 export default function ChangePassword() {
   const [newPassword, setNewPassword] = useState('');

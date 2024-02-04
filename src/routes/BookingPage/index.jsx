@@ -15,8 +15,8 @@ import styles from './styles.module.css';
 
 export default function BookingPage() {
   const navigate = useNavigate();
-  const { data: employees } = useEmployeesQuery();
-  const { data: schedules } = useScheduleQuery();
+  useEmployeesQuery();
+  useScheduleQuery();
   const { date, employee, selection, service, handleSelectionChange } =
     useFilter();
   const { open, handleClose, handleOpen } = useDialog();
@@ -25,7 +25,7 @@ export default function BookingPage() {
   const { handleError } = useNotification();
 
   const { id } = useParams();
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams] = useSearchParams();
   let emailToken = searchParams.get('token');
 
   const {

@@ -1,4 +1,4 @@
-import { theme } from '../../../../styles/styles';
+import { theme } from '../../../styles/styles';
 import styles from './styles.module.css';
 
 const outlineStyle = {

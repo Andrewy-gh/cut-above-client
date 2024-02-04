@@ -21,26 +21,29 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  if (result?.error?.data?.error === 'token expired') {
-    // send refresh token to get new access token
-    const refreshResult = await baseQuery('/refresh', api, extraOptions);
-    if (refreshResult?.data) {
-      const user = api.getState().auth.user;
-      // store the new token
-      api.dispatch(setCredentials({ ...refreshResult.data, user }));
-      // retry the original query with new access token
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      console.log('logging out');
-      api.dispatch(logoutUser());
-    }
-  }
+  console.log('====================================');
+  console.log('result', result);
+  console.log('====================================');
+  // if (result?.error?.data?.error === 'token expired') {
+  //   // send refresh token to get new access token
+  //   const refreshResult = await baseQuery('/refresh', api, extraOptions);
+  //   if (refreshResult?.data) {
+  //     const user = api.getState().auth.user;
+  //     // store the new token
+  //     api.dispatch(setCredentials({ ...refreshResult.data, user }));
+  //     // retry the original query with new access token
+  //     result = await baseQuery(args, api, extraOptions);
+  //   } else {
+  //     console.log('logging out');
+  //     api.dispatch(logoutUser());
+  //   }
+  // }
 
   return result;
 };
 
 export const apiSlice = createApi({
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReauth,
   tagTypes: ['Appointment', 'Employee', 'Schedule', 'User'],
   endpoints: (builder) => ({}),
 });

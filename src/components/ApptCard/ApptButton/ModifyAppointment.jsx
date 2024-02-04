@@ -1,5 +1,5 @@
-import ButtonDialog from '../../../ButtonDialog';
-import CustomDialogContent from '../../../CustomDialogContent';
+import ButtonDialog from '../../ButtonDialog';
+import CustomDialogContent from '../../CustomDialogContent';
 import { useAppointment } from '@/hooks/useAppointment';
 import { useDialog } from '@/hooks/useDialog';
 import { useEmployeesQuery } from '@/hooks/useEmployeesQuery';

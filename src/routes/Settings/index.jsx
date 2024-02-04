@@ -1,6 +1,6 @@
-import ChangeEmail from './components/ChangeEmail';
-import ChangePassword from './components/ChangePassword';
-import DeleteAccount from './components/DeleteAccount';
+import ChangeEmail from './ChangeEmail';
+import ChangePassword from './ChangePassword';
+import DeleteAccount from './DeleteAccount';
 import styles from './styles.module.css';
 
 export default function Settings() {
