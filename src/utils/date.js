@@ -73,7 +73,6 @@ export const findAvailableTimeSlots = (
       );
       return !employeeBooked;
     });
-
     if (availableEmployees.length > 0) {
       slots.push({
         id: crypto.randomUUID(),
@@ -85,7 +84,6 @@ export const findAvailableTimeSlots = (
 
     slotStart = slotStart.add(searchIncrement, 'minute');
   }
-
   return slots;
 };
 

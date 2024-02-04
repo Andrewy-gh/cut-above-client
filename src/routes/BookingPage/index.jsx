@@ -24,10 +24,21 @@ export default function BookingPage() {
   const { user } = useAuth();
   const { handleError } = useNotification();
 
+  // handles modifying an appointment
+  const [rescheduling, setRescheduling] = useState(null);
   const { id } = useParams();
+  useEffect(() => {
+    if (id) {
+      setRescheduling(true);
+    }
+  }, [id]);
+  let message = rescheduling
+    ? 'Please book your new appointment'
+    : 'Schedule your appointment';
+
+  // handles modifying an appointment through email
   let [searchParams] = useSearchParams();
   let emailToken = searchParams.get('token');
-
   const {
     data: tokenStatus,
     isLoading,
@@ -36,14 +47,6 @@ export default function BookingPage() {
     { option: 'email', token: emailToken },
     { skip: !emailToken }
   );
-
-  const [rescheduling, setRescheduling] = useState(null);
-  useEffect(() => {
-    if (id) {
-      setRescheduling(true);
-    }
-  }, [id]);
-
   if (emailToken && tokenStatus && tokenStatus.error) {
     handleError('Token is not valid');
   }
@@ -52,10 +55,6 @@ export default function BookingPage() {
     handleSelectionChange(data);
     handleOpen();
   };
-
-  let message = rescheduling
-    ? 'Please book your new appointment'
-    : 'Schedule your appointment';
 
   const handleAgree = () => {
     if (!user && !emailToken) {
@@ -74,7 +73,6 @@ export default function BookingPage() {
     });
     handleClose();
   };
-
   let content;
   if (isLoading) {
     content = <p>Loading...</p>;
