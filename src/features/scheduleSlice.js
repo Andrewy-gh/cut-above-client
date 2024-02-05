@@ -8,6 +8,7 @@ import {
   currentDate,
   findAvailableTimeSlots,
   formatDate,
+  formatDateFull,
 } from '../utils/date';
 
 const scheduleAdapter = createEntityAdapter({});
@@ -19,7 +20,16 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getSchedule: builder.query({
       query: () => '/api/schedules',
       transformResponse: (responseData) => {
-        const loadedPosts = responseData;
+        const loadedPosts = responseData.map((s) => {
+          const appointments = s.appointments.map((appt) => ({
+            ...appt,
+            date: formatDateFull(appt.date),
+          }));
+          return {
+            ...s,
+            appointments,
+          };
+        });
         return scheduleAdapter.setAll(initialState, loadedPosts);
       },
       // keepUnusedDataFor: 5,

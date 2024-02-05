@@ -38,7 +38,7 @@ export default function Dashboard() {
   }
   return (
     <div className="container-lg mb-16">
-      <Link to="/schedule">Go Back to Schedule </Link>
+      <Link to="../schedule">Go Back to Schedule </Link>
       {content}
     </div>
   );

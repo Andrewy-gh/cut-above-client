@@ -22,7 +22,7 @@ const dialog = (newStatus) => {
     // title: employee
     //   ? `${appointment.service} with ${employee.email}`
     //   : 'Loading',
-    title: 'title text',
+    title: 'Update Status',
     content,
   };
 };

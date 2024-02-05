@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 // This is an admin page which list all upcoming and past schedules
 export default function Schedules() {
   const { schedules, upcomingSchedules, pastSchedules } = useScheduleQuery();
+
   let content;
   if (!schedules) {
     content = <div>Loading...</div>;

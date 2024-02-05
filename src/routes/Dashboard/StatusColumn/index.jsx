@@ -22,7 +22,7 @@ export default function StatusColumn({ appointments, status }) {
           <div className={styles.flex_col}>
             <div>
               <ApptTitle appointment={appt} />
-              <Employee employeeId={appt.employee} />
+              <Employee employeeId={appt.employeeId} />
             </div>
           </div>
           <div className={styles.buttons_wrap}>
