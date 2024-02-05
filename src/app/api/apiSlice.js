@@ -24,6 +24,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   console.log('====================================');
   console.log('query result', result);
   console.log('====================================');
+  if (result?.error?.data?.error === 'Session expired, please log in') {
+    api.dispatch(logoutUser());
+    throw new Error(result?.error);
+  }
   // if (result?.error?.data?.error === 'token expired') {
   //   // send refresh token to get new access token
   //   const refreshResult = await baseQuery('/refresh', api, extraOptions);
