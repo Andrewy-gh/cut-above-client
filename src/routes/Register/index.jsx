@@ -10,51 +10,50 @@ import styles from './styles.module.css';
 
 export default function Register() {
   const navigate = useNavigate();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPwd, setConfirmPwd] = useState('');
-  const [emailError, setEmailError] = useState(false);
-  const [pwdError, setPwdError] = useState(false);
-  const [emailHelperText, setEmailHelperText] = useState('');
-  const [pwdHelperText, setPwdHelperText] = useState('');
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    password: '',
+    confirmPwd: '',
+  });
+  const [emailError, setEmailError] = useState({
+    error: false,
+    helperText: '',
+  });
+  const [pwdError, setPwdError] = useState({ error: false, helperText: '' });
   const [registerAccount] = useRegisterAccountMutation();
 
   const { handleSuccess, handleError } = useNotification();
 
+  const handleEmailChange = (e) => {
+    setEmailError({ error: false, helperText: '' });
+    setUser({ ...user, email: e.target.value });
+  };
+
   const handlePwdChange = (e) => {
-    setPwdError(false);
-    setPwdHelperText('');
-    setPassword(e.target.value);
+    setPwdError({ error: false, helperText: '' });
+    setUser({ ...user, password: e.target.value });
   };
 
   const handleConfirmPwdChange = (e) => {
-    setPwdError(false);
-    setPwdHelperText('');
-    setConfirmPwd(e.target.value);
+    setPwdError({ error: false, helperText: '' });
+    setUser({ ...user, confirmPwd: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      if (!emailIsValid(email)) {
-        setEmailError(true);
-        setEmailHelperText('Invalid email');
+      if (!emailIsValid(user.email)) {
+        setEmailError({ error: true, helperText: 'Invalid email' });
         return;
       }
-      if (password !== confirmPwd) {
-        // set a error message
-        setPwdError(true);
-        setPwdHelperText('Passwords do not match');
+      if (user.password !== user.confirmPwd) {
+        setPwdError({ error: false, helperText: 'Passwords do not match' });
         return;
       }
-      setEmail((email) => cleanEmail(email));
       const newUser = await registerAccount({
-        firstName,
-        lastName,
-        email,
-        password,
+        ...user,
+        email: cleanEmail(user.email),
       }).unwrap();
       if (newUser.success) {
         navigate('/login');
@@ -75,45 +74,49 @@ export default function Register() {
               label="First name"
               margin="normal"
               fullWidth
-              value={firstName}
-              onChange={({ target }) => setFirstName(target.value)}
+              value={user.firstName}
+              onChange={({ target }) =>
+                setUser({ ...user, firstName: target.value })
+              }
             ></TextField>
             <TextField
               label="Last name"
               margin="normal"
               fullWidth
-              value={lastName}
-              onChange={({ target }) => setLastName(target.value)}
+              value={user.lastName}
+              onChange={({ target }) =>
+                setUser({ ...user, lastName: target.value })
+              }
             ></TextField>
           </div>
           <TextField
-            error={emailError}
-            helperText={emailHelperText}
+            error={emailError.error}
+            helperText={emailError.helperText}
             label="Email"
             required
             fullWidth
-            value={email}
-            onChange={({ target }) => setEmail(target.value)}
+            value={user.email}
+            onChange={handleEmailChange}
           ></TextField>
           <TextField
-            error={pwdError}
+            error={pwdError.error}
             label="Password"
             type="password"
             required
             fullWidth
             margin="normal"
-            value={password}
+            value={user.password}
             onChange={handlePwdChange}
           ></TextField>
           <TextField
-            error={pwdError}
-            helperText={pwdHelperText}
+            error={pwdError.error}
+            helperText={pwdError.helperText}
             label="Confirm password"
             type="password"
             required
             fullWidth
             margin="normal"
-            value={confirmPwd}
+            value={user.confirmPwd}
             onChange={handleConfirmPwdChange}
           ></TextField>
           <Button
