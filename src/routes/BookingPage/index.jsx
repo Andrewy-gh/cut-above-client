@@ -69,7 +69,7 @@ export default function BookingPage() {
       end: selection.end,
       service: service.name,
       employee,
-      emailToken,
+      // emailToken,
     });
     handleClose();
   };

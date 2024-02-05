@@ -42,8 +42,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Appointment', 'Schedule'],
     }),
     modifyAppointment: builder.mutation({
-      query: (appointment) => ({
-        url: `/api/appointments/${appointment.id}`,
+      // destructure to separate id from body
+      query: ({ id, ...appointment }) => ({
+        url: `/api/appointments/${id}`,
         method: 'PUT',
         body: appointment,
       }),

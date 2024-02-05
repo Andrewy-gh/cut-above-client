@@ -18,7 +18,7 @@ export function useBooking() {
     end,
     service,
     employee,
-    emailToken,
+    // emailToken,
   }) => {
     try {
       if (id) {
@@ -29,7 +29,7 @@ export function useBooking() {
           end,
           service,
           employeeId: employee,
-          emailToken,
+          // emailToken,
         }).unwrap();
         if (modifiedAppt.success) {
           handleSuccess(modifiedAppt.message);
