@@ -1,9 +1,6 @@
 import haircut from '../assets/images/haircut.webp';
 import beard from '../assets/images/beard.webp';
 import shave from '../assets/images/shave.webp';
-import andre from '../assets/images/andre.webp';
-import obi from '../assets/images/obi.webp';
-import salah from '../assets/images/salah.webp';
 
 export const navigation = [
   { id: 1, name: 'Home', path: '/' },
@@ -49,29 +46,5 @@ export const services = [
     duration: 60,
     image: beard,
     description: `Our full package service is the ultimate indulgence in grooming. Our skilled barbers will provide you with a precision haircut, a beard trim or full shave, and a soothing shoulder massage to help you relax and unwind. You'll leave feeling like a VIP with the confidence to take on the world. `,
-  },
-];
-
-export const employees = [
-  {
-    id: '0b4e6b4d-b28c-4f82-b9b6-9fec81d773de',
-    firstName: 'Andre',
-    image: andre,
-    profile:
-      'Andre has honed his skills and techniques to deliver top-notch grooming services. In his free time, Andre enjoys exploring the outdoors and staying active. He loves hiking, running, and playing sports, and is always up for a new adventure.',
-  },
-  {
-    id: '83010c3d-d9a4-4b36-80d4-dac517c9d554',
-    firstName: 'Obi',
-    image: obi,
-    profile:
-      'Meet Obi, our skilled and talented barber who is dedicated to providing his clients with top-notch grooming services. He loves to travel and discover new cultures, and is always planning his next adventure. ',
-  },
-  {
-    id: '078c99f4-1431-47aa-b74c-45da0ca1b2f6',
-    firstName: 'Salah',
-    image: salah,
-    profile:
-      'With a natural talent for hair cutting and styling, Salah takes pride in helping his clients achieve the perfect look. In his free time, Salah enjoys painting and drawing, and is always attending concerts.  He is a big fan of classic rock and jazz.',
   },
 ];

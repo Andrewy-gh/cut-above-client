@@ -15,10 +15,15 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
       providesTags: ['Employee'],
     }),
+    getEmployeesProfiles: builder.query({
+      query: () => '/api/employees/profiles',
+      transformResponse: (responseData) => responseData,
+    }),
   }),
 });
 
-export const { useGetEmployeesQuery } = extendedApiSlice;
+export const { useGetEmployeesQuery, useGetEmployeesProfilesQuery } =
+  extendedApiSlice;
 
 export const selectEmployeesResult =
   extendedApiSlice.endpoints.getEmployees.select();

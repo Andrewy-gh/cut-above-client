@@ -12,7 +12,6 @@ import styles from './styles.module.css';
 export default function BookingForm({ handleOpen }) {
   const { date, handleDateChange } = useFilter();
   const timeSlots = useSelector(selectScheduleByFilter);
-
   return (
     <>
       <div className={styles.container}>

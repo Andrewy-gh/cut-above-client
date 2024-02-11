@@ -65,7 +65,7 @@ export const findAvailableTimeSlots = (
     const selectedEmployees = employees;
     const availableEmployees = selectedEmployees.filter((employeeId) => {
       const employeeAppointments = appointments.filter(
-        (appointment) => appointment.employee.id === employeeId
+        (appointment) => appointment.employeeId === employeeId
       );
       const employeeBooked = employeeAppointments.some(
         (appointment) =>
