@@ -9,10 +9,12 @@ import {
   setEmployee,
   setService,
 } from '@/features/filterSlice';
+import { useEmployeesQuery } from './useEmployeesQuery';
 import { services } from '@/data/data';
 
 export function useFilter() {
   const dispatch = useDispatch();
+  const { employees } = useEmployeesQuery();
   const [selection, setSelection] = useState({});
   const date = useSelector(selectDate);
   const employee = useSelector(selectEmployee);
@@ -23,7 +25,8 @@ export function useFilter() {
   };
 
   const handleEmployeeChange = (id) => {
-    dispatch(setEmployee(id));
+    const employee = employees.find((e) => e.id === id);
+    dispatch(setEmployee(employee));
   };
 
   const handleSelectionChange = (data) => {

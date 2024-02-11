@@ -23,7 +23,6 @@ export default function BookingPage() {
   const { handleBooking } = useBooking();
   const { user } = useAuth();
   const { handleError } = useNotification();
-
   // handles modifying an appointment
   const [rescheduling, setRescheduling] = useState(null);
   const { id } = useParams();

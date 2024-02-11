@@ -15,7 +15,7 @@ export default function EmployeeSelect() {
       <InputLabel>Choose a barber</InputLabel>
       <Select
         label="Barber"
-        value={employee}
+        value={employee.id || 'any'}
         fullWidth
         onChange={(e) => handleEmployeeChange(e.target.value)}
         sx={{ color: theme.palette.secondary.main }}
