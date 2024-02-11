@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  resetFilter,
   selectDate,
   selectEmployee,
   selectService,
@@ -35,11 +36,16 @@ export function useFilter() {
     dispatch(setService({ id: serviceId, name, duration }));
   };
 
+  const handleFilterReset = () => {
+    dispatch(resetFilter());
+  };
+
   return {
     date,
     employee,
     handleDateChange,
     handleEmployeeChange,
+    handleFilterReset,
     handleSelectionChange,
     handleServiceChange,
     selection,

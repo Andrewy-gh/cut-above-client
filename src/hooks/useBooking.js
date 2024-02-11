@@ -3,12 +3,14 @@ import {
   useModifyAppointmentMutation,
 } from '@/features/appointments/apptApiSlice';
 import { useAppointment } from './useAppointment';
+import { useFilter } from './useFilter';
 import { useNotification } from './useNotification';
 
 export function useBooking() {
   const [addAppointment] = useAddAppointmentMutation();
   const [modifyAppointment] = useModifyAppointmentMutation();
   const { handleEndRescheduling } = useAppointment();
+  const { handleFilterReset } = useFilter();
   const { handleSuccess, handleError } = useNotification();
 
   const handleBooking = async ({
@@ -43,7 +45,10 @@ export function useBooking() {
           service,
           employeeId: employee,
         }).unwrap();
-        if (newAppt.success) handleSuccess(newAppt.message);
+        if (newAppt.success) {
+          handleSuccess(newAppt.message);
+          handleFilterReset();
+        }
       }
     } catch (err) {
       handleError(err);
