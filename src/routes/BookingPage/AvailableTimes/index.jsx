@@ -12,7 +12,7 @@ const AvailableTime = ({ children, handleOpen }) => {
   );
 };
 
-export default function AvailableTimes({ timeSlots, openDialog }) {
+export default function AvailableTimes({ timeSlots, openDialog, employee }) {
   const handleOpen = (data) => openDialog(data);
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const containerClass = isMobile
@@ -34,11 +34,13 @@ export default function AvailableTimes({ timeSlots, openDialog }) {
       <div className={containerClass}>
         {timeSlots.map((slot) => {
           const startTime = formatTime(slot.start); // dayjs obj => 10:45am
+          const slotsAvailable =
+            employee === 'any' ? `${slot.available.length} left` : '';
           return (
             <div key={slot.id} className={itemClass}>
               <AvailableTime
                 handleOpen={() => handleOpen(slot)}
-              >{`${startTime} ${slot.available.length} left`}</AvailableTime>
+              >{`${startTime} ${slotsAvailable}`}</AvailableTime>
             </div>
           );
         })}

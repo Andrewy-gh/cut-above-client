@@ -9,7 +9,7 @@ import { currentDate, oneMonthFromCurrent } from '@/utils/date';
 import { useSelector } from 'react-redux';
 import styles from './styles.module.css';
 
-export default function BookingForm({ handleOpen }) {
+export default function BookingForm({ handleOpen, employee }) {
   const { date, handleDateChange } = useFilter();
   const timeSlots = useSelector(selectScheduleByFilter);
   return (
@@ -24,7 +24,11 @@ export default function BookingForm({ handleOpen }) {
           maxDate={oneMonthFromCurrent}
         />
       </div>
-      <AvailableTimes timeSlots={timeSlots} openDialog={handleOpen} />
+      <AvailableTimes
+        timeSlots={timeSlots}
+        openDialog={handleOpen}
+        employee={employee}
+      />
     </>
   );
 }

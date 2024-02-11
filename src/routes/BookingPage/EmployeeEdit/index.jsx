@@ -4,10 +4,10 @@ import PersonIcon from '@mui/icons-material/Person';
 import { selectEmployeeById } from '@/features/employeeSlice';
 import styles from './styles.module.css';
 
-export default function EmployeeEdit({ employeeId, handleClick }) {
-  const employee = useSelector((state) =>
-    selectEmployeeById(state, employeeId)
-  );
+export default function EmployeeEdit({ employee, handleClick }) {
+  // const employee = useSelector((state) =>
+  //   selectEmployeeById(state, employeeId)
+  // );
   return (
     <div className={styles.flex_sb}>
       <div className={styles.flex}>

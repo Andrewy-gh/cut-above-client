@@ -25,7 +25,7 @@ export function useFilter() {
   };
 
   const handleEmployeeChange = (id) => {
-    const employee = employees.find((e) => e.id === id);
+    const employee = id === 'any' ? 'any' : employees.find((e) => e.id === id);
     dispatch(setEmployee(employee));
   };
 

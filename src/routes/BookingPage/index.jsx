@@ -82,7 +82,7 @@ export default function BookingPage() {
     content = (
       <div className={styles.flex_container}>
         <h3 className={styles.header}>{message}</h3>
-        <BookingForm handleOpen={handleSelectAndOpen} />
+        <BookingForm handleOpen={handleSelectAndOpen} employee={employee} />
         <BookingDialog
           open={open}
           handleClose={handleClose}

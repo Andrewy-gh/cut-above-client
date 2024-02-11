@@ -24,7 +24,7 @@ export default function BookingDialog({
   } else {
     employeeOptions = (
       <EmployeeEdit
-        employeeId={employee}
+        employee={employee}
         handleClick={() => handleEmployeeChange('any')}
       />
     );
