@@ -30,7 +30,7 @@ export function useBooking() {
           start,
           end,
           service,
-          employeeId: employee,
+          employee,
           // emailToken,
         }).unwrap();
         if (modifiedAppt.success) {
@@ -43,7 +43,7 @@ export function useBooking() {
           start,
           end,
           service,
-          employeeId: employee,
+          employee,
         }).unwrap();
         if (newAppt.success) {
           handleSuccess(newAppt.message);
