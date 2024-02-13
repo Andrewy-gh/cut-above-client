@@ -61,8 +61,7 @@ export const findAvailableTimeSlots = (
       break;
     }
 
-    // const selectedEmployees = employee !== 'any' ? [employee] : employees;
-    const selectedEmployees = employees;
+    const selectedEmployees = employee !== 'any' ? [employee.id] : employees;
     const availableEmployees = selectedEmployees.filter((employeeId) => {
       const employeeAppointments = appointments.filter(
         (appointment) => appointment.employeeId === employeeId
