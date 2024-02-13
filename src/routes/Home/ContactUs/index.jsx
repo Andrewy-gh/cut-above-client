@@ -7,34 +7,46 @@ import { emailIsValid } from '@/utils/email';
 import styles from './styles.module.css';
 
 export default function ContactUs() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState(false);
-  const [helperText, setHelperText] = useState('');
+  const [contact, setContact] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    message: '',
+  });
+  const [emailError, setEmailError] = useState({
+    error: false,
+    helperText: '',
+  });
+
+  const handleEmailChange = (e) => {
+    setEmailError({
+      error: false,
+      helperText: '',
+    });
+    setContact({ ...contact, email: e.target.value });
+  };
 
   const { handleSuccess, handleError } = useNotification();
   const [sendMessageResponse] = useSendMessageResponseMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const contactDetails = { firstName, lastName, email, message };
     try {
-      if (!emailIsValid(email)) {
-        setError(true);
-        setHelperText('invalid email');
+      if (!emailIsValid(contact.email)) {
+        setEmailError({ error: true, helperText: 'invalid email' });
         return;
       }
       const sentMessageResponse = await sendMessageResponse({
-        contactDetails,
+        contactDetails: contact,
       }).unwrap();
       if (sentMessageResponse.success) {
         handleSuccess(sentMessageResponse.message);
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setMessage('');
+        setContact({
+          firstName: '',
+          lastName: '',
+          email: '',
+          message: '',
+        });
       }
     } catch (err) {
       handleError(err);
@@ -50,27 +62,31 @@ export default function ContactUs() {
             label="First name"
             margin="normal"
             fullWidth
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={contact.firstName}
+            onChange={(e) =>
+              setContact({ ...contact, firstName: e.target.value })
+            }
           ></TextField>
 
           <TextField
             label="Last name"
             margin="normal"
             fullWidth
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={contact.lastName}
+            onChange={(e) =>
+              setContact({ ...contact, lastName: e.target.value })
+            }
           ></TextField>
         </div>
         <TextField
-          error={error}
-          helperText={helperText}
+          error={emailError.error}
+          helperText={emailError.helperText}
           label="Email"
           required
           fullWidth
           margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={contact.email}
+          onChange={handleEmailChange}
         ></TextField>
         <TextField
           label="Message"
@@ -78,8 +94,8 @@ export default function ContactUs() {
           fullWidth
           margin="normal"
           multiline
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          value={contact.message}
+          onChange={(e) => setContact({ ...contact, message: e.target.value })}
         ></TextField>
         <Button
           type="submit"
