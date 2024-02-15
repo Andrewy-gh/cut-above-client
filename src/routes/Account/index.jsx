@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import LogoutButton from './LogoutButton';
 import { useAuth } from '@/hooks/useAuth';
 import styles from './styles.module.css';
+import { getStatus } from '@/utils/authStorage';
 
 export default function Account() {
   const navigate = useNavigate();

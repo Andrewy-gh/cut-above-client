@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   useLoginMutation,
   useLogoutMutation,
+  useGetCurrentUserQuery,
 } from '@/features/auth/authApiSlice';
 import {
   logoutUser,
@@ -12,6 +14,8 @@ import {
 } from '@/features/auth/authSlice';
 import { useNotification } from './useNotification';
 import { cleanEmail } from '@/utils/email';
+
+import { setUser, removeUser, getStatus } from '../utils/authStorage';
 
 export function useAuth() {
   const dispatch = useDispatch();
@@ -24,6 +28,18 @@ export function useAuth() {
   const location = useLocation();
 
   const { handleSuccess, handleError } = useNotification();
+  const { data: currentUser, isSuccess } = useGetCurrentUserQuery();
+
+  useEffect(() => {
+    if (!user && getStatus() && isSuccess) {
+      dispatch(
+        setCredentials({
+          user: currentUser.email,
+          role: currentUser.role,
+        })
+      );
+    }
+  }, []);
 
   const handleLogin = async (email, password) => {
     try {
@@ -40,6 +56,7 @@ export function useAuth() {
           })
         );
         handleSuccess(loggedInUser.message);
+        setUser();
         navigate(from || '/account');
       }
     } catch (err) {
@@ -50,6 +67,7 @@ export function useAuth() {
   const handleLogout = async () => {
     try {
       await logout().unwrap();
+      removeUser();
       dispatch(logoutUser());
     } catch (error) {
       console.error('Error logging out: ', error);

@@ -14,7 +14,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: '/logout',
       }),
     }),
+    getCurrentUser: builder.query({
+      query: () => ({
+        url: '/current-user',
+        transformResponse: (responseData) => responseData,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation } = authApiSlice;
+export const { useLoginMutation, useLogoutMutation, useGetCurrentUserQuery } =
+  authApiSlice;

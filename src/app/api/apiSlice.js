@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setCredentials, logoutUser } from '../../features/auth/authSlice';
+import { removeUser } from '@/utils/authStorage';
 
 const baseUrl =
   process.env.NODE_ENV === 'production'
@@ -26,7 +27,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   console.log('====================================');
   if (result?.error?.data?.error === 'Session expired, please log in') {
     api.dispatch(logoutUser());
-    throw new Error(result?.error);
+    removeUser();
+    throw new Error(result?.error?.data?.error);
   }
   // if (result?.error?.data?.error === 'token expired') {
   //   // send refresh token to get new access token
