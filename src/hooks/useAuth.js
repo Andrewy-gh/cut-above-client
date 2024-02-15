@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   useLoginMutation,
   useLogoutMutation,
@@ -21,6 +21,8 @@ export function useAuth() {
   const [login] = useLoginMutation();
   const [logout] = useLogoutMutation();
 
+  const location = useLocation();
+
   const { handleSuccess, handleError } = useNotification();
 
   const handleLogin = async (email, password) => {
@@ -30,6 +32,7 @@ export function useAuth() {
         password,
       }).unwrap();
       if (loggedInUser.success) {
+        const { from } = location.state || {};
         dispatch(
           setCredentials({
             user: loggedInUser.user.email,
@@ -37,7 +40,7 @@ export function useAuth() {
           })
         );
         handleSuccess(loggedInUser.message);
-        navigate('/account');
+        navigate(from || '/account');
       }
     } catch (err) {
       handleError(err);

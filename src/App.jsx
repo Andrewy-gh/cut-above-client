@@ -12,6 +12,7 @@ import Account from '@/routes/Account';
 import Settings from '@/routes/Settings';
 import Appointments from '@/routes/Appointments';
 import AppointmentPage from '@/routes/AppointmentPage';
+import AppointmentError from '@/routes/AppointmentPage/error';
 import AddSchedule from '@/routes/AddSchedule';
 import Schedule from '@/routes/Schedule';
 import Dashboard from '@/routes/Dashboard';
@@ -43,12 +44,16 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'signup', element: <Register /> },
       { path: 'login', element: <Login /> },
-      { path: 'resetpw', element: <ResetPw /> },
-      { path: 'appoinment/:id', element: <AppointmentPage /> },
       { path: 'bookings/:id?', element: <BookingPage /> },
+      { path: 'resetpw', element: <ResetPw /> },
       {
         element: <RequireAuth />,
         children: [
+          {
+            path: 'appointment/:id',
+            element: <AppointmentPage />,
+            errorElement: <AppointmentError />,
+          },
           {
             path: 'account',
             children: [

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 export default function RequireAuth({ requiredRole }) {
   const { role, user } = useAuth();
   const location = useLocation();
-
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }

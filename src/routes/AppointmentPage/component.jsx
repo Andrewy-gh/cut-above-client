@@ -13,7 +13,7 @@ export default function Component({ appointment, emailToken }) {
           <div className={styles.flex_col}>
             <div>
               <ApptTitle appointment={appointment} />
-              <Employee employeeId={appointment.employee} />
+              <Employee employeeId={appointment.employeeId} />
             </div>
           </div>
           <div className={styles.gap_4}>
