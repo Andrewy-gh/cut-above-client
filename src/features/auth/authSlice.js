@@ -14,7 +14,9 @@ const authSlice = createSlice({
       state.role = null;
     },
     updateUserDetails: (state, action) => {
-      state.user = action.payload;
+      const { user, role } = action.payload;
+      state.user = user;
+      state.role = role;
     },
   },
 });

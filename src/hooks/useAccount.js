@@ -21,7 +21,12 @@ export function useAccount() {
     try {
       const updatedUser = await changeUserEmail(newEmailObj).unwrap();
       if (updatedUser.success) {
-        dispatch(updateUserDetails(updatedUser.user));
+        dispatch(
+          updateUserDetails({
+            user: updatedUser.user.email,
+            role: updatedUser.user.role,
+          })
+        );
         handleSuccess(updatedUser.message);
         return true;
       }

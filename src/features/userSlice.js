@@ -16,7 +16,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     changeUserEmail: builder.mutation({
       query: (email) => ({
-        url: '/api/user/email',
+        url: '/api/account/email',
         method: 'PUT',
         body: email,
       }),
@@ -24,7 +24,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     changeUserPassword: builder.mutation({
       query: (password) => ({
-        url: '/api/user/password',
+        url: '/api/account/password',
         method: 'PUT',
         body: password,
       }),
