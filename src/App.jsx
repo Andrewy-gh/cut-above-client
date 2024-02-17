@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/routes/Layout';
 import Home from '@/routes/Home';
@@ -7,6 +7,7 @@ import Login from '@/routes/Login';
 import Register from '@/routes/Register';
 import ErrorPage from '@/routes/ErrorPage';
 import ResetPw from '@/routes/ResetPw';
+import ResetPwError from '@/routes/ResetPw/error';
 import RequireAuth from '@/routes/RequireAuth';
 import Account from '@/routes/Account';
 import Settings from '@/routes/Settings';
@@ -19,6 +20,7 @@ import Dashboard from '@/routes/Dashboard';
 
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 import Unauthorized from '@/routes/RequireAuth/Unauthorized';
+import TokenValidation from './routes/TokenVaidation';
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
 // // Lazy-loaded components
@@ -45,7 +47,16 @@ const router = createBrowserRouter([
       { path: 'signup', element: <Register /> },
       { path: 'login', element: <Login /> },
       { path: 'bookings/:id?', element: <BookingPage /> },
-      { path: 'resetpw', element: <ResetPw /> },
+      {
+        element: <TokenValidation />,
+        errorElement: <ResetPwError />,
+        children: [
+          {
+            path: 'resetpw/:email?/:token?',
+            element: <ResetPw />,
+          },
+        ],
+      },
       {
         element: <RequireAuth />,
         children: [

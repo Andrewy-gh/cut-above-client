@@ -1,14 +1,13 @@
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
+import { useAuth } from '@/hooks/useAuth';
 import { theme } from '@/styles/styles';
-import { selectCurrentUser } from '@/features/auth/authSlice';
 import styles from './styles.module.css';
 
 export default function NavDesktop() {
-  const user = useSelector(selectCurrentUser);
+  const { user } = useAuth();
 
   return (
     <ul className={styles.grid_col_3}>

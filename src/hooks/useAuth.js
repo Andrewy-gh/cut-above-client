@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   useLoginMutation,
   useLogoutMutation,
-  useGetCurrentUserQuery,
 } from '@/features/auth/authApiSlice';
 import {
   logoutUser,
@@ -16,6 +14,7 @@ import { useNotification } from './useNotification';
 import { cleanEmail } from '@/utils/email';
 
 import { setUser, removeUser, getStatus } from '../utils/authStorage';
+import { useEffect } from 'react';
 
 export function useAuth() {
   const dispatch = useDispatch();
@@ -28,16 +27,20 @@ export function useAuth() {
   const location = useLocation();
 
   const { handleSuccess, handleError } = useNotification();
-  const { data: currentUser, isSuccess } = useGetCurrentUserQuery();
 
   useEffect(() => {
-    if (!user && getStatus() && isSuccess) {
-      dispatch(
-        setCredentials({
-          user: currentUser.email,
-          role: currentUser.role,
-        })
-      );
+    if (!user && getStatus()) {
+      fetch('http://localhost:3001/current-user', { credentials: 'include' })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('data: ', data);
+          dispatch(
+            setCredentials({
+              user: data.email,
+              role: data.role,
+            })
+          );
+        });
     }
   }, []);
 
