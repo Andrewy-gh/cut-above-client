@@ -7,10 +7,7 @@ import { useSendPasswordResetMutation } from '@/features/emailSlice';
 import Overlay from '@/components/Overlay';
 import { emailIsValid } from '@/utils/email';
 import styles from './styles.module.css';
-import { useNavigate } from 'react-router-dom';
 export default function Login() {
-  const navigate = useNavigate();
-  const { user } = useAuth();
   const [view, setView] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +21,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      handleLogin(email, password);
+      await handleLogin(email, password);
     } catch (err) {
       handleError(err);
     }
@@ -44,9 +41,7 @@ export default function Login() {
     }
   };
   let content;
-  if (user) {
-    navigate('/');
-  }
+
   if (view === 'login') {
     content = (
       <>

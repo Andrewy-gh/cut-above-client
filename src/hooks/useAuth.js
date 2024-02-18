@@ -13,9 +13,6 @@ import {
 import { useNotification } from './useNotification';
 import { cleanEmail } from '@/utils/email';
 
-import { setUser, removeUser, getStatus } from '../utils/authStorage';
-import { useEffect } from 'react';
-
 export function useAuth() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,22 +24,6 @@ export function useAuth() {
   const location = useLocation();
 
   const { handleSuccess, handleError } = useNotification();
-
-  useEffect(() => {
-    if (!user && getStatus()) {
-      fetch('http://localhost:3001/current-user', { credentials: 'include' })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log('data: ', data);
-          dispatch(
-            setCredentials({
-              user: data.email,
-              role: data.role,
-            })
-          );
-        });
-    }
-  }, []);
 
   const handleLogin = async (email, password) => {
     try {
@@ -59,7 +40,6 @@ export function useAuth() {
           })
         );
         handleSuccess(loggedInUser.message);
-        setUser();
         navigate(from || '/account');
       }
     } catch (err) {
@@ -69,11 +49,10 @@ export function useAuth() {
 
   const handleLogout = async () => {
     try {
-      await logout().unwrap();
-      removeUser();
+      await logout();
       dispatch(logoutUser());
     } catch (error) {
-      console.error('Error logging out: ', error);
+      handleError('Error logging out: ', error);
     }
   };
 
