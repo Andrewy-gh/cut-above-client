@@ -38,15 +38,15 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['User'],
     }),
     resetUserPassword: builder.mutation({
-      query: (password) => ({
-        url: '/api/email/resetpw',
-        method: 'POST',
-        body: password,
+      query: ({ id, token, newPassword }) => ({
+        url: `/reset-pw/${id}/${token}`,
+        method: 'PUT',
+        body: { newPassword },
       }),
       invalidatesTags: ['User'],
     }),
     validateToken: builder.query({
-      query: (req) => `/api/token/validation/${req.email}/${req.token}`,
+      query: (req) => `/validation/${req.id}/${req.token}`,
       transformResponse: (responseData) => {
         return responseData;
       },

@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         errorElement: <ResetPwError />,
         children: [
           {
-            path: 'resetpw/:email?/:token?',
+            path: 'resetpw/:id?/:token?',
             element: <ResetPw />,
           },
         ],

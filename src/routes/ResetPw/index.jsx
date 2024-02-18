@@ -25,16 +25,16 @@ export default function ResetPw() {
   //   content = <Error />;
   // }
   // return <div className="container-sm">{content}</div>;
-  const { token, email } = useParams();
-  if (!email) {
-    throw new Error('no email');
+  const { token, id } = useParams();
+  if (!id) {
+    throw new Error('no id');
   }
   if (!token) {
     throw new Error('no token');
   }
   return (
     <div className="container-sm">
-      <Component />
+      <Component id={id} token={token} />
     </div>
   );
 }

@@ -3,9 +3,9 @@ import { Outlet } from 'react-router-dom';
 import { useValidateTokenQuery } from '@/features/userSlice';
 
 export default function TokenValidation() {
-  const { token, email } = useParams();
-  if (!email) {
-    throw new Error('no email');
+  const { token, id } = useParams();
+  if (!id) {
+    throw new Error('no id');
   }
   if (!token) {
     throw new Error('no token');
@@ -15,7 +15,7 @@ export default function TokenValidation() {
     isLoading,
     isSuccess,
     isError,
-  } = useValidateTokenQuery({ email, token });
+  } = useValidateTokenQuery({ id, token });
   console.log('tokenStatus', tokenStatus, isSuccess);
   console.log('error', isError);
   if (isLoading) {
