@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useAccount } from '@/hooks/useAccount';
+import { useAuth } from '@/hooks/useAuth';
 import { cleanEmail, emailIsValid } from '@/utils/email';
 
 export default function ChangeEmail() {
@@ -9,7 +9,7 @@ export default function ChangeEmail() {
   const [confirmNewEmail, setConfirmNewEmail] = useState('');
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState('');
-  const { handleUserEmailChange } = useAccount();
+  const { handleUserEmailChange } = useAuth();
 
   const handleNewEmailChange = (e) => {
     setError(false);

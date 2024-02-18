@@ -1,7 +1,7 @@
 import ButtonDialog from '@/components/ButtonDialog';
 import CustomDialogContent from '@/components/CustomDialogContent';
 import { useDialog } from '@/hooks/useDialog';
-import { useAccount } from '@/hooks/useAccount';
+import { useAuth } from '@/hooks/useAuth';
 
 const dialog = {
   button: 'Delete Account',
@@ -11,7 +11,7 @@ const dialog = {
 
 export default function DeleteAccount() {
   const { open, handleOpen, handleClose } = useDialog();
-  const { handleUserDelete } = useAccount();
+  const { handleUserDelete } = useAuth();
 
   return (
     <ButtonDialog

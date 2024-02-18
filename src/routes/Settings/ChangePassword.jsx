@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useAccount } from '../../hooks/useAccount';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function ChangePassword() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState('');
-  const { handleUserPasswordChange } = useAccount();
+  const { handleUserPasswordChange } = useAuth();
 
   const handleNewPasswordChange = (e) => {
     setError(false);

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-import { useValidateTokenQuery } from '@/features/userSlice';
+import { useValidateTokenQuery } from '@/features/auth/authApiSlice';
 
 export default function TokenValidation() {
   const { token, id } = useParams();

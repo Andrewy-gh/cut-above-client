@@ -9,7 +9,7 @@ import { useFilter } from '@/hooks/useFilter';
 import { useDialog } from '@/hooks/useDialog';
 import { useAuth } from '@/hooks/useAuth';
 import { useNotification } from '@/hooks/useNotification';
-import { useValidateTokenQuery } from '@/features/userSlice';
+import { useValidateTokenQuery } from '@/features/auth/authApiSlice';
 import Error from './error';
 import styles from './styles.module.css';
 

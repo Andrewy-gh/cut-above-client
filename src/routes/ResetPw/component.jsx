@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useAccount } from '@/hooks/useAccount';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function Component({ id, token }) {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ export default function Component({ id, token }) {
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState('');
-  const { handleUserPasswordReset } = useAccount();
+  const { handleUserPasswordReset } = useAuth();
 
   const handleNewPasswordChange = (e) => {
     setError(false);
