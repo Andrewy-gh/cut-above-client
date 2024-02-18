@@ -39,7 +39,7 @@ export default function ChangePassword() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="container-sm">
       <TextField
         label="New Password"
         type="password"

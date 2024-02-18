@@ -7,9 +7,10 @@ import { formatDateFull, sortAndFormatApptByStartTime } from '@/utils/date';
 import { filterByApptStatus } from '@/utils/apptStatus';
 import styles from './styles.module.css';
 
-export default function Dashboard() {
+export default function DashboardAppointment() {
   const { id } = useParams();
   const { appointments } = useScheduleQuery(id);
+  console.log('appointments', appointments);
   const formatTimeAppt = sortAndFormatApptByStartTime(appointments);
   const [status, setStatus] = useState('scheduled');
   const statuses = filterByApptStatus(formatTimeAppt);
@@ -37,9 +38,11 @@ export default function Dashboard() {
     );
   }
   return (
-    <div className="container-lg mb-16">
-      <Link to="../schedule">Go Back to Schedule </Link>
+    <main className="container-lg mb-16">
+      <div className="mt-4">
+        <Link to="../dashboard">Back to Schedule Dashboard </Link>
+      </div>
       {content}
-    </div>
+    </main>
   );
 }

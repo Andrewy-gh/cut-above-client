@@ -4,7 +4,7 @@ import ScheduleCard from './ScheduleCard';
 import styles from './styles.module.css';
 
 // This is an admin page which list all upcoming and past schedules
-export default function Schedules() {
+export default function DashboardSchedule() {
   const { schedules, upcomingSchedules, pastSchedules } = useScheduleQuery();
 
   let content;
@@ -29,8 +29,8 @@ export default function Schedules() {
     );
   }
   return (
-    <div>
-      <div>
+    <div className="container-lg">
+      <div className="mt-4">
         <Link to="/account">Back to account page</Link>
       </div>
       <h4 className={styles.header}>

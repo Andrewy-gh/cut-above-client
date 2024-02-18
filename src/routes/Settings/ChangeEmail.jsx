@@ -44,7 +44,7 @@ export default function ChangeEmail() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="container-sm">
       <TextField
         label="New email"
         required

@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import { useAuth } from '../../hooks/useAuth';
 import PropTypes from 'prop-types';
 
@@ -10,10 +12,14 @@ export default function RequireAuth({ requiredRole }) {
   }
 
   if (requiredRole && role !== requiredRole) {
-    return <Navigate to="/unauthorized" replace />;
+    throw new Error('Not authorized');
   }
 
-  return <Outlet />;
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <Outlet />
+    </Suspense>
+  );
 }
 
 RequireAuth.propTypes = {

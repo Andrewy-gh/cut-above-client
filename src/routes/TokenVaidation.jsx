@@ -1,6 +1,7 @@
-import { useParams } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
+import { useParams, Outlet } from 'react-router-dom';
 import { useValidateTokenQuery } from '@/features/auth/authApiSlice';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function TokenValidation() {
   const { token, id } = useParams();
@@ -21,7 +22,11 @@ export default function TokenValidation() {
   if (isLoading) {
     return <p>Loading...</p>;
   } else if (isSuccess && tokenStatus.message === 'Token is valid') {
-    return <Outlet />;
+    return (
+      <Suspense fallback={<LoadingSpinner />}>
+        <Outlet />
+      </Suspense>
+    );
   } else if (isError) {
     throw new Error('Token is not valid');
   }

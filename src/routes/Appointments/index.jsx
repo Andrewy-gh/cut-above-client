@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 // This is the user's Appointments page when accessed through the Profile
 export default function Appointments() {
-  const { data } = useGetAppointmentQuery();
+  useGetAppointmentQuery();
   const appointments = useSelector(selectAllAppointment);
   let content;
   if (appointments.length > 0) {
@@ -19,7 +19,7 @@ export default function Appointments() {
     content = (
       <>
         <h4 className="text-center">Upcoming appointments</h4>
-        <div className="container-lg">
+        <div>
           {upcomingAppts.map((appt) => (
             <UpcomingCard key={appt.id} appt={appt} />
           ))}
@@ -27,7 +27,7 @@ export default function Appointments() {
         {pastAppts.length > 0 && (
           <h4 className="text-center">Past appointments</h4>
         )}
-        <div className="container-lg">
+        <div>
           {pastAppts.map((appt) => (
             <PastCard key={appt.id} appt={appt} />
           ))}
@@ -39,11 +39,13 @@ export default function Appointments() {
   }
 
   return (
-    <div className={styles.container}>
-      <div>
-        <Link to="/account">Go back to account page</Link>
+    <main className="container-lg">
+      <div className={styles.container}>
+        <div className="mt-4">
+          <Link to="/account">Go back to account page</Link>
+        </div>
+        <div>{content}</div>
       </div>
-      <div>{content}</div>
-    </div>
+    </main>
   );
 }

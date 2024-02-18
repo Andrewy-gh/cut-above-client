@@ -10,29 +10,27 @@ export default function Account() {
   const adminRoutes = (
     <>
       <div className="body1">
-        <Link to="schedule">View schedule</Link>
+        <Link to="../dashboard">Schedule Dashboard</Link>
       </div>
       <div className="body1">
-        <Link to="add">Add a new schedule</Link>
+        <Link to="../addschedule">Add a new schedule</Link>
       </div>
     </>
   );
 
   return (
-    <>
-      <div className="container-lg">
-        <h5 className={styles.header}>{welcome} Account page</h5>
-        <div className="body1">
-          <Link to="settings">Account settings</Link>
-        </div>
-        <div className="body1">
-          <Link to="appointments">View your appointments</Link>
-        </div>
-        {role === 'admin' && adminRoutes}
-        <div>
-          <LogoutButton />
-        </div>
+    <main className="container-lg">
+      <h5 className={styles.header}>{welcome} Account page</h5>
+      <div className="body1">
+        <Link to="settings">Account settings</Link>
       </div>
-    </>
+      <div className="body1">
+        <Link to="appointments">View your appointments</Link>
+      </div>
+      {role === 'admin' && adminRoutes}
+      <div className="mt-4">
+        <LogoutButton />
+      </div>
+    </main>
   );
 }

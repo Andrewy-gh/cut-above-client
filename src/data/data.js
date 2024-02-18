@@ -8,7 +8,7 @@ export const navigation = [
   { id: 3, name: 'Sign Up', path: '/signup' },
   { id: 4, name: 'Login', path: '/login' },
   { id: 5, name: 'Account', path: '/account' },
-  { id: 6, name: 'Schedule', path: '/account/schedule' },
+  { id: 6, name: 'Dashboard', path: '/dashboard' },
 ];
 
 export const services = [

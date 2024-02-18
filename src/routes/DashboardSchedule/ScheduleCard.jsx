@@ -14,7 +14,7 @@ export default function ScheduleCard({ schedule }) {
       <div>Open: {formatDateToTime(schedule.open)}</div>
       <div>Close: {formatDateToTime(schedule.close)}</div>
       <div>Total appointments: {schedule.appointments.length}</div>
-      <Link to={`../dashboard/${schedule.id}`}>
+      <Link to={`${schedule.id}`}>
         <Button>View Details</Button>
       </Link>
     </div>
