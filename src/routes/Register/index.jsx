@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useRegisterAccountMutation } from '@/features/registerSlice';
+import { useRegisterAccountMutation } from '@/features/auth/authApiSlice';
 import Overlay from '@/components/Overlay';
 import { useNotification } from '@/hooks/useNotification';
 import { cleanEmail, emailIsValid } from '@/utils/email';

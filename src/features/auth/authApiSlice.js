@@ -14,14 +14,18 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: '/logout',
       }),
     }),
-    getCurrentUser: builder.query({
-      query: () => ({
-        url: '/current-user',
-        transformResponse: (responseData) => responseData,
+    registerAccount: builder.mutation({
+      query: (register) => ({
+        url: '/signup',
+        method: 'POST',
+        body: register,
       }),
     }),
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation, useGetCurrentUserQuery } =
-  authApiSlice;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useRegisterAccountMutation,
+} = authApiSlice;
