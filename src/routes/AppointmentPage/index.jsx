@@ -1,7 +1,6 @@
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useGetSingleAppointmentQuery } from '@/features/appointments/apptApiSlice';
 import Component from './component';
-import Error from './error';
 
 // This is the single Appontment page shown when accessing through email
 export default function AppointmentPage() {

@@ -1,47 +1,42 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/routes/Layout';
 import Home from '@/routes/Home';
 import BookingPage from '@/routes/BookingPage';
 import Login from '@/routes/Login';
 import Register from '@/routes/Register';
-import ErrorPage from '@/routes/ErrorPage';
-// import ResetPw from '@/routes/ResetPw';
-import ResetPwError from '@/routes/ResetPw/error';
-// import RequireAuth from '@/routes/RequireAuth';
-// import Account from '@/routes/Account';
-// import Settings from '@/routes/Settings';
-// import Appointments from '@/routes/Appointments';
-// import AppointmentPage from '@/routes/AppointmentPage';
-import AppointmentError from '@/routes/AppointmentPage/error';
-// import AddSchedule from '@/routes/AddSchedule';
-// import DashboardSchedule from '@/routes/DashboardSchedule';
-// import DashboardAppointment from '@/routes/DashboardAppointment';
+import TokenValidation from './routes/TokenVaidation';
+import LoadingSpinner from './components/LoadingSpinner';
 
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
-// import Unauthorized from '@/routes/RequireAuth/Unauthorized';
-import TokenValidation from './routes/TokenVaidation';
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
-// // Lazy-loaded components
+// Lazy-loaded components
 const Account = lazy(() => import('./routes/Account'));
-const AppointmentPage = lazy(() => import('./routes/AppointmentPage'));
-const ResetPw = lazy(() => import('./routes/ResetPw'));
-const AddSchedule = lazy(() => import('./routes/AddSchedule'));
-const Appointments = lazy(() => import('./routes/appointments'));
 const RequireAuth = lazy(() => import('./routes/RequireAuth'));
+const AppointmentPage = lazy(() => import('./routes/AppointmentPage'));
+const AppointmentError = lazy(() => import('./routes/AppointmentPage/error'));
+const Appointments = lazy(() => import('./routes/appointments'));
+const AddSchedule = lazy(() => import('./routes/AddSchedule'));
 const DashboardSchedule = lazy(() => import('./routes/DashboardSchedule'));
-const Settings = lazy(() => import('./routes/Settings'));
-const Unauthorized = lazy(() => import('.//routes/RequireAuth/Unauthorized'));
 const DashboardAppointment = lazy(() =>
   import('./routes/DashboardAppointment')
 );
+const Settings = lazy(() => import('./routes/Settings'));
+const Unauthorized = lazy(() => import('./routes/RequireAuth/Unauthorized'));
+const ErrorPage = lazy(() => import('./routes/ErrorPage'));
+const ResetPw = lazy(() => import('./routes/ResetPw'));
+const ResetPwError = lazy(() => import('./routes/ResetPw/error'));
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement: <ErrorPage />,
+    errorElement: (
+      <Suspense fallback={<LoadingSpinner />}>
+        <ErrorPage />
+      </Suspense>
+    ),
     children: [
       { index: true, element: <Home /> },
       { path: 'signup', element: <Register /> },
@@ -53,10 +48,19 @@ const router = createBrowserRouter([
           {
             path: 'appointment/:id',
             element: <AppointmentPage />,
-            errorElement: <AppointmentError />,
+            errorElement: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <AppointmentError />
+              </Suspense>
+            ),
           },
           {
             path: 'account',
+            errorElement: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <Unauthorized />
+              </Suspense>
+            ),
             children: [
               { index: true, element: <Account /> },
               { path: 'settings', element: <Settings /> },
@@ -67,7 +71,11 @@ const router = createBrowserRouter([
       },
       {
         element: <RequireAuth requiredRole="admin" />,
-        errorElement: <Unauthorized />,
+        errorElement: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <Unauthorized />
+          </Suspense>
+        ),
         children: [
           { path: 'addschedule', element: <AddSchedule /> },
           {
@@ -82,7 +90,11 @@ const router = createBrowserRouter([
       },
       {
         element: <TokenValidation />,
-        errorElement: <ResetPwError />,
+        errorElement: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <ResetPwError />
+          </Suspense>
+        ),
         children: [
           {
             path: 'resetpw/:id?/:token?',
@@ -97,34 +109,3 @@ const router = createBrowserRouter([
 export default function App() {
   return <RouterProvider router={router} />;
 }
-
-// export default function App() {
-//   return (
-//     <BrowserRouter>
-//       <ThemeProvider theme={responsiveFontSizes(theme)}>
-//         <CssBaseline />
-//         <Routes>
-//           <Route element={<Layout />}>
-//             <Route path="/" element={<Home />} />
-//             <Route path="/appointment/:id" element={<AppointmentPage />} />
-//             <Route path="/bookings/:id?/" element={<BookingPage />} />
-//             <Route path="/login" element={<Login />} />
-//             <Route path="/signup" element={<Register />} />
-//             <Route path="/resetpw" element={<ResetPw />} />
-//             <Route element={<RequireAuth />}>
-//               <Route path="/account" element={<Account />} />
-//               <Route path="/account/settings" element={<Settings />} />
-//               <Route path="/appointments" element={<Appointments />} />
-//               <Route element={<RequireAuth requiredRole="admin" />}>
-//                 <Route path="/add" element={<AddSchedule />} />
-//                 <Route path="/schedule" element={<Schedule />} />
-//                 <Route path="/dashboard/:id" element={<ApptStatusBoard />} />
-//               </Route>
-//             </Route>
-//             <Route path="/unauthorized" element={<Unauthorized />} />
-//           </Route>
-//         </Routes>
-//       </ThemeProvider>
-//     </BrowserRouter>
-//   );
-// }
