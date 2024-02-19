@@ -5,8 +5,10 @@ import { useAuth } from '@/hooks/useAuth';
 import { useNotification } from '@/hooks/useNotification';
 import { useSendPasswordResetMutation } from '@/features/emailSlice';
 import Overlay from '@/components/Overlay';
+import PasswordInput from '@/components/PasswordInput';
 import { emailIsValid } from '@/utils/email';
 import styles from './styles.module.css';
+
 export default function Login() {
   const [view, setView] = useState('login');
   const [email, setEmail] = useState('');
@@ -54,17 +56,12 @@ export default function Login() {
             value={email}
             onChange={({ target }) => setEmail(target.value)}
           ></TextField>
-          <TextField
+          <PasswordInput
             error={error}
-            label="Password"
-            type="password"
-            required
-            fullWidth
-            margin="normal"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
-          ></TextField>
-
+            label="Password *"
+          />
           <Button
             type="submit"
             variant="contained"

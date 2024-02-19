@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import FormHelperText from '@mui/material/FormHelperText';
 import { useRegisterAccountMutation } from '@/features/auth/authApiSlice';
 import Overlay from '@/components/Overlay';
 import { useNotification } from '@/hooks/useNotification';
 import { cleanEmail, emailIsValid } from '@/utils/email';
+import { passwordIsValid, passwordValidationError } from '@/utils/password';
 import styles from './styles.module.css';
+
+import PasswordInput from '@/components/PasswordInput';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -21,6 +25,7 @@ export default function Register() {
     helperText: '',
   });
   const [pwdError, setPwdError] = useState({ error: false, helperText: '' });
+
   const [registerAccount] = useRegisterAccountMutation();
 
   const { handleSuccess, handleError } = useNotification();
@@ -47,8 +52,15 @@ export default function Register() {
         setEmailError({ error: true, helperText: 'Invalid email' });
         return;
       }
+      if (!passwordIsValid(user.password)) {
+        setPwdError({
+          error: true,
+          helperText: passwordValidationError,
+        });
+        return;
+      }
       if (user.password !== user.confirmPwd) {
-        setPwdError({ error: false, helperText: 'Passwords do not match' });
+        setPwdError({ error: true, helperText: 'Passwords do not match' });
         return;
       }
       const newUser = await registerAccount({
@@ -98,27 +110,24 @@ export default function Register() {
             value={user.email}
             onChange={handleEmailChange}
           ></TextField>
-          <TextField
+          <PasswordInput
             error={pwdError.error}
-            label="Password"
-            type="password"
-            required
-            fullWidth
-            margin="normal"
             value={user.password}
             onChange={handlePwdChange}
-          ></TextField>
-          <TextField
+            label="Password *"
+          />
+          {/* Confirm password */}
+          <PasswordInput
             error={pwdError.error}
-            helperText={pwdError.helperText}
-            label="Confirm password"
-            type="password"
-            required
-            fullWidth
-            margin="normal"
             value={user.confirmPwd}
             onChange={handleConfirmPwdChange}
-          ></TextField>
+            label="Confirm Password *"
+          />
+          {pwdError && (
+            <FormHelperText error={pwdError}>
+              {pwdError.helperText}
+            </FormHelperText>
+          )}
           <Button
             type="submit"
             variant="contained"
