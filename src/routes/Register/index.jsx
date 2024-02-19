@@ -123,8 +123,8 @@ export default function Register() {
             onChange={handleConfirmPwdChange}
             label="Confirm Password *"
           />
-          {pwdError && (
-            <FormHelperText error={pwdError}>
+          {pwdError.error && (
+            <FormHelperText error={pwdError.error}>
               {pwdError.helperText}
             </FormHelperText>
           )}
