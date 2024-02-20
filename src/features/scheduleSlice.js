@@ -9,6 +9,7 @@ import {
   findAvailableTimeSlots,
   formatDate,
   formatDateFull,
+  formatDateToTime,
 } from '../utils/date';
 
 const scheduleAdapter = createEntityAdapter({});
@@ -18,17 +19,24 @@ const initialState = scheduleAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getSchedule: builder.query({
-      query: () => '/api/schedules',
+      query: () => '/api/schedules/dashboard',
       transformResponse: (responseData) => {
         const loadedPosts = responseData
           .sort((a, b) => new Date(a.date) - new Date(b.date))
           .map((s) => {
-            const appointments = s.appointments.map((appt) => ({
-              ...appt,
-              date: formatDateFull(appt.date),
-            }));
+            const appointments = s.appointments
+              .toSorted((a, b) => new Date(a.start) - new Date(b.start))
+              .map((appt) => ({
+                ...appt,
+                date: formatDateFull(appt.date),
+                start: formatDateToTime(appt.start),
+                end: formatDateToTime(appt.end),
+              }));
             return {
-              ...s,
+              id: s.id,
+              date: formatDateFull(s.date),
+              open: formatDateToTime(s.open),
+              close: formatDateToTime(s.close),
               appointments,
             };
           });

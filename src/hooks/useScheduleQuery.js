@@ -7,7 +7,7 @@ import {
 import { splitByUpcomingAndPast } from '@/utils/date';
 
 export function useScheduleQuery(scheduleId) {
-  const { data } = useGetScheduleQuery();
+  useGetScheduleQuery();
   const schedules = useSelector(selectAllSchedule);
   const schedule = useSelector((state) =>
     selectScheduleById(state, scheduleId)
