@@ -39,7 +39,7 @@ export default function AddSchedule() {
     }
   };
   return (
-    <div className="container-sm">
+    <div className="container-sm mb-16">
       <div className={styles.flex}>
         <h5>Choose your dates:</h5>
         <DateRangePicker

@@ -20,16 +20,16 @@ export default function Appointments() {
       <>
         <h4 className="text-center">Upcoming appointments</h4>
         <div>
-          {upcomingAppts.map((appt) => (
-            <UpcomingCard key={appt.id} appt={appt} />
+          {upcomingAppts.map((appointment) => (
+            <UpcomingCard key={appointment.id} appointment={appointment} />
           ))}
         </div>
         {pastAppts.length > 0 && (
           <h4 className="text-center">Past appointments</h4>
         )}
         <div>
-          {pastAppts.map((appt) => (
-            <PastCard key={appt.id} appt={appt} />
+          {pastAppts.map((appointment) => (
+            <PastCard key={appointment.id} appointment={appointment} />
           ))}
         </div>
       </>

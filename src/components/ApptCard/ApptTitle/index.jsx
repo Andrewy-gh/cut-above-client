@@ -1,4 +1,5 @@
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
 
 export default function AppTitle({ children, appointment }) {
   return (
@@ -14,3 +15,11 @@ export default function AppTitle({ children, appointment }) {
     </>
   );
 }
+
+AppTitle.propTypes = {
+  appointment: PropTypes.shape({
+    date: PropTypes.string.isRequired,
+    start: PropTypes.string.isRequired,
+    service: PropTypes.string.isRequired,
+  }),
+};

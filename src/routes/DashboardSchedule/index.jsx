@@ -29,7 +29,7 @@ export default function DashboardSchedule() {
     );
   }
   return (
-    <div className="container-lg">
+    <div className="container-lg mb-16">
       <div className="mt-4">
         <Link to="/account">Back to account page</Link>
       </div>

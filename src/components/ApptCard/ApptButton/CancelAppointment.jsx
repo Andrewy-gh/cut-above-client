@@ -2,14 +2,14 @@ import ButtonDialog from '@/components/ButtonDialog';
 import CustomDialogContent from '@/components/CustomDialogContent';
 import { useAppointment } from '@/hooks/useAppointment';
 import { useDialog } from '@/hooks/useDialog';
-import { useEmployeesQuery } from '@/hooks/useEmployeesQuery';
 import { theme } from '@/styles/styles';
+import PropTypes from 'prop-types';
 
-const dialog = (appointment, employee) => {
+const dialog = (appointment) => {
   return {
     button: 'Cancel',
     title: `Are you sure you want to cancel your ${appointment.service}?`,
-    content: `With ${employee.firstName} on ${appointment.date} at ${appointment.start}?`,
+    content: `With ${appointment.employee.firstName} on ${appointment.date} at ${appointment.start}?`,
   };
 };
 
@@ -17,14 +17,11 @@ const buttonStyle = {
   color: theme.palette.secondary.dark,
 };
 
-export default function CancelAppointment({ appointment, emailToken }) {
+export default function CancelAppointment({ appointment }) {
   const { open, handleOpen, handleClose } = useDialog();
-  const { employee } = useEmployeesQuery(appointment.employeeId);
   const { handleCancel } = useAppointment();
 
-  if (!employee) return <div>Loading...</div>;
-
-  const dialogProps = dialog(appointment, employee);
+  const dialogProps = dialog(appointment);
 
   return (
     <ButtonDialog
@@ -37,9 +34,22 @@ export default function CancelAppointment({ appointment, emailToken }) {
     >
       <CustomDialogContent
         dialog={dialogProps}
-        handleAgree={() => handleCancel(appointment.id, emailToken)}
+        handleAgree={() => handleCancel(appointment.id)}
         handleClose={handleClose}
       />
     </ButtonDialog>
   );
 }
+
+CancelAppointment.propTypes = {
+  appointment: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    employee: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+    }),
+    start: PropTypes.string.isRequired,
+    service: PropTypes.string.isRequired,
+  }),
+};
