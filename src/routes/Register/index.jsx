@@ -4,13 +4,12 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import FormHelperText from '@mui/material/FormHelperText';
 import { useRegisterAccountMutation } from '@/features/auth/authApiSlice';
+import PasswordInput from '@/components/PasswordInput';
 import Overlay from '@/components/Overlay';
 import { useNotification } from '@/hooks/useNotification';
 import { cleanEmail, emailIsValid } from '@/utils/email';
 import { passwordIsValid, passwordValidationError } from '@/utils/password';
 import styles from './styles.module.css';
-
-import PasswordInput from '@/components/PasswordInput';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -64,7 +63,9 @@ export default function Register() {
         return;
       }
       const newUser = await registerAccount({
-        ...user,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        password: user.password,
         email: cleanEmail(user.email),
       }).unwrap();
       if (newUser.success) {

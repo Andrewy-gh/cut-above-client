@@ -1,7 +1,6 @@
 export const passwordIsValid = (password) => {
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=]).{8,}$/;
-  console.log('testing', passwordRegex.test(password));
   return passwordRegex.test(password);
 };
 

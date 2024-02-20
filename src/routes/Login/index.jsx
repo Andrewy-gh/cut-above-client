@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useAuth } from '@/hooks/useAuth';
@@ -8,14 +8,16 @@ import Overlay from '@/components/Overlay';
 import PasswordInput from '@/components/PasswordInput';
 import { emailIsValid } from '@/utils/email';
 import styles from './styles.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const navigate = useNavigate();
   const [view, setView] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState('');
-  const { handleLogin } = useAuth();
+  const { user, handleLogin } = useAuth();
 
   const { handleSuccess, handleError } = useNotification();
   const [sendPasswordReset] = useSendPasswordResetMutation();
@@ -43,6 +45,12 @@ export default function Login() {
     }
   };
   let content;
+
+  useEffect(() => {
+    if (user) {
+      navigate('/account');
+    }
+  });
 
   if (view === 'login') {
     content = (

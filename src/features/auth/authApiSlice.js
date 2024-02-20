@@ -54,10 +54,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
       },
     }),
     resetUserPassword: builder.mutation({
-      query: ({ id, token, newPassword }) => ({
+      query: ({ id, token, password }) => ({
         url: `/reset-pw/${id}/${token}`,
         method: 'PUT',
-        body: { newPassword },
+        body: { password },
       }),
       invalidatesTags: ['User'],
     }),
