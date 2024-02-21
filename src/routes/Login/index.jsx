@@ -8,10 +8,11 @@ import Overlay from '@/components/Overlay';
 import PasswordInput from '@/components/PasswordInput';
 import { emailIsValid } from '@/utils/email';
 import styles from './styles.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [view, setView] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -48,7 +49,8 @@ export default function Login() {
 
   useEffect(() => {
     if (user) {
-      navigate('/account');
+      const { from } = location.state || {};
+      navigate(from || '/account');
     }
   });
 
