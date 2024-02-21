@@ -19,6 +19,26 @@ const initialState = scheduleAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getSchedule: builder.query({
+      query: () => '/api/schedules',
+      transformResponse: (responseData) => {
+        const loadedPosts = responseData
+          .sort((a, b) => new Date(a.date) - new Date(b.date))
+          .map((s) => {
+            const appointments = s.appointments.map((appt) => ({
+              ...appt,
+              date: formatDateFull(appt.date),
+            }));
+            return {
+              ...s,
+              appointments,
+            };
+          });
+        return scheduleAdapter.setAll(initialState, loadedPosts);
+      },
+      // keepUnusedDataFor: 5,
+      providesTags: ['Schedule'],
+    }),
+    getDashboardSchedules: builder.query({
       query: () => '/api/schedules/dashboard',
       transformResponse: (responseData) => {
         const loadedPosts = responseData
@@ -40,10 +60,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
               appointments,
             };
           });
-        return scheduleAdapter.setAll(initialState, loadedPosts);
+        return loadedPosts;
       },
-      // keepUnusedDataFor: 5,
-      providesTags: ['Schedule'],
     }),
     addSchedule: builder.mutation({
       query: (schedule) => ({
@@ -66,6 +84,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetScheduleQuery,
+  useGetDashboardSchedulesQuery,
   useAddScheduleMutation,
   useUpdateScheduleMutation,
 } = extendedApiSlice;
@@ -109,6 +128,9 @@ export const selectScheduleByFilter = createSelector(
   selectEmployeeIds,
   selectEmployee,
   (schedule, service, employees, employee) => {
+    console.log('====================================');
+    console.log('schedule in slice: ', schedule);
+    console.log('====================================');
     if (!schedule) {
       return [];
     }

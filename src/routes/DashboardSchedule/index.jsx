@@ -1,16 +1,24 @@
 import { Link } from 'react-router-dom';
-import { useScheduleQuery } from '../../hooks/useScheduleQuery';
+import { useGetDashboardSchedulesQuery } from '@/features/scheduleSlice';
 import ScheduleCard from './ScheduleCard';
 import styles from './styles.module.css';
+import { splitByUpcomingAndPast } from '@/utils/date';
 
 // This is an admin page which list all upcoming and past schedules
 export default function DashboardSchedule() {
-  const { schedules, upcomingSchedules, pastSchedules } = useScheduleQuery();
+  const {
+    data: schedules,
+    isLoading,
+    isSuccess,
+    isError,
+  } = useGetDashboardSchedulesQuery();
 
   let content;
-  if (!schedules) {
+  if (isLoading) {
     content = <div>Loading...</div>;
-  } else {
+  } else if (isSuccess) {
+    const [upcomingSchedules, pastSchedules] =
+      splitByUpcomingAndPast(schedules);
     content = (
       <>
         <h5 className={styles.header}>Upcoming schedules</h5>
@@ -27,6 +35,8 @@ export default function DashboardSchedule() {
         </div>
       </>
     );
+  } else if (isError) {
+    throw new Error('Error fetching schedules');
   }
   return (
     <div className="container-lg mb-16">
