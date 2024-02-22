@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEmployeesQuery } from '@/hooks/useEmployeesQuery';
 import { useScheduleQuery } from '@/hooks/useScheduleQuery';
 import BookingForm from '@/routes/BookingPage/BookingForm';
@@ -9,8 +9,6 @@ import { useFilter } from '@/hooks/useFilter';
 import { useDialog } from '@/hooks/useDialog';
 import { useAuth } from '@/hooks/useAuth';
 import { useNotification } from '@/hooks/useNotification';
-import { useValidateTokenQuery } from '@/features/auth/authApiSlice';
-import Error from './error';
 import styles from './styles.module.css';
 
 export default function BookingPage() {
@@ -23,6 +21,7 @@ export default function BookingPage() {
   const { handleBooking } = useBooking();
   const { user } = useAuth();
   const { handleError } = useNotification();
+
   // handles modifying an appointment
   const [rescheduling, setRescheduling] = useState(null);
   const { id } = useParams();
@@ -35,28 +34,13 @@ export default function BookingPage() {
     ? 'Please book your new appointment'
     : 'Schedule your appointment';
 
-  // handles modifying an appointment through email
-  let [searchParams] = useSearchParams();
-  let emailToken = searchParams.get('token');
-  const {
-    data: tokenStatus,
-    isLoading,
-    isError,
-  } = useValidateTokenQuery(
-    { option: 'email', token: emailToken },
-    { skip: !emailToken }
-  );
-  if (emailToken && tokenStatus && tokenStatus.error) {
-    handleError('Token is not valid');
-  }
-
   const handleSelectAndOpen = (data) => {
     handleSelectionChange(data);
     handleOpen();
   };
 
   const handleAgree = () => {
-    if (!user && !emailToken) {
+    if (!user) {
       handleError('Please login to complete booking');
       navigate('/login');
       return;
@@ -68,18 +52,12 @@ export default function BookingPage() {
       end: selection.end,
       service: service.name,
       employee,
-      // emailToken,
     });
     handleClose();
   };
-  let content;
-  if (isLoading) {
-    content = <p>Loading...</p>;
-  } else if (emailToken && isError) {
-    // emailToken present but it is not valid
-    content = <Error />;
-  } else {
-    content = (
+
+  return (
+    <>
       <div className={styles.flex_container}>
         <h3 className={styles.header}>{message}</h3>
         <BookingForm handleOpen={handleSelectAndOpen} employee={employee} />
@@ -91,7 +69,6 @@ export default function BookingPage() {
           user={user}
         />
       </div>
-    );
-  }
-  return <>{content}</>;
+    </>
+  );
 }
