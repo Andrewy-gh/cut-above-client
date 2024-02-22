@@ -1,12 +1,10 @@
 import AppTitle from '../ApptTitle';
-import Employee from '@/components/Employee';
 
-export default function PastCard({ appt }) {
+export default function PastCard({ appointment }) {
   return (
     <div className="appointment-card" style={{ flexDirection: 'column' }}>
-      <AppTitle key={appt.id} appointment={appt}>
-        <Employee employeeId={appt.employeeId} />
-      </AppTitle>
+      <AppTitle key={appointment.id} appointment={appointment} />
+      <div>{appointment.employee.firstName}</div>
     </div>
   );
 }

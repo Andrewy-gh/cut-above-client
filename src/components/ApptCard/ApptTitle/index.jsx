@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-export default function AppTitle({ children, appointment }) {
+export default function AppTitle({ appointment }) {
   return (
     <>
       <div className={styles.date_time}>
@@ -10,7 +10,6 @@ export default function AppTitle({ children, appointment }) {
         <span>{appointment.start}</span>
       </div>
       <div className={styles.service}>{appointment.service}</div>
-      {children}
     </>
   );
 }
