@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useEmployeesQuery } from '@/hooks/useEmployeesQuery';
 import { useScheduleQuery } from '@/hooks/useScheduleQuery';
 import BookingForm from '@/routes/BookingPage/BookingForm';
@@ -13,6 +13,7 @@ import styles from './styles.module.css';
 
 export default function BookingPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   useEmployeesQuery();
   useScheduleQuery();
   const { date, employee, selection, service, handleSelectionChange } =
@@ -42,7 +43,7 @@ export default function BookingPage() {
   const handleAgree = () => {
     if (!user) {
       handleError('Please login to complete booking');
-      navigate('/login');
+      navigate('/login', { state: { from: location }, replace: true });
       return;
     }
     handleBooking({
