@@ -13,6 +13,7 @@ if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
 // Lazy-loaded components
 const Account = lazy(() => import('./routes/Account'));
+const Cancellation = lazy(() => import('./routes/Cancellation'));
 const RequireAuth = lazy(() => import('./routes/RequireAuth'));
 const AppointmentPage = lazy(() => import('./routes/AppointmentPage'));
 const AppointmentError = lazy(() => import('./routes/AppointmentPage/error'));
@@ -101,6 +102,10 @@ const router = createBrowserRouter([
             element: <ResetPw />,
           },
         ],
+      },
+      {
+        path: 'cancellation',
+        element: <Cancellation />,
       },
     ],
   },

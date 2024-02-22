@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   useCancelAppointmentMutation,
   useUpdateAppointmentStatusMutation,
@@ -14,6 +14,7 @@ import { useNotification } from '@/hooks/useNotification';
 export function useAppointment() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const rescheduling = useSelector(selectRescheduling);
   const modifyingApptId = useSelector(selectModifyingApptId);
   const [cancelAppointment] = useCancelAppointmentMutation();
@@ -27,6 +28,9 @@ export function useAppointment() {
       }).unwrap();
       if (cancelledAppt.success) {
         handleSuccess(cancelledAppt.message);
+        if (location.pathname.startsWith('/appointment/')) {
+          navigate('/cancellation');
+        }
       }
     } catch (err) {
       handleError(err);
