@@ -3,7 +3,7 @@ import Employee from '@/components/Employee';
 import ModifyAppointment from '../ApptButton/ModifyAppointment';
 import CancelAppointment from '../ApptButton/CancelAppointment';
 
-export default function UpcomingCard({ appt }) {
+export default function UpcomingCard({ appointment }) {
   return (
     <div
       className="appointment-card"
@@ -16,8 +16,8 @@ export default function UpcomingCard({ appt }) {
         }}
       >
         <div>
-          <AppTitle appointment={appt} />
-          <Employee employeeId={appt.employeeId} />
+          <AppTitle appointment={appointment} />
+          <Employee employeeId={appointment.employee.id} />
         </div>
       </div>
       <div
@@ -27,10 +27,10 @@ export default function UpcomingCard({ appt }) {
         }}
       >
         <div className="grow-0">
-          <ModifyAppointment appointment={appt} />
+          <ModifyAppointment appointment={appointment} />
         </div>
         <div className="grow-0">
-          <CancelAppointment appointment={appt} />
+          <CancelAppointment appointment={appointment} />
         </div>
       </div>
     </div>

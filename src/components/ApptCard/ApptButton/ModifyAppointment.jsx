@@ -2,24 +2,20 @@ import ButtonDialog from '../../ButtonDialog';
 import CustomDialogContent from '../../CustomDialogContent';
 import { useAppointment } from '@/hooks/useAppointment';
 import { useDialog } from '@/hooks/useDialog';
-import { useEmployeesQuery } from '@/hooks/useEmployeesQuery';
 
-const dialog = (appointment, employee) => {
+const dialog = (appointment) => {
   return {
     button: 'Modify',
     title: `Are you sure you want to modify your ${appointment.service}?`,
-    content: `With ${employee.firstName} on ${appointment.date} at ${appointment.start}?`,
+    content: `With ${appointment.employee.firstName} on ${appointment.date} at ${appointment.start}?`,
   };
 };
 
-export default function ModifyAppointment({ appointment, emailToken }) {
+export default function ModifyAppointment({ appointment }) {
   const { open, handleOpen, handleClose } = useDialog();
-  const { employee } = useEmployeesQuery(appointment.employeeId);
   const { handleBeginRescheduling } = useAppointment();
 
-  if (!employee) return <div>Loading...</div>;
-
-  const dialogProps = dialog(appointment, employee);
+  const dialogProps = dialog(appointment);
 
   return (
     <ButtonDialog
@@ -30,7 +26,7 @@ export default function ModifyAppointment({ appointment, emailToken }) {
     >
       <CustomDialogContent
         dialog={dialogProps}
-        handleAgree={() => handleBeginRescheduling(appointment.id, emailToken)}
+        handleAgree={() => handleBeginRescheduling(appointment.id)}
         handleClose={handleClose}
       />
     </ButtonDialog>

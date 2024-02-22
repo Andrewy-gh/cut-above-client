@@ -20,27 +20,21 @@ export function useAppointment() {
   const [updateAppointmentStatus] = useUpdateAppointmentStatusMutation();
   const { handleSuccess, handleError } = useNotification();
 
-  const handleCancel = async (id, emailToken) => {
+  const handleCancel = async (id) => {
     try {
       const cancelledAppt = await cancelAppointment({
         id,
-        emailToken,
       }).unwrap();
       if (cancelledAppt.success) {
         handleSuccess(cancelledAppt.message);
-        navigate('/');
       }
     } catch (err) {
       handleError(err);
     }
   };
 
-  const handleBeginRescheduling = (id, emailToken) => {
-    if (emailToken) {
-      navigate(`/bookings/${id}/?token=${emailToken}`);
-    } else {
-      navigate(`/bookings/${id}`);
-    }
+  const handleBeginRescheduling = (id) => {
+    navigate(`/bookings/${id}`);
   };
 
   const handleEndRescheduling = () => dispatch(endRescheduling());
