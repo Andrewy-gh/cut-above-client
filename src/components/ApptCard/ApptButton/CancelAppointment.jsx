@@ -8,7 +8,9 @@ const dialog = (appointment) => {
   return {
     button: 'Cancel',
     title: `Are you sure you want to cancel your ${appointment.service}?`,
-    content: `With ${appointment.employee.firstName} on ${appointment.date} at ${appointment.start}?`,
+    content: `With ${
+      appointment?.employee?.firstName || appointment?.client?.firstName
+    } on ${appointment.date} at ${appointment.start}?`,
   };
 };
 

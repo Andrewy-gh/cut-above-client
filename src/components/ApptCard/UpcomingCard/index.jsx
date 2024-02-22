@@ -1,9 +1,10 @@
 import AppTitle from '../ApptTitle';
-import Employee from '@/components/Employee';
 import ModifyAppointment from '../ApptButton/ModifyAppointment';
 import CancelAppointment from '../ApptButton/CancelAppointment';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function UpcomingCard({ appointment }) {
+  const { role } = useAuth();
   return (
     <div
       className="appointment-card"
@@ -17,7 +18,11 @@ export default function UpcomingCard({ appointment }) {
       >
         <div>
           <AppTitle appointment={appointment} />
-          <Employee employeeId={appointment.employee.id} />
+          <div>
+            {role === 'client'
+              ? appointment.employee.firstName
+              : appointment.client.firstName}
+          </div>
         </div>
       </div>
       <div

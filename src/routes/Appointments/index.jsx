@@ -13,6 +13,20 @@ import styles from './styles.module.css';
 export default function Appointments() {
   useGetAppointmentQuery();
   const appointments = useSelector(selectAllAppointment);
+
+  // return (
+  //   <>
+  //     {appointments.map((appointment) => (
+  //       <p key={appointment.id}>
+  //         <span>
+  //           {appointment.date} - {appointment.service} -{' '}
+  //           {appointment.client.firstName}
+  //         </span>
+  //       </p>
+  //     ))}
+  //   </>
+  // );
+
   let content;
   if (appointments.length > 0) {
     const [upcomingAppts, pastAppts] = splitByUpcomingAndPast(appointments);
