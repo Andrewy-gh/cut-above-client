@@ -7,8 +7,9 @@ import IconButton from '@mui/material/IconButton';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import CloseIcon from '@mui/icons-material/Close';
-import { formatDateFull, formatTime } from '@/utils/date';
+import { useAuth } from '@/hooks/useAuth';
 import { useFilter } from '@/hooks/useFilter';
+import { formatDateFull, formatTime } from '@/utils/date';
 import { theme } from '@/styles/styles';
 import styles from './styles.module.css';
 
@@ -32,13 +33,13 @@ const BookingDialogTitle = ({ children, onClose }) => {
   );
 };
 
-function BookingDialogContent({
+export default function BookingDialogContent({
   children,
   handleAgree,
   handleClose,
   selection,
-  user,
 }) {
+  const { user } = useAuth();
   const { date, service } = useFilter();
 
   let loggedIn;
@@ -76,5 +77,3 @@ function BookingDialogContent({
     </>
   );
 }
-
-export default BookingDialogContent;

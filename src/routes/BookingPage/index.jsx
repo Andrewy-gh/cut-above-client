@@ -67,7 +67,6 @@ export default function BookingPage() {
           handleClose={handleClose}
           selection={selection}
           handleAgree={handleAgree}
-          user={user}
         />
       </div>
     </>

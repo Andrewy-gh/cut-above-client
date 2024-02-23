@@ -11,7 +11,6 @@ export default function BookingDialog({
   selection,
   handleAgree,
   handleClose,
-  user,
 }) {
   const { employee, handleEmployeeChange } = useFilter();
   let employeeOptions;
@@ -35,7 +34,6 @@ export default function BookingDialog({
         selection={selection}
         handleAgree={handleAgree}
         handleClose={handleClose}
-        user={user}
       >
         <DialogContent>{employeeOptions}</DialogContent>
       </BookingDialogContent>
