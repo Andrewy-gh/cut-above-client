@@ -2,6 +2,8 @@ import ButtonDialog from '@/components/ButtonDialog';
 import CustomDialogContent from '@/components/CustomDialogContent';
 import { useAppointment } from '@/hooks/useAppointment';
 import { useDialog } from '@/hooks/useDialog';
+import { appointmentPropType } from '@/utils/propTypes';
+import PropTypes from 'prop-types';
 
 const dialog = (newStatus) => {
   let content;
@@ -52,3 +54,8 @@ export default function UpdateApptStatus({ appointment, newStatus }) {
     </ButtonDialog>
   );
 }
+
+UpdateApptStatus.propTypes = {
+  appointment: appointmentPropType,
+  newStatus: PropTypes.string.isRequired,
+};

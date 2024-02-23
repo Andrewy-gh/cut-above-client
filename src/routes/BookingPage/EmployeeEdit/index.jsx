@@ -1,13 +1,10 @@
-import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import PersonIcon from '@mui/icons-material/Person';
-import { selectEmployeeById } from '@/features/employeeSlice';
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
+import { userPropType } from '@/utils/propTypes';
 
 export default function EmployeeEdit({ employee, handleClick }) {
-  // const employee = useSelector((state) =>
-  //   selectEmployeeById(state, employeeId)
-  // );
   return (
     <div className={styles.flex_sb}>
       <div className={styles.flex}>
@@ -18,3 +15,8 @@ export default function EmployeeEdit({ employee, handleClick }) {
     </div>
   );
 }
+
+EmployeeEdit.propTypes = {
+  employee: userPropType.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};

@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import { formatDateFull, formatDateToTime } from '../../utils/date';
 import styles from './styles.module.css';
 import { theme } from '../../styles/styles';
+import { schedulePropType } from '@/utils/propTypes';
 
 export default function ScheduleCard({ schedule }) {
   return (
@@ -20,3 +21,7 @@ export default function ScheduleCard({ schedule }) {
     </div>
   );
 }
+
+ScheduleCard.propTypes = {
+  schedule: schedulePropType,
+};

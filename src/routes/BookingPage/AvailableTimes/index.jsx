@@ -1,11 +1,10 @@
-AvailableTimes;
-
 import { useMediaQuery } from '@mui/material/';
 import Button from '@mui/material/Button';
 import { formatTime } from '@/utils/date';
 import { theme } from '@/styles/styles';
 import styles from './styles.module.css';
 import PropTypes from 'prop-types';
+import { selectionPropType, userPropType } from '@/utils/propTypes';
 
 const AvailableTime = ({ children, handleOpen }) => {
   return (
@@ -62,25 +61,13 @@ export default function AvailableTimes({ timeSlots, openDialog, employee }) {
 }
 
 AvailableTimes.propTypes = {
-  timeSlots: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      start: PropTypes.object,
-      end: PropTypes.object,
-      available: PropTypes.arrayOf(PropTypes.string),
-    })
-  ),
-  openDialog: PropTypes.func,
-  employee: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      id: PropTypes.string,
-      firstName: PropTypes.string,
-    }),
-  ]),
+  timeSlots: PropTypes.arrayOf(selectionPropType),
+  openDialog: PropTypes.func.isRequired,
+  employee: PropTypes.oneOfType([PropTypes.string.isRequired, userPropType])
+    .isRequired,
 };
 
 AvailableTime.propTypes = {
-  children: PropTypes.string,
-  handleOpen: PropTypes.func,
+  children: PropTypes.string.isRequired,
+  handleOpen: PropTypes.func.isRequired,
 };

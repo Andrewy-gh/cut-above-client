@@ -4,6 +4,8 @@ import ApptTitle from '@/components/ApptCard/ApptTitle';
 import ModifyAppointment from '@/components/ApptCard/ApptButton/ModifyAppointment';
 import CancelAppointment from '@/components/ApptCard/ApptButton/CancelAppointment';
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
+import { appointmentPropType } from '@/utils/propTypes';
 
 export default function StatusColumn({ appointments, status }) {
   const nextStatus = {
@@ -41,3 +43,8 @@ export default function StatusColumn({ appointments, status }) {
     </div>
   );
 }
+
+StatusColumn.propTypes = {
+  appointments: PropTypes.arrayOf(appointmentPropType),
+  status: PropTypes.string.isRequired,
+};

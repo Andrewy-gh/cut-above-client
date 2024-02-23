@@ -1,4 +1,5 @@
 import styles from './styles.module.css';
+import { appointmentPropType } from '@/utils/propTypes';
 
 export default function AppTitle({ appointment }) {
   return (
@@ -13,3 +14,7 @@ export default function AppTitle({ appointment }) {
     </>
   );
 }
+
+AppTitle.propTypes = {
+  appointment: appointmentPropType,
+};

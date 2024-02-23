@@ -2,6 +2,7 @@ import ButtonDialog from '@/components/ButtonDialog';
 import CustomDialogContent from '@/components/CustomDialogContent';
 import { useAppointment } from '@/hooks/useAppointment';
 import { useDialog } from '@/hooks/useDialog';
+import { appointmentPropType } from '@/utils/propTypes';
 
 const dialog = (appointment) => {
   return {
@@ -35,3 +36,7 @@ export default function CancelAppointment({ appointment }) {
     </ButtonDialog>
   );
 }
+
+CancelAppointment.propTypes = {
+  appointment: appointmentPropType,
+};

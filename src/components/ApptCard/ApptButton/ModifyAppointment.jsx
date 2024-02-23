@@ -2,6 +2,7 @@ import ButtonDialog from '../../ButtonDialog';
 import CustomDialogContent from '../../CustomDialogContent';
 import { useAppointment } from '@/hooks/useAppointment';
 import { useDialog } from '@/hooks/useDialog';
+import { appointmentPropType } from '@/utils/propTypes';
 
 const dialog = (appointment) => {
   return {
@@ -34,3 +35,7 @@ export default function ModifyAppointment({ appointment }) {
     </ButtonDialog>
   );
 }
+
+ModifyAppointment.propTypes = {
+  appointment: appointmentPropType,
+};

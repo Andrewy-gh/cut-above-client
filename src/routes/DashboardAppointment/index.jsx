@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 export default function DashboardAppointment() {
   const { id } = useParams();
   const { appointments } = useScheduleQuery(id);
-  console.log('appointments', appointments);
   const formatTimeAppt = sortAndFormatApptByStartTime(appointments);
   const [status, setStatus] = useState('scheduled');
   const statuses = filterByApptStatus(formatTimeAppt);
@@ -29,7 +28,7 @@ export default function DashboardAppointment() {
               key={status.id}
               handleClick={() => setStatus(status.name)}
               name={status.name}
-              data={status.data}
+              total={status.data.length}
             />
           ))}
         </div>

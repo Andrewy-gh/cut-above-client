@@ -21,6 +21,9 @@ const EmployeeRadioOption = ({ employeeId }) => {
 };
 
 export default function EmployeeRadio({ employees }) {
+  console.log('====================================');
+  console.log('employees', employees);
+  console.log('====================================');
   const { employee, handleEmployeeChange } = useFilter();
 
   return (

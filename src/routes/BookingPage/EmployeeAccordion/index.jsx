@@ -3,6 +3,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
 
 export default function EmployeeAccordion({ children }) {
   return (
@@ -14,3 +15,7 @@ export default function EmployeeAccordion({ children }) {
     </Accordion>
   );
 }
+
+EmployeeAccordion.propTypes = {
+  children: PropTypes.elementType,
+};

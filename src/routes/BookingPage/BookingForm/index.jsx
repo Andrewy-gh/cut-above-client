@@ -8,6 +8,7 @@ import { selectScheduleByFilter } from '@/features/scheduleSlice';
 import { currentDate, oneMonthFromCurrent } from '@/utils/date';
 import { useSelector } from 'react-redux';
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
 
 export default function BookingForm({ handleOpen, employee }) {
   const { date, handleDateChange } = useFilter();
@@ -32,3 +33,14 @@ export default function BookingForm({ handleOpen, employee }) {
     </>
   );
 }
+
+BookingForm.propTypes = {
+  handleOpen: PropTypes.func.isRequired,
+  employee: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+    }),
+  ]).isRequired,
+};

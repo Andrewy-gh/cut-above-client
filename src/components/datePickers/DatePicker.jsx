@@ -2,7 +2,7 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 
 export default function DatePicker({
-  date = currentDate,
+  date,
   handleDateChange,
   dateDisabled,
   minDate,

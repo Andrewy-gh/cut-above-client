@@ -1,3 +1,4 @@
+import { appointmentPropType } from '@/utils/propTypes';
 import AppTitle from '../ApptTitle';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -15,3 +16,7 @@ export default function PastCard({ appointment }) {
     </div>
   );
 }
+
+PastCard.propTypes = {
+  appointment: appointmentPropType,
+};

@@ -78,6 +78,6 @@ ServiceCard.propTypes = {
     duration: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
   handleClick: PropTypes.func.isRequired,
 };

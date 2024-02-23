@@ -5,6 +5,8 @@ import { useFilter } from '@/hooks/useFilter';
 import EmployeeAccordion from '../EmployeeAccordion';
 import EmployeeRadio from '../EmployeeRadio';
 import EmployeeEdit from '../EmployeeEdit';
+import PropTypes from 'prop-types';
+import { selectionPropType } from '@/utils/propTypes';
 
 export default function BookingDialog({
   open,
@@ -40,3 +42,10 @@ export default function BookingDialog({
     </CustomDialog>
   );
 }
+
+BookingDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  selection: selectionPropType,
+  handleAgree: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
+};

@@ -12,6 +12,8 @@ import { useFilter } from '@/hooks/useFilter';
 import { formatDateFull, formatTime } from '@/utils/date';
 import { theme } from '@/styles/styles';
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
+import { selectionPropType } from '@/utils/propTypes';
 
 const BookingDialogTitle = ({ children, onClose }) => {
   return (
@@ -77,3 +79,15 @@ export default function BookingDialogContent({
     </>
   );
 }
+
+BookingDialogTitle.propTypes = {
+  children: PropTypes.string.isRequired,
+  onClose: PropTypes.bool.isRequired,
+};
+
+BookingDialogContent.propTypes = {
+  children: PropTypes.elementType,
+  handleAgree: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  selection: selectionPropType,
+};
