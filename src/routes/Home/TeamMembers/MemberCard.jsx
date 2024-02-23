@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Grid from '@mui/material/Grid';
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
 
 export default function MemberCard({ employee, handleClick }) {
   return (
@@ -41,3 +42,13 @@ export default function MemberCard({ employee, handleClick }) {
     </Grid>
   );
 }
+
+MemberCard.propTypes = {
+  employee: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    profile: PropTypes.string.isRequired,
+  }),
+  handleClick: PropTypes.func.isRequired,
+};

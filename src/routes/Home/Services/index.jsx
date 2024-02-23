@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import { services } from '@/data/data';
 import { useFilter } from '@/hooks/useFilter';
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
 
 const ServiceCard = ({ service, handleClick }) => {
   return (
@@ -69,3 +70,14 @@ export default function Services() {
     </div>
   );
 }
+
+ServiceCard.propTypes = {
+  service: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }),
+  handleClick: PropTypes.func.isRequired,
+};
