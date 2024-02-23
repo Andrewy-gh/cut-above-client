@@ -2,7 +2,6 @@ import ButtonDialog from '@/components/ButtonDialog';
 import CustomDialogContent from '@/components/CustomDialogContent';
 import { useAppointment } from '@/hooks/useAppointment';
 import { useDialog } from '@/hooks/useDialog';
-import { theme } from '@/styles/styles';
 
 const dialog = (appointment) => {
   return {
@@ -12,10 +11,6 @@ const dialog = (appointment) => {
       appointment?.employee?.firstName || appointment?.client?.firstName
     } on ${appointment.date} at ${appointment.start}?`,
   };
-};
-
-const buttonStyle = {
-  color: theme.palette.secondary.dark,
 };
 
 export default function CancelAppointment({ appointment }) {
@@ -31,7 +26,6 @@ export default function CancelAppointment({ appointment }) {
       handleOpen={handleOpen}
       handleClose={handleClose}
       color={'error'}
-      buttonStyle={buttonStyle}
     >
       <CustomDialogContent
         dialog={dialogProps}

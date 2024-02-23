@@ -1,26 +1,23 @@
 import Button from '@mui/material/Button';
 import CustomDialog from './CustomDialog';
+import { theme } from '@/styles/styles';
 
-export default function ButtonDialog({
-  children,
-  color,
-  buttonStyle,
-  buttonText,
-  fullWidth,
-  open,
-  handleOpen,
-  handleClose,
-  variant = 'contained',
-}) {
+const buttonStyle = {
+  color: theme.palette.secondary.dark,
+};
+
+export default function ButtonDialog(props) {
+  const {
+    children,
+    buttonText,
+    open,
+    handleClose,
+    variant = 'contained',
+    ...buttonProps
+  } = props;
   return (
     <>
-      <Button
-        variant={variant}
-        onClick={handleOpen}
-        fullWidth={fullWidth}
-        sx={buttonStyle}
-        color={color}
-      >
+      <Button variant={variant} sx={buttonStyle} {...buttonProps}>
         {buttonText}
       </Button>
       <CustomDialog open={open} handleClose={handleClose}>
