@@ -10,7 +10,6 @@ export default function CustomDialogContent({
   handleClose,
   handleAgree,
 }) {
-  console.log('dialog', dialog);
   return (
     <>
       <DialogTitle>{dialog.title}</DialogTitle>

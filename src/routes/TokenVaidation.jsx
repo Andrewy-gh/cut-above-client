@@ -17,8 +17,6 @@ export default function TokenValidation() {
     isSuccess,
     isError,
   } = useValidateTokenQuery({ id, token });
-  console.log('tokenStatus', tokenStatus, isSuccess);
-  console.log('error', isError);
   if (isLoading) {
     return <p>Loading...</p>;
   } else if (isSuccess && tokenStatus.message === 'Token is valid') {
