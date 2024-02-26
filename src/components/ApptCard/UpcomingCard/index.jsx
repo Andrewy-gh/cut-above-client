@@ -2,6 +2,7 @@ import AppTitle from '../ApptTitle';
 import ModifyAppointment from '../ApptButton/ModifyAppointment';
 import CancelAppointment from '../ApptButton/CancelAppointment';
 import { useAuth } from '@/hooks/useAuth';
+import { appointmentPropType } from '@/utils/propTypes';
 
 export default function UpcomingCard({ appointment }) {
   const { role } = useAuth();
@@ -41,3 +42,7 @@ export default function UpcomingCard({ appointment }) {
     </div>
   );
 }
+
+UpcomingCard.propTypes = {
+  appointment: appointmentPropType,
+};
