@@ -35,7 +35,7 @@ export default function ButtonDialog(props) {
 }
 
 ButtonDialog.propTypes = {
-  children: PropTypes.elementType,
+  children: PropTypes.object,
   buttonText: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
   handleOpen: PropTypes.func.isRequired,

@@ -9,6 +9,7 @@ import TokenValidation from './routes/TokenVaidation';
 import LoadingSpinner from './components/LoadingSpinner';
 
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+// eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === 'production') disableReactDevTools();
 
 // Lazy-loaded components

@@ -22,10 +22,10 @@ export const appointmentPropType = PropTypes.shape({
 });
 
 export const selectionPropType = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  start: PropTypes.instanceOf(dayjs).isRequired,
-  end: PropTypes.instanceOf(dayjs).isRequired,
-  available: PropTypes.arrayOf(PropTypes.string).isRequired,
+  id: PropTypes.string,
+  start: PropTypes.instanceOf(dayjs),
+  end: PropTypes.instanceOf(dayjs),
+  available: PropTypes.arrayOf(PropTypes.string),
 }).isRequired;
 
 export const schedulePropType = PropTypes.shape({

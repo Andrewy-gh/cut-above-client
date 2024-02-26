@@ -11,5 +11,5 @@ export default function Overlay({ children }) {
 }
 
 Overlay.propTypes = {
-  children: PropTypes.elementType.isRequired,
+  children: PropTypes.object.isRequired,
 };

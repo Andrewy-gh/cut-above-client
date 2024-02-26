@@ -24,7 +24,7 @@ export default function DateRangerPicker({
 }
 
 DateRangerPicker.propTypes = {
-  dates: PropTypes.array(PropTypes.instanceOf(dayjs)).isRequired,
+  dates: PropTypes.array.isRequired,
   handleDateChange: PropTypes.func.isRequired,
   minDate: PropTypes.instanceOf(dayjs).isRequired,
   maxDate: PropTypes.instanceOf(dayjs).isRequired,

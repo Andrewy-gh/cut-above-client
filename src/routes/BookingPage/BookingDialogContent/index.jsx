@@ -82,7 +82,7 @@ export default function BookingDialogContent({
 
 BookingDialogTitle.propTypes = {
   children: PropTypes.string.isRequired,
-  onClose: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 BookingDialogContent.propTypes = {

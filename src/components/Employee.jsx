@@ -8,5 +8,5 @@ export default function Employee({ employeeId }) {
 }
 
 Employee.propTypes = {
-  employeeId: PropTypes.string.isRequired,
+  employeeId: PropTypes.string,
 };

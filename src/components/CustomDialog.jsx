@@ -20,7 +20,7 @@ export default function CustomDialog({ children, open, handleClose }) {
 }
 
 CustomDialog.propTypes = {
-  children: PropTypes.elementType,
+  children: PropTypes.object,
   open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  handleClose: PropTypes.func,
 };
