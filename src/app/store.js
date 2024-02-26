@@ -33,19 +33,13 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  // reducer: {
-  //   [apiSlice.reducerPath]: apiSlice.reducer,
-  //   appointment: appointmentReducer,
-  //   auth: authReducer,
-  //   filter: filterReducer,
-  //   notification: notificationReducer,
-  // },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }).concat(apiSlice.middleware),
+  // eslint-disable-next-line no-undef
   devTools: process.env.NODE_ENV !== 'production',
 });
 

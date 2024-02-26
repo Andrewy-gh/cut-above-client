@@ -18,7 +18,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   if (result?.error?.data?.error === 'Session expired, please log in') {
     api.dispatch(logoutUser());
     api.dispatch(setError(result?.error?.data?.error));
-    api.dispatch(clearMessage);
+    api.dispatch(clearMessage());
   }
   return result;
 };
