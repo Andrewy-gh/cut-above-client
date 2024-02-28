@@ -86,7 +86,7 @@ BookingDialogTitle.propTypes = {
 };
 
 BookingDialogContent.propTypes = {
-  children: PropTypes.elementType,
+  children: PropTypes.object,
   handleAgree: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   selection: selectionPropType,

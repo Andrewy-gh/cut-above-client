@@ -17,5 +17,5 @@ export default function EmployeeAccordion({ children }) {
 }
 
 EmployeeAccordion.propTypes = {
-  children: PropTypes.elementType,
+  children: PropTypes.object,
 };

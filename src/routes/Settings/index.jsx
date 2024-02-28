@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import ChangeEmail from './ChangeEmail';
 import ChangePassword from './ChangePassword';
-import DeleteAccount from './DeleteAccount';
+// import DeleteAccount from './DeleteAccount';
 import styles from './styles.module.css';
 
 export default function Settings() {
@@ -19,10 +19,10 @@ export default function Settings() {
         <h4 className="text-center">Update Password</h4>
         <ChangePassword />
       </div>
-      <div className={styles.mx_auto}>
+      {/* <div className={styles.mx_auto}>
         <h4 className="text-center">Delete Account</h4>
         <DeleteAccount />
-      </div>
+      </div> */}
     </div>
   );
 }
